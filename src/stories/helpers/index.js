@@ -9,6 +9,9 @@ export {
   renderHeaderBar,
   renderProposalHeader,
   renderTaskListSection,
+  renderGovukTaskListSection,
+  renderItemsCounter,
+  renderAssignmentBar,
   renderSidebar,
   wrapInPage,
 } from "./pageLayout.js";

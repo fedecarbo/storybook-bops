@@ -321,6 +321,108 @@ export function renderTaskListSection(title, tasks) {
 }
 
 // ---------------------------------------------------------------------------
+// renderGovukTaskListSection — GOV.UK Design System task list pattern
+// ---------------------------------------------------------------------------
+
+/**
+ * Renders a task list section using the GOV.UK govuk-task-list pattern.
+ * @param {string} title - Section heading
+ * @param {Array<{name: string, href?: string, status: string}>} tasks
+ * @returns {string} HTML
+ */
+export function renderGovukTaskListSection(title, tasks) {
+  const items = tasks
+    .map((task) => {
+      const hasLink = task.href && task.status !== "cannot_start_yet";
+      const linkClass = hasLink ? " govuk-task-list__item--with-link" : "";
+      const nameHtml = hasLink
+        ? `<a class="govuk-link govuk-task-list__link" href="${task.href}">${task.name}</a>`
+        : task.name;
+      return `
+      <li class="govuk-task-list__item${linkClass}">
+        <div class="govuk-task-list__name-and-hint">
+          ${nameHtml}
+        </div>
+        <div class="govuk-task-list__status">
+          ${renderStatusTag(task.status)}
+        </div>
+      </li>`;
+    })
+    .join("");
+
+  return `
+    <h2 class="govuk-heading-m">${title}</h2>
+    <ul class="govuk-task-list">
+      ${items}
+    </ul>`;
+}
+
+// ---------------------------------------------------------------------------
+// renderItemsCounter — Invalid/Updated items counter for validation
+// ---------------------------------------------------------------------------
+
+/**
+ * Renders the validation items counter showing invalid and updated counts.
+ * @param {number} invalidCount
+ * @param {number} updatedCount
+ * @returns {string} HTML
+ */
+export function renderItemsCounter(invalidCount, updatedCount) {
+  return `
+    <div id="validation-tasks-item-counter">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half" id="invalid-items-count">
+          <p class="govuk-body-l">
+            <strong>Invalid items</strong>
+          </p>
+          <p class="govuk-body-l">
+            <strong>${invalidCount}</strong>
+          </p>
+        </div>
+        <div class="govuk-grid-column-one-half" id="updated-items-count">
+          <p class="govuk-body-l">
+            <strong>Updated items</strong>
+          </p>
+          <p class="govuk-body-l">
+            <strong>${updatedCount}</strong>
+          </p>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ---------------------------------------------------------------------------
+// renderAssignmentBar — Assigned to + application type
+// ---------------------------------------------------------------------------
+
+/**
+ * Renders the assignment and application type info shown below the proposal header.
+ * @param {object} [options]
+ * @param {string} [options.assignee]
+ * @param {string} [options.applicationType]
+ * @returns {string} HTML
+ */
+export function renderAssignmentBar(options = {}) {
+  const {
+    assignee = mockData.people.caseOfficer.name,
+    applicationType = mockData.application.type,
+  } = options;
+
+  return `
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p>
+          Assigned to: <strong>${assignee}</strong>
+          <a class="govuk-link govuk-!-margin-left-2" href="#">Change</a>
+        </p>
+        <p>
+          Application type: <strong>${applicationType}</strong>
+        </p>
+      </div>
+    </div>`;
+}
+
+// ---------------------------------------------------------------------------
 // renderSidebar
 // ---------------------------------------------------------------------------
 

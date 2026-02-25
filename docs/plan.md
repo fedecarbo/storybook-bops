@@ -239,7 +239,7 @@ docker compose down && docker compose up -d --build
 - [x] Task 0B: Workflow overview MDX
 
 ### Stage 1: Validation
-- [ ] Task 1: Validation Task List
+- [x] Task 1: Validation Task List
 - [ ] Task 2: Review Documents
 - [ ] Task 3: Check & Request Documents
 - [ ] Task 4: Check Red Line Boundary
