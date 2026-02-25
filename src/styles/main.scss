@@ -121,6 +121,30 @@ h3 {
   padding: 2rem;
 }
 
+// ---------------------------------------------------------------------------
+// Document tags (from source: components/_documents.scss)
+// ---------------------------------------------------------------------------
+
+.document-tag {
+  margin-right: 3px;
+  margin-bottom: 10px;
+}
+
+.document-thumbnail-placeholder {
+  background-color: govuk-colour("light-grey");
+  border: 2px dashed $govuk-border-colour;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  @include govuk-font($size: 16);
+  color: $govuk-secondary-text-colour;
+}
+
+.govuk-\!-column-count-2 {
+  column-count: 2;
+}
+
 // Status tag overrides
 .govuk-tag {
   max-width: none;

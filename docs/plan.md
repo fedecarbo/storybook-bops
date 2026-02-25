@@ -240,7 +240,7 @@ docker compose down && docker compose up -d --build
 
 ### Stage 1: Validation
 - [x] Task 1: Validation Task List
-- [ ] Task 2: Review Documents
+- [x] Task 2: Review Documents
 - [ ] Task 3: Check & Request Documents
 - [ ] Task 4: Check Red Line Boundary
 - [ ] Task 5: Check Constraints
