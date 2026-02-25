@@ -1,0 +1,22 @@
+{
+  "name": "storybook-bops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Storybook showcase for BOPS UI components",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "govuk-frontend": "^5.2.0"
+  },
+  "devDependencies": {
+    "@storybook/html": "^8.6.0",
+    "@storybook/html-vite": "^8.6.0",
+    "@storybook/addon-essentials": "^8.6.0",
+    "@storybook/addon-a11y": "^8.6.0",
+    "storybook": "^8.6.0",
+    "sass": "^1.80.0",
+    "vite": "^6.0.0"
+  }
+}

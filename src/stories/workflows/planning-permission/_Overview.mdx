@@ -1,0 +1,267 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Workflows/Planning Permission/Overview" />
+
+# Planning Permission Workflow
+
+A planning application moves through **5 stages** from submission to decision. Each stage contains a set of tasks that officers complete before moving on. This page maps the full workflow so designers can see every task and how the stages connect.
+
+<div style={{ display: "flex", gap: "4px", marginBottom: "32px", marginTop: "24px" }}>
+  <div style={{ flex: 1, background: "#1d70b8", color: "#fff", padding: "12px 16px", borderRadius: "4px", textAlign: "center" }}>
+    <strong style={{ display: "block", fontSize: "16px" }}>1. Validation</strong>
+    <span style={{ fontSize: "13px", opacity: 0.9 }}>14 tasks</span>
+  </div>
+  <div style={{ flex: 1, background: "#4c2c92", color: "#fff", padding: "12px 16px", borderRadius: "4px", textAlign: "center" }}>
+    <strong style={{ display: "block", fontSize: "16px" }}>2. Consultation</strong>
+    <span style={{ fontSize: "13px", opacity: 0.9 }}>9 tasks</span>
+  </div>
+  <div style={{ flex: 1, background: "#d53880", color: "#fff", padding: "12px 16px", borderRadius: "4px", textAlign: "center" }}>
+    <strong style={{ display: "block", fontSize: "16px" }}>3. Assessment</strong>
+    <span style={{ fontSize: "13px", opacity: 0.9 }}>5 tasks</span>
+  </div>
+  <div style={{ flex: 1, background: "#f47738", color: "#fff", padding: "12px 16px", borderRadius: "4px", textAlign: "center" }}>
+    <strong style={{ display: "block", fontSize: "16px" }}>4. Review</strong>
+    <span style={{ fontSize: "13px", opacity: 0.9 }}>1 task</span>
+  </div>
+  <div style={{ flex: 1, background: "#00703c", color: "#fff", padding: "12px 16px", borderRadius: "4px", textAlign: "center" }}>
+    <strong style={{ display: "block", fontSize: "16px" }}>5. Determination</strong>
+    <span style={{ fontSize: "13px", opacity: 0.9 }}>1 task</span>
+  </div>
+</div>
+
+<hr />
+
+## Stage 1: Validation
+
+The case officer checks the application is valid — documents are present, details are correct, fees paid, and all requirements met. If anything is wrong, they send requests to the applicant before making a validation decision.
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Check, tag, and confirm documents</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Review documents</td><td style={{ textAlign: "center" }}>P2</td><td>Tag each uploaded document (plans, supporting docs, evidence)</td></tr>
+    <tr><td>Check and request documents</td><td style={{ textAlign: "center" }}>P1</td><td>Check if required documents are present; request missing ones from applicant</td></tr>
+  </tbody>
+</table>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Check application details</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Check red line boundary</td><td style={{ textAlign: "center" }}>P1</td><td>Verify the site boundary on the map is correct; request changes if not</td></tr>
+    <tr><td>Check constraints</td><td style={{ textAlign: "center" }}>P2</td><td>Review planning constraints (conservation area, TPO, flood zone, etc.)</td></tr>
+    <tr><td>Check description</td><td style={{ textAlign: "center" }}>P1</td><td>Confirm the proposal description is accurate; request amendment if not</td></tr>
+    <tr><td>Check fee</td><td style={{ textAlign: "center" }}>P1</td><td>Verify the correct fee has been paid; handle exemptions</td></tr>
+    <tr><td>Add reporting details</td><td style={{ textAlign: "center" }}>P3</td><td>Select the reporting type for this application</td></tr>
+  </tbody>
+</table>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Confirm application requirements</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Confirm Community Infrastructure Levy (CIL)</td><td style={{ textAlign: "center" }}>P2</td><td>Confirm whether CIL applies based on PlanX data</td></tr>
+    <tr><td>Check Environment Impact Assessment</td><td style={{ textAlign: "center" }}>P2</td><td>Determine if an EIA is required</td></tr>
+    <tr><td>Check ownership certificate</td><td style={{ textAlign: "center" }}>P1</td><td>Verify the ownership certificate is valid</td></tr>
+  </tbody>
+</table>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Other validation issues</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Other validation requests</td><td style={{ textAlign: "center" }}>P2</td><td>Send ad-hoc requests to the applicant</td></tr>
+  </tbody>
+</table>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Review</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Review validation requests</td><td style={{ textAlign: "center" }}>P2</td><td>Summary of all pending/resolved requests</td></tr>
+    <tr><td>Send validation decision</td><td style={{ textAlign: "center" }}>P1</td><td>Validate or invalidate the application</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Stage 2: Consultation
+
+Neighbours are notified, statutory consultees are emailed, and public notices are posted. The officer monitors responses and marks the consultation as complete once the period ends.
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Select neighbours</td><td style={{ textAlign: "center" }}>P2</td><td>Choose which neighbouring addresses to notify</td></tr>
+    <tr><td>Send letters to neighbours</td><td style={{ textAlign: "center" }}>P2</td><td>Preview and send notification letters</td></tr>
+    <tr><td>View neighbour responses</td><td style={{ textAlign: "center" }}>P2</td><td>Track responses (support, object, neutral)</td></tr>
+    <tr><td>Select consultees</td><td style={{ textAlign: "center" }}>P2</td><td>Choose statutory and non-statutory consultees</td></tr>
+    <tr><td>Email consultees</td><td style={{ textAlign: "center" }}>P2</td><td>Customise and send consultation emails</td></tr>
+    <tr><td>View consultee responses</td><td style={{ textAlign: "center" }}>P2</td><td>Review responses with tags</td></tr>
+    <tr><td>Site notice</td><td style={{ textAlign: "center" }}>P3</td><td>Record site notice details and upload evidence</td></tr>
+    <tr><td>Press notice</td><td style={{ textAlign: "center" }}>P3</td><td>Record press notice publication details</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Stage 3: Assessment
+
+The case officer assesses the application against policy, reviews consultation responses, and writes a summary of their findings before making a recommendation.
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Check application</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Check ownership certificate</td><td style={{ textAlign: "center" }}>P2</td><td>Post-validation review with activity log</td></tr>
+    <tr><td>Check consultees</td><td style={{ textAlign: "center" }}>P2</td><td>Review consultee responses and mark as checked</td></tr>
+    <tr><td>Check site history</td><td style={{ textAlign: "center" }}>P2</td><td>Review previous planning applications for the site</td></tr>
+  </tbody>
+</table>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Assessment summaries</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Check publicity</td><td style={{ textAlign: "center" }}>P2</td><td>Review site and press notice evidence</td></tr>
+    <tr><td>Summary of works</td><td style={{ textAlign: "center" }}>P2</td><td>Write assessment summary of the proposed works</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Stage 4: Review
+
+A senior officer reviews the assessor's recommendation and either accepts it, challenges it, or requests changes.
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>View recommendation</td><td style={{ textAlign: "center" }}>P1</td><td>Review the assessor's recommendation; accept, challenge, or request changes</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Stage 5: Determination
+
+The decision is published and the decision notice is issued.
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th>Task</th><th style={{ width: "70px", textAlign: "center" }}>Priority</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Publish determination</td><td style={{ textAlign: "center" }}>P2</td><td>Verify prerequisites and publish the decision</td></tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Application type variations
+
+This table shows every task and which application types include it. Most tasks are shared; differences are highlighted.
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Stage 1: Validation</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th style={{ textAlign: "center", width: "100px" }}>Planning Permission</th>
+      <th style={{ textAlign: "center", width: "80px" }}>Prior Approval</th>
+      <th style={{ textAlign: "center", width: "90px" }}>Lawfulness Certificate</th>
+      <th style={{ textAlign: "center", width: "60px" }}>Other</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Review documents</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Check and request documents</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Check red line boundary</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Check constraints</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Check description</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Check fee</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Add reporting details</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr style={{ background: "#fef7e5" }}><td>Check legislative requirements</td><td style={{ textAlign: "center" }}>—</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>—</td></tr>
+    <tr><td>Confirm CIL</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Check EIA</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr style={{ background: "#fef7e5" }}><td>Check ownership certificate</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>—</td><td style={{ textAlign: "center" }}>—</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Other validation requests</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Review validation requests</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Send validation decision</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+  </tbody>
+</table>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Stage 2: Consultation</h4>
+
+<p>All four types include the Consultation stage. Tasks within it are configured per application rather than in the workflow YAML.</p>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Stage 3: Assessment</h4>
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th style={{ textAlign: "center", width: "100px" }}>Planning Permission</th>
+      <th style={{ textAlign: "center", width: "80px" }}>Prior Approval</th>
+      <th style={{ textAlign: "center", width: "90px" }}>Lawfulness Certificate</th>
+      <th style={{ textAlign: "center", width: "60px" }}>Other</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{ background: "#fef7e5" }}><td>Check ownership certificate</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>—</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr style={{ background: "#fef7e5" }}><td>Check consultees</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>—</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Check site history</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr style={{ background: "#fef7e5" }}><td>Permitted development rights</td><td style={{ textAlign: "center" }}>—</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>—</td></tr>
+    <tr style={{ background: "#fef7e5" }}><td>Check publicity</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>—</td><td style={{ textAlign: "center" }}>✓</td></tr>
+    <tr><td>Summary of works</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td><td style={{ textAlign: "center" }}>✓</td></tr>
+  </tbody>
+</table>
+
+<h4 style={{ marginTop: "24px", marginBottom: "8px", color: "#505a5f" }}>Stages 4–5: Review and Determination</h4>
+
+<p>All four types include <strong>View recommendation</strong> (Review) and <strong>Publish determination</strong> (Determination).</p>
+
+<p style={{ marginTop: "16px", padding: "12px 16px", background: "#fef7e5", borderLeft: "4px solid #f47738", fontSize: "14px" }}>
+  Highlighted rows indicate tasks that vary between application types. The <strong>Enforcement</strong> workflow uses a completely different stage structure (Check → Investigate → Review → Serve and monitor → Appeal → Close) and is not covered here.
+</p>
+
+<hr />
+
+## Priority key
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr><th style={{ width: "80px", textAlign: "center" }}>Priority</th><th>Meaning</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style={{ textAlign: "center" }}><strong>P1</strong></td><td>Complex tasks with rich interactions — branching forms, multiple outcomes, dynamic tables</td></tr>
+    <tr><td style={{ textAlign: "center" }}><strong>P2</strong></td><td>Moderate interactions — simpler forms, fewer branches</td></tr>
+    <tr><td style={{ textAlign: "center" }}><strong>P3</strong></td><td>Simple or variant tasks</td></tr>
+  </tbody>
+</table>
