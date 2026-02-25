@@ -457,6 +457,16 @@ body:has(.bops-fullwidth-container) {
   display: flex;
   flex-direction: column;
 
+  // Storybook wraps stories in #storybook-root inside <body>.
+  // It must also be a flex column filling the body so that the
+  // sticky headers + sidebar grid inside it size correctly.
+  #storybook-root {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
   .govuk-header .govuk-width-container {
     max-width: none;
     margin: 0;
@@ -472,7 +482,8 @@ body:has(.bops-fullwidth-container) {
     display: grid;
     grid-template-columns: $sidebar-width 1fr;
     overflow: hidden;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
 
     main {
       overflow-y: auto;

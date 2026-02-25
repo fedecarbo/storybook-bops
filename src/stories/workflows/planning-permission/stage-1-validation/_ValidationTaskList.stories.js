@@ -5,12 +5,10 @@
  */
 import {
   mockData,
-  renderProposalHeader,
   renderAssignmentBar,
   renderItemsCounter,
   renderGovukTaskListSection,
-  renderHeader,
-  renderHeaderBar,
+  renderValidationLayout,
 } from "../../../helpers";
 
 export default {
@@ -87,23 +85,20 @@ function renderValidationTaskList(statusMap, { invalidCount = 0, updatedCount = 
 
   const backButton = `<a href="#" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">Back</a>`;
 
-  return `
-    ${renderHeader()}
-    ${renderHeaderBar()}
-    <div class="govuk-width-container">
-      <main class="govuk-main-wrapper" id="main-content" role="main">
-        ${renderProposalHeader({ heading: "Check the application" })}
-        ${renderAssignmentBar()}
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-two-thirds">
-            ${renderItemsCounter(invalidCount, updatedCount)}
-            ${taskListHtml}
-            ${validateButton}
-            ${backButton}
-          </div>
-        </div>
-      </main>
+  const content = `
+    ${renderAssignmentBar()}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        ${renderItemsCounter(invalidCount, updatedCount)}
+        ${taskListHtml}
+        ${validateButton}
+        ${backButton}
+      </div>
     </div>`;
+
+  return renderValidationLayout(content, {
+    heading: "Check the application",
+  });
 }
 
 // ---------------------------------------------------------------------------

@@ -14,4 +14,5 @@ export {
   renderAssignmentBar,
   renderSidebar,
   wrapInPage,
+  renderValidationLayout,
 } from "./pageLayout.js";

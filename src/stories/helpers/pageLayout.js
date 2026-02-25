@@ -543,3 +543,65 @@ export function wrapInPage(content, options = {}) {
       </main>
     </div>`;
 }
+
+// ---------------------------------------------------------------------------
+// renderValidationLayout
+// ---------------------------------------------------------------------------
+
+/**
+ * Wraps task content in the standard validation layout with header bar.
+ *
+ * Two modes:
+ * - Sidebar mode: pass `activeTaskSlug` → sticky headers + sidebar nav + main content
+ * - Breadcrumb mode: pass `breadcrumbs` → sticky headers + breadcrumbs + main content
+ * - Plain mode: neither → sticky headers + main content in govuk-width-container
+ *
+ * The proposal header (h1 + status tag) is rendered automatically when `heading`
+ * is provided. Because the header bar is always shown, address/reference/description
+ * are omitted (they're already in the bar).
+ *
+ * @param {string} content - The main content HTML (goes inside the content area)
+ * @param {object} [options]
+ * @param {string} [options.heading] - Page h1 heading
+ * @param {string} [options.status="in_progress"] - Status tag to show
+ * @param {string} [options.activeTaskSlug] - If provided, shows sidebar with this task highlighted
+ * @param {Array} [options.breadcrumbs] - If provided (and no activeTaskSlug), shows breadcrumb layout
+ * @param {Array} [options.subsections] - Sidebar subsections (defaults to mockData.validationTasks.subsections)
+ */
+export function renderValidationLayout(content, options = {}) {
+  const {
+    heading,
+    status = "in_progress",
+    activeTaskSlug,
+    breadcrumbs,
+    subsections = mockData.validationTasks.subsections,
+  } = options;
+
+  // When header bar is shown, proposal header only renders h1 + status tag
+  const proposalHeaderHtml = heading
+    ? `<div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds" id="planning-application-details">
+          <h1 class="govuk-heading-l">${heading}</h1>
+          <div id="planning-application-statuses-tags">
+            <p>${renderStatusTag(status)}</p>
+          </div>
+        </div>
+      </div>`
+    : "";
+
+  const mainContent = `${proposalHeaderHtml}${content}`;
+
+  if (activeTaskSlug) {
+    // Sidebar layout — task list pages
+    return wrapInPage(mainContent, {
+      showHeaderBar: true,
+      withSidebar: { subsections, activeTaskSlug },
+    });
+  }
+
+  // Breadcrumb or plain layout — edit/detail pages
+  return wrapInPage(mainContent, {
+    showHeaderBar: true,
+    breadcrumbs,
+  });
+}

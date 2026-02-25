@@ -224,6 +224,46 @@ Each session, tell Claude: **"Do Task N: [name]"**. The agent will:
 6. Rebuild Docker and verify it renders
 7. **Mark the task as done** — edit this file and change `[ ]` to `[x]` for the completed task in the checklist below
 
+## Layout convention
+
+All validation task stories should use `renderValidationLayout()` from `src/stories/helpers` instead of building their own page shells.
+
+```js
+import { renderValidationLayout } from "../../../helpers";
+```
+
+The layout handles: GOV.UK header, BOPS header bar, proposal header (h1 + status tag only — address/reference/description are in the header bar), sidebar or breadcrumbs, and the `<main>` wrapper. Stories only provide the **content** that goes inside the main area.
+
+**Sidebar pages** (task list/index views) — pass `activeTaskSlug`:
+```js
+return renderValidationLayout(content, {
+  heading: "Review documents",
+  activeTaskSlug: "review-documents",
+});
+```
+
+**Detail/edit pages** (reached by clicking into a list item) — pass `breadcrumbs`:
+```js
+return renderValidationLayout(content, {
+  heading: "Check supplied document",
+  breadcrumbs: [
+    { text: "Home", href: "#" },
+    { text: "Application", href: "#" },
+    { text: "Review documents", href: "#" },
+    { text: "Check supplied document" },
+  ],
+});
+```
+
+**Plain layout** (no sidebar, no breadcrumbs — e.g. the validation task list page itself):
+```js
+return renderValidationLayout(content, {
+  heading: "Check the application",
+});
+```
+
+Do **not** call `renderHeader()`, `renderHeaderBar()`, or `wrapInPage()` directly in stories — use `renderValidationLayout()`.
+
 ## Verification
 ```bash
 docker compose down && docker compose up -d --build

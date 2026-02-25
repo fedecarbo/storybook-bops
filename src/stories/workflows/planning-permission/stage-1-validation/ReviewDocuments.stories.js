@@ -12,7 +12,7 @@
 import {
   mockData,
   renderStatusTag,
-  wrapInPage,
+  renderValidationLayout,
 } from "../../../helpers";
 
 export default {
@@ -106,18 +106,7 @@ function renderDocumentListPage(documents) {
       </ul>`
     : renderDocumentTable(documents);
 
-  // When the header bar is shown, the proposal_header partial hides
-  // address/reference/description (they're already in the bar).
-  // It only shows the h1 heading and status tags.
   const content = `
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds" id="planning-application-details">
-        <h1 class="govuk-heading-l">Review documents</h1>
-        <div id="planning-application-statuses-tags">
-          <p>${renderStatusTag("in_progress")}</p>
-        </div>
-      </div>
-    </div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
         <div id="check-tag-documents-tasks">
@@ -131,12 +120,9 @@ function renderDocumentListPage(documents) {
       </div>
     </div>`;
 
-  return wrapInPage(content, {
-    showHeaderBar: true,
-    withSidebar: {
-      subsections: mockData.validationTasks.subsections,
-      activeTaskSlug: "review-documents",
-    },
+  return renderValidationLayout(content, {
+    heading: "Review documents",
+    activeTaskSlug: "review-documents",
   });
 }
 
@@ -251,18 +237,7 @@ function renderDocumentEditPage(document, options = {}) {
               </div>`
     : "";
 
-  // When the header bar is visible, the proposal_header only shows
-  // the h1 heading + status tags (no address/reference/description).
   const content = `
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds" id="planning-application-details">
-        <h1 class="govuk-heading-l">Check supplied document</h1>
-        <div id="planning-application-statuses-tags">
-          <p>${renderStatusTag("in_progress")}</p>
-        </div>
-      </div>
-    </div>
-
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
         <div class="document-thumbnail-placeholder">
@@ -392,8 +367,8 @@ function renderDocumentEditPage(document, options = {}) {
       </div>
     </div>`;
 
-  return wrapInPage(content, {
-    showHeaderBar: true,
+  return renderValidationLayout(content, {
+    heading: "Check supplied document",
     breadcrumbs: [
       { text: "Home", href: "#" },
       { text: "Application", href: "#" },
