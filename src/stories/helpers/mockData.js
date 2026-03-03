@@ -1356,4 +1356,70 @@ Yours
 
 {{local_authority}}`,
   },
+
+  // Assessment task list — section definitions for the assessment stage
+  assessmentTasks: {
+    checkApplicationTasks: [
+      {
+        name: "Check application details and description documents",
+        slug: "check-consistency",
+      },
+      { name: "Check publicity", slug: "check-publicity" },
+      {
+        name: "Check ownership certificate",
+        slug: "check-ownership-certificate-assessment",
+      },
+      {
+        name: "Check consultees consulted",
+        slug: "check-consultees-consulted",
+      },
+      { name: "Check site history", slug: "check-site-history" },
+      {
+        name: "Permitted development rights",
+        slug: "permitted-development-rights",
+      },
+    ],
+    assessmentSummariesTasks: [
+      { name: "Site description", slug: "site-description" },
+      { name: "Summary of works", slug: "summary-of-works" },
+      { name: "Site visits", slug: "site-visits" },
+    ],
+    policiesTasks: [
+      { name: "Considerations", slug: "considerations" },
+    ],
+    legislationTasks: [
+      {
+        name: "Development type classification",
+        slug: "development-type",
+      },
+      {
+        name: "Part 1, Class A — Enlargement of a dwellinghouse",
+        slug: "policy-class-1a",
+      },
+      {
+        name: "Part 1, Class B — Additions to the roof",
+        slug: "policy-class-1b",
+      },
+    ],
+    completeAssessmentTasks: [
+      {
+        name: "Review assessment documents",
+        slug: "review-assessment-documents",
+      },
+      {
+        name: "Make draft recommendation",
+        slug: "make-draft-recommendation",
+      },
+      { name: "Standard conditions", slug: "standard-conditions" },
+      {
+        name: "Pre-commencement conditions",
+        slug: "pre-commencement-conditions",
+      },
+      { name: "Informatives", slug: "informatives" },
+      {
+        name: "Review and submit recommendation",
+        slug: "submit-recommendation",
+      },
+    ],
+  },
 };

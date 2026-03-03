@@ -1,0 +1,128 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as AssessmentTaskListStories from "./_AssessmentTaskList.stories";
+
+<Meta title="Workflows/Planning Permission/3. Assessment/Assessment Task List/Journey" />
+
+# Assessment Task List — User Journey
+
+This documents how a case officer works through the assessment stage of a planning application. The assessment task list is the central page for evaluating the application against planning policies, writing assessment summaries, and making a recommendation for the reviewer. An **accordion** at the top gives quick access to application details without leaving the page. The task sections shown depend on the application type — some simpler types skip the policies and legislation sections.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the assessment task list</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Application overview → Assessment
+
+After consultation is complete, the case officer navigates to the assessment stage. The page shows:
+
+- An **Application details** accordion with 6 collapsible sections (application information, site map, constraints, pre-assessment outcome, proposal details, and documents)
+- A **dates bar** showing the validation date, consultation end date, and target decision date
+- Up to **5 task sections** depending on the application type:
+  1. **Check application** — verify consistency with validation and consultation
+  2. **Assessment summaries** — write site description, summary of works, record site visits
+  3. **Assess against policies and guidance** — evaluate planning considerations (conditional)
+  4. **Assess against legislation** — classify development type and assess policy classes (conditional)
+  5. **Complete assessment** — review documents, make recommendation, add conditions, and submit
+
+The "Complete assessment" tasks (recommendation, conditions, informatives, submit) are locked until earlier sections are done.
+
+<Canvas of={AssessmentTaskListStories.AllNotStarted} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Reviewing consistency with previous stages</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Assessment task list → Check application section
+
+The case officer starts by verifying that the information from validation and consultation is still accurate. This includes:
+
+1. **Check application details** — confirm the description and documents match what was validated
+2. **Check publicity** — verify that required site and press notices were published
+3. **Check ownership certificate** — confirm the ownership certificate is still valid
+4. **Check consultees consulted** — review that all required consultees were notified
+5. **Check site history** — review previous planning applications on this site
+6. **Permitted development rights** — check whether permitted development rights apply
+
+The officer can refer to the accordion sections above for quick reference without navigating away from the page.
+
+<Canvas of={AssessmentTaskListStories.InProgress} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Writing assessment summaries and evaluating policies</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Assessment task list → Assessment summaries / Policies / Legislation sections
+
+With the checks complete, the officer moves to the substantive assessment work:
+
+- **Site description** — write a summary of the site and its surroundings
+- **Summary of works** — describe the proposed development
+- **Site visits** — record any site visits carried out
+- **Considerations** — assess the application against relevant planning policies and guidance
+- **Legislation** — classify the development type and assess against specific policy classes
+
+This is the most time-intensive part of the assessment. The officer may work through these tasks over several sessions, saving drafts as they go.
+
+<Canvas of={AssessmentTaskListStories.ChecksComplete} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Making the recommendation</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Assessment task list → Complete assessment section
+
+Once all assessment work is done, the "Complete assessment" tasks unlock:
+
+1. **Review assessment documents** — final check that all documents are in order
+2. **Make draft recommendation** — choose Grant, Refuse, or Not required, and write the justification
+3. **Standard conditions** — select and customise standard planning conditions
+4. **Pre-commencement conditions** — add any conditions that must be met before work starts
+5. **Informatives** — add informative notes for the applicant
+6. **Review and submit recommendation** — final review and submission to the reviewer
+
+The officer is now ready to submit the recommendation. The submit task becomes available once all other tasks are complete.
+
+<Canvas of={AssessmentTaskListStories.ReadyToSubmit} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>All assessment tasks complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Assessment task list
+
+When all tasks are complete, the recommendation has been submitted and the application moves to the **Review** stage. A senior officer or reviewer will now evaluate the case officer's recommendation before a final decision is made.
+
+<Canvas of={AssessmentTaskListStories.AllComplete} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#505a5f", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>~</div>
+  <h2 style={{ margin: 0 }}>Variant: Simpler application type</h2>
+</div>
+
+**When:** Certain application types (e.g. householder applications, minor amendments) don't require detailed policy and legislation assessment.
+
+Only three sections are shown: **Check application**, **Assessment summaries**, and **Complete assessment**. The "Assess against policies and guidance" and "Assess against legislation" sections are hidden entirely, making the task list shorter and simpler.
+
+<Canvas of={AssessmentTaskListStories.WithoutPoliciesOrLegislation} />
