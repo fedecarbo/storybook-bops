@@ -354,7 +354,7 @@ docker compose down && docker compose up -d --build
 - [x] Task 15: Consultation Task List
 - [x] Task 16: Select Neighbours
 - [x] Task 17: Send Letters to Neighbours
-- [ ] Task 18: View Neighbour Responses
+- [x] Task 18: View Neighbour Responses
 - [ ] Task 19: Select Consultees
 - [ ] Task 20: Email Consultees
 - [ ] Task 21: View Consultee Responses

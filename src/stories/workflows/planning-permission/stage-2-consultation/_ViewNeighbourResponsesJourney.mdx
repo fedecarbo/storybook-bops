@@ -1,0 +1,134 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ViewNeighbourResponsesStories from "./ViewNeighbourResponses.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/View Neighbour Responses/Journey" />
+
+# View Neighbour Responses — User Journey
+
+This documents the end-to-end journey of viewing and managing neighbour responses during the consultation period. It involves **two actors**: the **case officer** (in BOPS) and **neighbours** (via the public comments portal or by post). The case officer uploads responses received offline, reviews all comments, and redacts personal data before publication.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the neighbour responses page</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation task list → View neighbour responses
+
+The case officer clicks "View neighbour responses" from the consultation task list. This link becomes active once a consultation end date has been set. Initially, no responses have been received.
+
+The page shows:
+- The consultation end date
+- A count of responses (currently 0)
+- A message: "No neighbour responses yet"
+- A link to manually add a new response
+
+<Canvas of={ViewNeighbourResponsesStories.NoResponsesYet} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Responses start arriving</h2>
+</div>
+
+**Who:** Neighbours (via online portal or by post) / Case officer (uploading postal responses)
+**Where:** Public comments portal / BOPS neighbour responses page
+
+Neighbours submit comments through the public-facing portal (linked in their notification letter). Comments received by post or email are uploaded manually by the case officer using the "Add a new neighbour response" link.
+
+As responses come in, they appear in an accordion grouped by type:
+- **Objection responses** — shown with a red status tag
+- **Supportive responses** — shown with a green status tag
+- **Neutral responses** — shown with a yellow status tag
+
+Each response displays the respondent's name, email, address, date received, a truncated preview of the comment text, and any concern tags (light, privacy, noise, design, etc.).
+
+<Canvas of={ViewNeighbourResponsesStories.ResponsesComingIn} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Case officer uploads a postal response</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation → View neighbour responses → Add a new neighbour response
+
+When a comment is received by post or email (not through the online portal), the case officer clicks "Add a new neighbour response" and completes the upload form:
+
+1. **Name** and **email** of the respondent
+2. **Address** — select from the list of known neighbours, or type a new address
+3. **Date received** — when the comment was received
+4. **Response type** — Supportive, Neutral, or An objection
+5. **Tags** — categorise the concerns raised (use, privacy, light, access, noise, traffic, design, other)
+6. **Response text** — the full comment (internal, not made public)
+7. **Redacted response** — the version to be published (with personal data removed)
+8. **Documents** — any attached letters or evidence from the respondent
+
+<Canvas of={ViewNeighbourResponsesStories.AddNewResponse} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Case officer views a response in detail</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation → View neighbour responses → Individual response
+
+Clicking on a response or "View more" shows the full comment text (not truncated), all concern tags, and any attached documents with thumbnail previews.
+
+The case officer can see:
+- The full response text (or redacted version if already published)
+- Attached documents with thumbnails and tags
+- Links to "Redact and publish" or "Edit" the response
+
+<Canvas of={ViewNeighbourResponsesStories.ResponseDetail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Case officer redacts and publishes a response</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation → View neighbour responses → Redact comment
+
+Before a neighbour response can be published on the planning register, the case officer must review it for personal data and redact any sensitive information. The redaction page shows:
+
+1. **Comment submitted by** — the respondent's name, email, address, and date received
+2. **Redaction guidelines** — a collapsible section explaining what needs to be redacted (personal data, names, third party addresses, contact information, special category data)
+3. **Full comment** — the original text (read-only)
+4. **Redacted comment** — an editable copy where the officer replaces sensitive text with `[redacted]`
+5. A **"Reset comment"** link to restore the original text if needed
+6. **"Save and publish"** to publish the redacted version
+
+Once saved, the response on the main page shows "Redacted by: [officer name]" next to the "Redact and publish" link.
+
+<Canvas of={ViewNeighbourResponsesStories.RedactAndPublish} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>All responses received — task complete</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Consultation → View neighbour responses
+
+Once the consultation period has ended and all responses have been reviewed, redacted, and published, the task is marked as **Complete**. The page shows:
+
+- The full count of responses grouped by type
+- All responses with redaction attribution
+- The "Add a new neighbour response" link is no longer shown
+
+The consultation task list will show a green "Complete" tag against "View neighbour responses".
+
+<Canvas of={ViewNeighbourResponsesStories.Completed} />

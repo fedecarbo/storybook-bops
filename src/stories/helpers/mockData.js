@@ -997,6 +997,132 @@ export const mockData = {
     },
   ],
 
+  // Neighbour responses — uploaded/received comments from neighbours about the application
+  neighbourResponses: [
+    {
+      id: 1,
+      name: "S. O'Brien",
+      email: "s.obrien@example.com",
+      address: "14 Elm Grove, London, SE15 5DE",
+      neighbourSelected: true,
+      receivedAt: "2 December 2024",
+      summaryTag: "objection",
+      tags: ["light", "privacy"],
+      response:
+        "I strongly object to this proposed two-storey rear extension. The additional height will significantly reduce the natural light reaching our rear garden and kitchen window, particularly during the winter months when the sun is low. The first-floor bedroom window will also directly overlook our private garden and patio area, which we currently enjoy without any overlooking from neighbouring properties. We have lived here for 15 years and this would fundamentally change the character of our outdoor space. I would ask the council to consider the impact on our amenity before granting permission.",
+      redactedResponse:
+        "I strongly object to this proposed two-storey rear extension. The additional height will significantly reduce the natural light reaching our rear garden and kitchen window, particularly during the winter months when the sun is low. The first-floor bedroom window will also directly overlook our private garden and patio area, which we currently enjoy without any overlooking from neighbouring properties. [redacted] I would ask the council to consider the impact on our amenity before granting permission.",
+      redactedBy: "Sarah Johnson",
+    },
+    {
+      id: 2,
+      name: "C. Evans",
+      email: "c.evans@example.com",
+      address: "8 Elm Grove, London, SE15 5DE",
+      neighbourSelected: true,
+      receivedAt: "5 December 2024",
+      summaryTag: "objection",
+      tags: ["design", "noise"],
+      response:
+        "I object to this application. The proposed extension is out of keeping with the existing terrace of Victorian properties on Elm Grove. A two-storey extension of this depth (4 metres) would be visually dominant when viewed from rear gardens and would set a harmful precedent for similar developments along the row. I am also concerned about noise and disruption during the construction period which could last several months. My elderly mother lives with us and relies on a quiet environment for her health.",
+      redactedResponse:
+        "I object to this application. The proposed extension is out of keeping with the existing terrace of Victorian properties on Elm Grove. A two-storey extension of this depth (4 metres) would be visually dominant when viewed from rear gardens and would set a harmful precedent for similar developments along the row. I am also concerned about noise and disruption during the construction period which could last several months. [redacted]",
+      redactedBy: "Sarah Johnson",
+    },
+    {
+      id: 3,
+      name: "K. Williams",
+      email: "k.williams@example.com",
+      address: "11 Elm Grove, London, SE15 5DD",
+      neighbourSelected: true,
+      receivedAt: "3 December 2024",
+      summaryTag: "supportive",
+      tags: ["design"],
+      response:
+        "I support this application. The proposed extension is modest in scale and the use of matching materials (London stock brick and slate) will ensure it blends well with the existing dwelling. The additional living space will benefit the family and is in keeping with similar extensions that have been approved elsewhere on the street. I have no concerns about overlooking as our property faces the front of the application site.",
+      redactedResponse: null,
+      redactedBy: null,
+    },
+    {
+      id: 4,
+      name: "R. Patel",
+      email: "r.patel@example.com",
+      address: "10 Elm Grove, London, SE15 5DE",
+      neighbourSelected: true,
+      receivedAt: "8 December 2024",
+      summaryTag: "supportive",
+      tags: [],
+      response:
+        "We have no objection to the proposed rear extension. We have spoken to Mr Morton about his plans and are satisfied that the extension will not affect our property. The design is sympathetic to the area and we welcome the improvement to the housing stock on our street.",
+      redactedResponse: null,
+      redactedBy: null,
+    },
+    {
+      id: 5,
+      name: "D. Brown",
+      email: "d.brown@example.com",
+      address: "10A Elm Grove, London, SE15 5DE",
+      neighbourSelected: true,
+      receivedAt: "6 December 2024",
+      summaryTag: "neutral",
+      tags: ["access"],
+      response:
+        "I wish to make a neutral comment. While I do not object to the principle of the extension, I would like the council to ensure that the construction access arrangements do not block the shared alleyway that runs between numbers 10 and 12. This alleyway is used by several properties for bin storage and rear garden access. Could a condition be attached to any permission to ensure access is maintained during the building works?",
+      redactedResponse: null,
+      redactedBy: null,
+    },
+    {
+      id: 6,
+      name: "A. Nguyen",
+      email: null,
+      address: "13 Elm Grove, London, SE15 5DD",
+      neighbourSelected: true,
+      receivedAt: "10 December 2024",
+      summaryTag: "neutral",
+      tags: ["traffic", "other"],
+      response:
+        "I am writing regarding the above application. I have no strong feelings either way about the extension itself, but I would ask that consideration be given to the parking situation during construction. Elm Grove is already heavily parked and any construction vehicles or skips will cause further congestion. I would also like to know if the applicant intends to convert the loft in future, as this would be more concerning in terms of the overall bulk of the building.",
+      redactedResponse: null,
+      redactedBy: null,
+    },
+  ],
+
+  // Redaction guidelines HTML — from redaction_guidelines.yml
+  redactionGuidelines: `<div class="govuk-body">
+    <p>You need to redact any:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>personal data</li>
+      <li>special category data</li>
+    </ul>
+    <strong>Personal data</strong>
+    <p>This includes any words or phrases that could identify a particular person, such as names, addresses or descriptions.</p>
+    <strong>Names</strong>
+    <p>Redact the name of the person or people making the comment.</p>
+    <p>The applicant's name does not usually need to be redacted. However, you may need to redact it if the nature of the application could mean that the applicant's name is linked to 'special category data'. For example, when a flat is obviously being adapted for a disabled person.</p>
+    <p>Redact any other names or references to neighbours.</p>
+    <strong>Third party address</strong>
+    <p>Do not redact the address of the person making the comment. This may be made public by the Planning Inspectorate in the event of an appeal in order to give the comment weight.</p>
+    <p>Redact any other third party addresses.</p>
+    <strong>Contact information</strong>
+    <p>Redact all contact information such as telephone, email or websites.</p>
+    <strong>Personal details</strong>
+    <p>Redact any words or phrases that could help someone to identify a person. This includes descriptions of:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>how a person looks or speaks</li>
+      <li>a person's occupation</li>
+      <li>a place in relation to the site, for example, 'the garden two doors down on the right'</li>
+    </ul>
+    <strong>Special category data</strong>
+    <p>Redact any information about a person's:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>race or ethnic origin</li>
+      <li>politics, religion or philosophical beliefs</li>
+      <li>trade union membership</li>
+      <li>health</li>
+      <li>sex life or sexual orientation</li>
+    </ul>
+  </div>`,
+
   // Neighbour letter template — realistic letter text with mock data substituted
   neighbourLetterTemplate: `# Town and Country Planning Act 1990
 
