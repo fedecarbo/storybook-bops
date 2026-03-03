@@ -1,0 +1,136 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ViewConsulteeResponsesStories from "./ViewConsulteeResponses.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/View Consultee Responses/Journey" />
+
+# View Consultee Responses — User Journey
+
+This documents the end-to-end journey of viewing and managing consultee responses during the consultation period. It involves **two actors**: the **case officer** (in BOPS) and **consultees** (statutory bodies who respond via the consultee portal or by letter/email). The case officer monitors responses as they arrive, uploads any received offline, and can redact sensitive content before publication.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the consultee responses page</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation task list &rarr; View consultee responses
+
+After consultation emails have been sent (see "Email Consultees"), the case officer clicks "View consultee responses" from the consultation task list to monitor incoming replies. Initially, all consultees show an "Awaiting response" status tag and no filter tabs appear — only the "All" tab is visible.
+
+Each consultee is shown in a panel card with their name, role, organisation, type badge (Internal/External), and a "Last contacted on" date.
+
+<Canvas of={ViewConsulteeResponsesStories.NoResponses} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Responses start arriving</h2>
+</div>
+
+**Who:** Consultees (via consultee portal) / Case officer (uploading offline responses)
+**Where:** BOPS consultee responses page
+
+Consultees receive an email with a link to the consultee portal where they submit their response, choosing a summary (No objection / Amendments needed / Objection) and providing text and documents. As responses come in:
+
+- Status tags update from "Awaiting response" to the consultee's summary tag (green "No objection", yellow "Amendments needed", or red "Objection")
+- Filter tabs appear for each response type that has at least one entry
+- "Last received on" dates and response snippets appear on responded panels
+- Consultees still awaiting show "Awaiting response" with their original "Last contacted on" date
+
+<Canvas of={ViewConsulteeResponsesStories.AwaitingResponses} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Case officer uploads an offline response</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation &rarr; View consultee responses &rarr; Upload new response
+
+When a response is received by letter, email, or phone (not through the online portal), the case officer clicks "Upload new response" on the relevant consultee's panel and completes the upload form:
+
+1. **Name** and **email** of the person who responded
+2. **Date received** — when the response was received
+3. **Summary tag** — No objection, Amendments needed, or Objection
+4. **Response text** — the full response (not made public)
+5. **Redacted response** — a version safe for publication with personal data removed
+6. **Documents** — any attached letters, reports, or evidence
+
+<Canvas of={ViewConsulteeResponsesStories.UploadingResponse} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>All consultees have responded</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Consultation &rarr; View consultee responses
+
+Once all consultees have responded, the page shows the full picture:
+
+- **All** tab shows all 5 consultees grouped by Internal/External
+- **No objection** tab filters to the 3 consultees who had no objection (Conservation Officer, Highways Authority, Thames Water)
+- **Amendments needed** tab shows the Tree Officer's request for a revised arboricultural assessment
+- **Objection** tab shows the Environment Agency's objection about flood risk
+
+Each panel shows a truncated snippet of the response text (~200 characters) with a "View all responses" link for the full detail.
+
+<Canvas of={ViewConsulteeResponsesStories.AllResponded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Filtering by response type</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Consultation &rarr; View consultee responses &rarr; Objection tab
+
+The case officer clicks a filter tab to focus on a specific response type. This is especially useful for quickly finding objections or amendment requests that need attention. Here the "Objection" tab is selected, showing only the Environment Agency.
+
+<Canvas of={ViewConsulteeResponsesStories.FilteredByObjection} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Case officer views individual consultee detail</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation &rarr; View consultee responses &rarr; View consultee response
+
+Clicking "View all responses" on a consultee's panel opens their detail page. This shows:
+
+- **Summary list** with the consultee's name, role, organisation, email, consulted date, last received date, and current status
+- **Response list** showing each response chronologically in an inset-text block with:
+  - Received date
+  - Summary tag (green "No objection" / yellow "Amendments needed" / red "Objection")
+  - Published status tag (green "Published" or grey "Private")
+  - Full response text (not truncated)
+  - Any attached documents as download links
+  - A "Redact and publish" link to prepare the response for publication
+
+<Canvas of={ViewConsulteeResponsesStories.IndividualConsulteeDetail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Response uploaded — task progresses</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation &rarr; View consultee responses
+
+After uploading a response (or when all expected responses have been received through the portal), a green success banner confirms the action. The tab view reflects the updated response counts. The consultation task list will show updated progress against "View consultee responses".
+
+<Canvas of={ViewConsulteeResponsesStories.ResponseUploaded} />

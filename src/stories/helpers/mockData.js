@@ -368,6 +368,71 @@ export const mockData = {
     },
   ],
 
+  // Consultee responses — one response per consultee with realistic planning content
+  consulteeResponses: [
+    {
+      consultee: "Conservation Officer",
+      name: "Dr. Sarah Whitfield",
+      email: "conservation@southwark.gov.uk",
+      receivedAt: "3 December 2024",
+      summaryTag: "approved",
+      response:
+        "Having reviewed the submitted plans and heritage statement, I can confirm that the proposed two-storey rear extension will not cause harm to the significance of the Camberwell Grove Conservation Area. The proposed materials — London stock brick and slate roof tiles — are appropriate and will match the existing dwelling. The scale and massing are subordinate to the host building. I have no objection to this application.",
+      redactedResponse: "",
+      published: false,
+      documents: [],
+    },
+    {
+      consultee: "Tree Officer",
+      name: "Mark Reynolds",
+      email: "trees@southwark.gov.uk",
+      receivedAt: "1 December 2024",
+      summaryTag: "amendments_needed",
+      response:
+        "The proposed extension is within the root protection area of a mature London plane tree (T3) protected under TPO/2019/0045. The submitted arboricultural impact assessment does not adequately address potential root damage during excavation for the new foundations. I request that the applicant provides a revised foundation design using pile-and-beam construction to avoid root severance, along with an updated arboricultural method statement. Subject to these amendments, the scheme may be acceptable.",
+      redactedResponse: "",
+      published: false,
+      documents: ["Arboricultural-Assessment-Review.pdf"],
+    },
+    {
+      consultee: "Highways Authority",
+      name: "James Thornton",
+      email: "highways@tfl.gov.uk",
+      receivedAt: "5 December 2024",
+      summaryTag: "approved",
+      response: "The proposal does not affect the public highway. No objection.",
+      redactedResponse:
+        "The proposal does not affect the public highway. No objection.",
+      published: true,
+      documents: [],
+    },
+    {
+      consultee: "Environment Agency",
+      name: "Claire Dawson",
+      email: "planning@environment-agency.gov.uk",
+      receivedAt: "8 December 2024",
+      summaryTag: "objected",
+      response:
+        "The site falls partly within Flood Zone 2. The submitted flood risk assessment is not adequate as it does not include a sequential test or demonstrate that the development will not increase flood risk elsewhere. We object to this application until a satisfactory flood risk assessment is provided that addresses surface water drainage, finished floor levels, and flood resilient construction measures.",
+      redactedResponse: "",
+      published: false,
+      documents: ["EA-Standard-Response-Flood-Zone.pdf"],
+    },
+    {
+      consultee: "Thames Water",
+      name: "Planning Team",
+      email: "planning@thameswater.co.uk",
+      receivedAt: "2 December 2024",
+      summaryTag: "approved",
+      response:
+        "Thames Water has no objection to the above application with regard to waste water network and sewage treatment works infrastructure capacity. We recommend an informative be attached to any planning permission advising the developer to contact Thames Water regarding connection to the sewer network.",
+      redactedResponse:
+        "Thames Water has no objection to the above application with regard to waste water network and sewage treatment works infrastructure capacity. We recommend an informative be attached to any planning permission advising the developer to contact Thames Water regarding connection to the sewer network.",
+      published: true,
+      documents: [],
+    },
+  ],
+
   // Additional consultees available to search and add (not yet assigned to this application)
   availableConsultees: [
     {

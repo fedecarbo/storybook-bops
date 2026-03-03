@@ -357,7 +357,7 @@ docker compose down && docker compose up -d --build
 - [x] Task 18: View Neighbour Responses
 - [x] Task 19: Select Consultees
 - [x] Task 20: Email Consultees
-- [ ] Task 21: View Consultee Responses
+- [x] Task 21: View Consultee Responses
 - [ ] Task 22: Site Notice
 - [x] Task 23: Press Notice
 
