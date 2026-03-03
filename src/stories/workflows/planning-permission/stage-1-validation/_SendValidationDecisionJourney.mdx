@@ -1,0 +1,132 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as SendValidationDecisionStories from "./SendValidationDecision.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Send Validation Decision/Journey" />
+
+# Send Validation Decision — User Journey
+
+This documents the end-to-end journey of validating or invalidating a planning application. It is the **final step** in the validation stage and involves **three actors**: the **case officer** (in BOPS), the **system** (automatic emails), and the **applicant/agent** (receiving notifications).
+
+The case officer arrives here after all other validation tasks are complete. They either validate the application (moving it to consultation and assessment) or invalidate it (sending it back to the applicant with a list of issues to resolve).
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the validation decision page</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Send validation decision
+
+All validation tasks are complete and correct. The case officer opens "Send validation decision" from the sidebar. They see a message confirming the application has not yet been marked as valid or invalid, a radio asking whether to publish on the BOPS Public Portal, and a green button to validate.
+
+<Canvas of={SendValidationDecisionStories.ReadyToValidate} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Path A: Officer validates the application</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send validation decision
+
+If all checks passed and there are no outstanding issues, the officer clicks **"Mark the application as valid"**. The system:
+1. Sets the validation date
+2. Sends a validation notice email to the applicant/agent
+3. Moves the application status to "In assessment"
+4. Shows a success confirmation
+
+<Canvas of={SendValidationDecisionStories.SuccessConfirmation} />
+
+The applicant/agent receives an email confirming the application is valid and providing a target decision date:
+
+<Canvas of={SendValidationDecisionStories.ValidationEmail} />
+
+The page now shows a read-only confirmed state with a link to view the formal validation notice:
+
+<Canvas of={SendValidationDecisionStories.Validated} />
+
+Clicking "View notification" shows the formal validation notice — a letter-format document with legislation reference, appeal rights, and signatory details:
+
+<Canvas of={SendValidationDecisionStories.ValidationNotice} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Path B: Officer cannot validate — pending requests exist</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send validation decision
+
+If the officer has flagged issues during earlier validation tasks (e.g. requested a new document, flagged a boundary change, or raised an "other" validation request), those requests are still pending. The page shows a warning explaining that the application **cannot** be validated while requests are outstanding.
+
+The only available action is to **invalidate** — this sends all pending requests to the applicant in one batch notification.
+
+<Canvas of={SendValidationDecisionStories.CannotValidate} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>System sends invalidation email</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Applicant/agent email
+
+When the officer clicks "Mark the application as invalid", the system sends an email to the applicant/agent. The email explains that more information is needed and provides a **secure link** to view and respond to all validation requests. The applicant has **15 business days** to respond before the application may be closed with a refund.
+
+<Canvas of={SendValidationDecisionStories.InvalidationEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Application is invalidated — awaiting responses</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send validation decision
+
+While the applicant is responding to the requests, the page shows the invalidated state. It confirms when the applicant was notified, displays a summary of unresolved and resolved requests with a link to view them, and explains that **all requests must be resolved or cancelled** before the application can be validated.
+
+There is no action button in this state — the officer must wait for the applicant to respond.
+
+<Canvas of={SendValidationDecisionStories.Invalidated} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Requests resolved — officer can now validate</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send validation decision
+
+Once the applicant has responded to all validation requests (or any remaining requests have been cancelled by the officer), the page updates. The invalidation header remains, but now the message says the application can be marked as valid. The publish radio and "Mark the application as valid" button reappear.
+
+Note: the "valid from" date is now the **next business day after the last request was closed**, not the original received date.
+
+<Canvas of={SendValidationDecisionStories.InvalidatedRequestsResolved} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Validation complete — application moves to assessment</h2>
+</div>
+
+**Who:** System
+**Where:** Application overview
+
+The application is now validated. The applicant receives a validation email (see Step 2) and a formal validation notice is generated. The application status changes to **"In assessment"** and moves to the consultation and assessment stages.
+
+The validation decision page becomes read-only, showing the confirmation and a link to view the formal notice.
+
+<Canvas of={SendValidationDecisionStories.Validated} />

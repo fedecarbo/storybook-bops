@@ -1,0 +1,115 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as PressNoticeStories from "./PressNotice.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Press Notice/Journey" />
+
+# Press Notice — User Journey
+
+This documents the end-to-end journey of a press notice, from the case officer's initial decision through to confirmed publication. It involves **two actors**: the **case officer** (in BOPS) and the **press team** (via email).
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer decides if a press notice is required</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation task list → Press notice
+
+The case officer opens the press notice task and is asked: *"Does this application require a press notice?"*
+
+- If **No** → the task is marked complete immediately. Journey ends here.
+- If **Yes** → the officer must select one or more statutory reasons from a checklist (e.g. Conservation Area, Listed Building, Major Development). If none of the standard reasons apply, they can select "Other" and provide a custom reason.
+
+<Canvas of={PressNoticeStories.InitialView} />
+
+When "Yes" is selected with reasons:
+
+<Canvas of={PressNoticeStories.RequiredWithReasons} />
+
+When "Other" is selected, a textarea appears for the custom reason:
+
+<Canvas of={PressNoticeStories.RequiredWithOther} />
+
+When the officer saves, two things happen:
+1. The press notice is recorded against the application
+2. An **email is automatically sent** to the local authority's configured press notice email address
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>System sends email to the press team</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** The local authority's press notice email (e.g. `press.notices@southwark.gov.uk`)
+
+The email includes:
+- Application reference number
+- Site address
+- Full application description
+- The statutory reasons selected by the case officer
+- A link to the confirmation page in BOPS where the press team can upload evidence
+
+<Canvas of={PressNoticeStories.EmailToPress} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Press notice is awaiting confirmation</h2>
+</div>
+
+**Who:** Case officer (checking status)
+**Where:** Consultation → Confirm press notice
+
+While waiting for the press team to publish the notice and provide evidence, the confirmation page shows:
+- The reasons that were selected
+- The date the request was sent
+- A prompt to upload evidence, with a "Confirm publication" button
+
+The case officer can also manually send a **follow-up email** requesting confirmation if the press team hasn't responded.
+
+<Canvas of={PressNoticeStories.AwaitingConfirmation} />
+
+The follow-up confirmation request email:
+
+<Canvas of={PressNoticeStories.ConfirmationRequestEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Press team confirms publication</h2>
+</div>
+
+**Who:** Press team (or case officer on their behalf)
+**Where:** Link from the email → Confirm press notice page
+
+The press team clicks the link in the email, which takes them to a form where they:
+1. Enter the **date the notice was published** (must fall within the consultation period)
+2. **Upload a photo** of the published press notice as evidence
+3. Optionally add a **comment** (e.g. which newspaper, which page)
+
+<Canvas of={PressNoticeStories.ConfirmPublication} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Press notice confirmed — task complete</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Consultation → Confirm press notice
+
+Once evidence is uploaded, the page shows the completed state:
+- The statutory reasons
+- Date requested and date published
+- The comment left by the press team
+- A thumbnail of the uploaded evidence document with a "Published" tag
+- Links to **edit publication details** or **add a new press notice response** (if a new notice is needed later)
+
+<Canvas of={PressNoticeStories.Completed} />

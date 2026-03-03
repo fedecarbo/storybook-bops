@@ -1,0 +1,82 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as CheckEIAStories from "./CheckEIA.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Check EIA/Journey" />
+
+# Check EIA — User Journey
+
+This documents the journey for checking whether an Environmental Impact Assessment (EIA) is required under the Town and Country Planning (Environmental Impact Assessment) Regulations 2017. This is a **single-actor** task — only the **case officer** is involved. If an EIA is required, the determination period is extended from 8 weeks to 16 weeks.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the EIA task</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Check Environment Impact Assessment
+
+The case officer opens the task from the validation sidebar. They see a collapsible documents section showing relevant application documents (which may include an Environmental Statement if one was submitted). A guidance link to GOV.UK's EIA screening checklist opens in a new tab to help the officer make their determination.
+
+Below this, a Yes/No radio question asks whether an Environmental Impact Assessment is required.
+
+<Canvas of={CheckEIAStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Case officer makes their determination</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check EIA form
+
+The officer reviews the application documents and the GOV.UK guidance, then selects their answer.
+
+### If EIA is not required
+
+The officer selects **No** — no additional fields are needed. They click "Save and mark as complete".
+
+<Canvas of={CheckEIAStories.SelectedNo} />
+
+### If EIA is required
+
+The officer selects **Yes**. A hint explains that the determination period will be extended to 16 weeks. Three optional fields appear for public access to the Environmental Statement:
+
+- **Email address** — where the public can request a copy
+- **Address** — where the public can view or request a copy (must include fee if provided)
+- **Fee** — cost to obtain a hard copy (must include address if provided)
+
+The officer can fill in all fields, some, or none — all three are optional. However, if either the address or fee is provided, both must be filled in.
+
+<Canvas of={CheckEIAStories.SelectedYes} />
+
+The officer can also confirm an EIA is required without providing any public access details:
+
+<Canvas of={CheckEIAStories.SelectedYesMinimal} />
+
+If the officer tries to submit without selecting an option, a validation error is shown:
+
+<Canvas of={CheckEIAStories.WithErrors} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task completed — EIA check confirmed</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check EIA (read-only view)
+
+After saving, the page shows a success banner and a summary of the decision. If EIA was required, the summary includes any email address, physical address, and fee that were provided. The officer can click "Edit" to return to the form and change their decision.
+
+**EIA required — with contact details:**
+
+<Canvas of={CheckEIAStories.Completed} />
+
+**EIA not required:**
+
+<Canvas of={CheckEIAStories.CompletedNotRequired} />

@@ -9,17 +9,17 @@
  * The edit view shows a single document with thumbnail, metadata, tag editing
  * (GOV.UK tabs with checkboxes), privacy radios, and validation radios.
  */
-import {
-  mockData,
-  renderStatusTag,
-  renderValidationLayout,
-} from "../../../helpers";
+import { mockData, renderStatusTag } from "../../../helpers";
 
 export default {
   title: "Workflows/Planning Permission/1. Validation/Review Documents",
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [
+    (story) =>
+      `<div style="max-width: 1100px; margin: 0 auto; padding: 30px 20px;">${story()}</div>`,
+  ],
 };
 
 // ---------------------------------------------------------------------------
@@ -106,9 +106,10 @@ function renderDocumentListPage(documents) {
       </ul>`
     : renderDocumentTable(documents);
 
-  const content = `
+  return `
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Review documents</h1>
         <div id="check-tag-documents-tasks">
           <h2 class="app-task-list__section">Submitted documents</h2>
           <div>
@@ -119,11 +120,6 @@ function renderDocumentListPage(documents) {
         <a href="#" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">Back</a>
       </div>
     </div>`;
-
-  return renderValidationLayout(content, {
-    heading: "Review documents",
-    activeTaskSlug: "review-documents",
-  });
 }
 
 // ---------------------------------------------------------------------------
@@ -237,7 +233,12 @@ function renderDocumentEditPage(document, options = {}) {
               </div>`
     : "";
 
-  const content = `
+  return `
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Check supplied document</h1>
+      </div>
+    </div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
         <div class="document-thumbnail-placeholder">
@@ -366,16 +367,6 @@ function renderDocumentEditPage(document, options = {}) {
 
       </div>
     </div>`;
-
-  return renderValidationLayout(content, {
-    heading: "Check supplied document",
-    breadcrumbs: [
-      { text: "Home", href: "#" },
-      { text: "Application", href: "#" },
-      { text: "Review documents", href: "#" },
-      { text: "Check supplied document" },
-    ],
-  });
 }
 
 // ---------------------------------------------------------------------------

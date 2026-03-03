@@ -1,0 +1,139 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as CheckFeeStories from "./CheckFee.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Check Fee/Journey" />
+
+# Check Fee — User Journey
+
+This documents the end-to-end journey of checking whether the correct planning application fee has been paid. It involves **three actors**: the **case officer** (in BOPS), the **system** (automatic emails), and the **applicant** (via a secure response link).
+
+The fee check has two main paths: the officer confirms the fee is correct (quick path), or flags the fee as incorrect and sends a fee change request to the applicant. The applicant responds, and the officer confirms the updated payment.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer checks the fee</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Check fee
+
+The officer sees the payment information table (fee paid, payment reference, session ID) and a fee calculation breakdown showing how the fee was calculated (application fee, exemptions, reductions, discount, total). They are asked: *"Is the fee valid?"*
+
+- If **Yes** → the officer saves and the task is marked complete immediately. Jump to the final step.
+- If **No** → the officer is redirected to the fee change request form (see step 3).
+
+<Canvas of={CheckFeeStories.InitialView} />
+
+When "Yes" is selected — the fee is correct and the officer can submit:
+
+<Canvas of={CheckFeeStories.SelectedYes} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Fee is exempt (variant)</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Check fee
+
+Some applications are exempt from fees (e.g. disability exemptions). When the applicant did not make a payment, the payment reference shows "Exempt" and no fee calculation section is displayed.
+
+<Canvas of={CheckFeeStories.WithExemptFee} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Officer selects "No" and creates a fee change request</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Fee change request form
+
+When the officer selects "No", they are redirected to a form where they must explain:
+1. **Why the fee is incorrect** — a plain English explanation shown to the applicant
+2. **What the applicant needs to do** — clear instructions on how to resolve the issue
+
+The form includes a guidance dropdown with examples of supporting documents for disability fee exemptions (PIP award letters, NHS letters, blue badges, etc.) to help officers use appropriate language.
+
+<Canvas of={CheckFeeStories.FeeChangeRequestForm} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>System sends email to applicant</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Applicant's email
+
+After the officer submits the fee change request, the system sends an email to the applicant (or their agent) explaining the fee issue, what they need to do, and providing a secure link to respond. The email includes a deadline for responding.
+
+<Canvas of={CheckFeeStories.FeeChangeEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Officer sees pending request</h2>
+</div>
+
+**Who:** Case officer (checking status)
+**Where:** Validation → Check fee
+
+While waiting for the applicant to respond, the task page shows the fee change request details in an inset — the reason, what the applicant was told to do, and the date it was sent. The officer can cancel the request if needed.
+
+<Canvas of={CheckFeeStories.FeeChangeRequestSent} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Applicant responds to the request</h2>
+</div>
+
+**Who:** Applicant
+**Where:** External link from email → Fee change response page
+
+The applicant clicks the link in the email and sees a page showing what the officer said and a textarea to explain what they've done (e.g. made an additional payment, provided exemption evidence). They submit their response.
+
+<Canvas of={CheckFeeStories.ApplicantResponseForm} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>7</div>
+  <h2 style={{ margin: 0 }}>Officer reviews response and confirms fee</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation → Check fee → Fee change request
+
+Once the applicant responds, the officer sees the applicant's response alongside the original request. They can now confirm the total fee paid by entering the updated amount in the currency input field. If the fee was refunded, they enter 0.
+
+Clicking "Mark as valid" marks the fee as correct and completes the task.
+
+<Canvas of={CheckFeeStories.ApplicantResponded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Fee confirmed — task complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list
+
+The task is complete when:
+- The officer confirmed the fee was correct (selected "Yes" in step 1), or
+- The applicant responded to the fee change request and the officer confirmed the updated payment amount
+
+The completed view shows the payment information with a green "Valid" tag.
+
+<Canvas of={CheckFeeStories.Completed} />

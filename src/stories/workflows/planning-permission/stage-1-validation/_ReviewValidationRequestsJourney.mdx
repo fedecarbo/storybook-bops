@@ -1,0 +1,80 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ReviewValidationRequestsStories from "./ReviewValidationRequests.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Review Validation Requests/Journey" />
+
+# Review Validation Requests — User Journey
+
+This documents the journey of reviewing all validation requests in one consolidated view. The "Review validation requests" page is a **read-only summary table** that shows every request type (documents, description, red line boundary, fee, ownership, other) and their current statuses. The case officer uses this page to check progress before sending the validation decision.
+
+This page involves **one actor**: the **case officer** reviewing the status of requests created through other tasks.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Officer opens the review page — requests queued</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Review validation requests
+
+The case officer opens this page from the validation sidebar to see an overview of all requests created through individual tasks (Check Description, Check Documents, Check Red Line Boundary, etc.). Before the application has been invalidated, all requests show **"Not sent yet"** (yellow tag) — they are queued and will be sent when the validation decision is made.
+
+If no requests have been created yet, the page shows a simple empty state.
+
+Empty state:
+
+<Canvas of={ReviewValidationRequestsStories.NoActiveRequests} />
+
+All requests queued before invalidation:
+
+<Canvas of={ReviewValidationRequestsStories.AllPending} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Requests sent — responses come in over time</h2>
+</div>
+
+**Who:** Case officer (monitoring)
+**Where:** Review validation requests page
+
+After the application is invalidated, requests are sent to the applicant automatically. The table now shows a mix of statuses as the applicant works through them:
+
+- **"Sent"** (green) — request sent, response still within the 15-business-day deadline
+- **"Overdue"** (red) — response deadline has passed
+- **"Responded"** (blue) — applicant has submitted their response
+
+This is the most common view — a mix of statuses showing the overall progress.
+
+<Canvas of={ReviewValidationRequestsStories.MixedStatuses} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Cancelled requests appear in a separate section</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Review validation requests page
+
+If any requests have been cancelled (e.g. the officer realised a document wasn't actually needed), they appear in a **"Cancelled requests"** table below the active requests. This table shows the original reason for the request and why it was cancelled, so there is a clear audit trail.
+
+<Canvas of={ReviewValidationRequestsStories.WithCancelledRequests} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>All requests resolved — ready for validation decision</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Review validation requests page
+
+Once every request shows **"Responded"**, the officer knows the applicant has addressed all outstanding issues. The officer can now proceed to the **"Send validation decision"** task to either validate or invalidate the application.
+
+<Canvas of={ReviewValidationRequestsStories.AllResolved} />

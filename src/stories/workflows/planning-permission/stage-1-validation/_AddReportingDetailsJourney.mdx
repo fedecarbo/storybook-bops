@@ -1,0 +1,76 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as AddReportingDetailsStories from "./AddReportingDetails.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Add Reporting Details/Journey" />
+
+# Add Reporting Details — User Journey
+
+This documents the journey for adding reporting details to an application. The case officer selects the correct development type (used for national statistics returns) and answers whether the local authority owns the land. This is a **single-actor** task — only the **case officer** is involved.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the reporting details task</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Add reporting details
+
+The case officer opens the task from the validation task list. They see a list of reporting type radio buttons filtered to the application type. For a householder application, this typically shows Q21 — Householder developments plus any other applicable types.
+
+Each type may include guidance text explaining what it covers, a link to further guidance on GOV.UK, and relevant legislation.
+
+Below the reporting type selection, there is a question about local authority land ownership.
+
+<Canvas of={AddReportingDetailsStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Case officer selects a reporting type</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add reporting details form
+
+The officer selects the development type that best matches the application. For most householder applications, this will be **Q21 — Householder developments**.
+
+<Canvas of={AddReportingDetailsStories.WithTypeSelected} />
+
+If the local authority is the land owner, the officer selects "Yes" and a sub-question appears asking whether the LA is carrying out the proposed works. This determines whether **Regulation 3** (LA carrying out works) or **Regulation 4** (LA not carrying out works) applies.
+
+<Canvas of={AddReportingDetailsStories.WithRegulation3} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Validation and error handling</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add reporting details form
+
+If the officer tries to save without selecting a reporting type, a validation error is shown. The reporting type selection is required (when types are configured for the application type).
+
+<Canvas of={AddReportingDetailsStories.WithErrors} />
+
+If no reporting types are configured for the application type, the form shows an information message explaining this. The officer can still complete the task and answer the regulation questions.
+
+<Canvas of={AddReportingDetailsStories.NoTypesAvailable} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task completed — reporting details saved</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add reporting details (read-only view)
+
+After saving, the page shows a summary of the selected reporting type and regulation answers. The officer can click "Edit" to return to the form and change their selections.
+
+<Canvas of={AddReportingDetailsStories.Completed} />

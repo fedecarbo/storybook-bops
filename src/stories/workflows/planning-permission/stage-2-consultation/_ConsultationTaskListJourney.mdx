@@ -1,0 +1,127 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ConsultationTaskListStories from "./_ConsultationTaskList.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Consultation Task List/Journey" />
+
+# Consultation Task List — User Journey
+
+This documents how a case officer works through the consultation stage of a planning application. The consultation task list is the central page for managing **three parallel workstreams**: notifying neighbours, consulting statutory bodies, and arranging publicity (site notices and press notices). The sections shown depend on the application type.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the consultation task list</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Application overview → Consultation
+
+After an application is validated, the case officer navigates to the consultation stage. The page shows up to three sections depending on the application type:
+
+- **Neighbours** — selecting addresses, sending letters, reviewing responses
+- **Manage consultees** — adding statutory/non-statutory consultees, sending emails, reviewing responses
+- **Publicity** — arranging site notices and press notices
+
+Below the task list is a **dates bar** showing the validation date, consultation end date, and target decision date. At the bottom, a **Details** accordion provides access to the consultation audit log.
+
+<Canvas of={ConsultationTaskListStories.FullAllNotStarted} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Working through the tasks</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list
+
+The case officer works through the sections in parallel. Typically:
+
+1. **Select neighbours** first — choose which addresses to notify
+2. **Add consultees** — select statutory and non-statutory consultees based on constraints
+3. **Send letters** and **send emails** — these become available once recipients are selected
+4. Begin publicity tasks — decide if site/press notices are required
+
+As tasks progress, their status tags update to show the current state.
+
+<Canvas of={ConsultationTaskListStories.FullInProgress} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Awaiting responses</h2>
+</div>
+
+**Who:** Case officer (monitoring) / Neighbours and consultees (responding externally)
+**Where:** Consultation task list
+
+Once letters and emails are sent, the response tasks show **"Awaiting response"**. The case officer monitors responses as they come in. The consultation period typically runs for 21 days.
+
+During this waiting period, the officer can:
+- View responses as they arrive
+- Send follow-up emails to consultees who haven't responded
+- Check the consultation end date and request an extension if needed
+
+<Canvas of={ConsultationTaskListStories.FullAwaitingResponses} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Confirming publicity</h2>
+</div>
+
+**Who:** Case officer / Press team
+**Where:** Consultation task list → Publicity section
+
+When a site notice or press notice is marked as **required**, a **"Confirm"** task appears below it. These confirmation tasks require evidence that the notice was actually displayed or published:
+
+- **Confirm site notice** — enter the display date, upload a photo of the notice on site
+- **Confirm press notice** — enter the publication date, upload evidence of the newspaper notice
+
+These confirm tasks only appear once the parent notice task has been completed with "Yes, required".
+
+<Canvas of={ConsultationTaskListStories.WithNoticeConfirmations} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>All consultation tasks complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list
+
+When all tasks in every section are marked as complete, the consultation stage is finished. The application can now move to the **Assessment** stage.
+
+<Canvas of={ConsultationTaskListStories.FullAllComplete} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#505a5f", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>~</div>
+  <h2 style={{ margin: 0 }}>Variant: Consultees only</h2>
+</div>
+
+**When:** Certain application types (e.g. minor amendments) only require statutory consultee input — no neighbour notification or publicity.
+
+Only the **Manage consultees** section is shown. The officer adds consultees, sends emails, and reviews responses.
+
+<Canvas of={ConsultationTaskListStories.ConsulteesOnly} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#505a5f", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>~</div>
+  <h2 style={{ margin: 0 }}>Variant: No consultation required</h2>
+</div>
+
+**When:** Some application types skip consultation entirely (e.g. certain prior approvals or lawfulness certificates).
+
+The page shows an inset message explaining that no consultation is required. The officer simply clicks **Back** to return to the application overview.
+
+<Canvas of={ConsultationTaskListStories.NoConsultation} />

@@ -42,6 +42,57 @@ Stories:
 - **JSDoc**: Brief explanation of what this task does and when it appears in the workflow
 - **Exports**: Named by what the designer sees (e.g. `InitialView`, `SelectedYes`, `SelectedNo`, `RequestSent`)
 - **HTML**: Full page context (not just the form — include breadcrumbs, heading, surrounding layout)
+- **Decorator**: Every story file should include a content wrapper decorator so content doesn't stretch full-width:
+  ```js
+  decorators: [
+    (story) =>
+      `<div style="max-width: 1100px; margin: 0 auto; padding: 30px 20px;">${story()}</div>`,
+  ],
+  ```
+
+## Journey documentation (required for every task)
+
+Every task **must** have a companion `_[TaskName]Journey.mdx` file alongside the `.stories.js` file. This is a step-by-step user journey that explains the full flow — who does what, what the system does, what emails are sent, and what each actor sees. Designers use this as the primary way to understand a task.
+
+### Structure
+
+```mdx
+import { Meta, Canvas } from "@storybook/blocks";
+import * as TaskStories from "./TaskName.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Task Name/Journey" />
+
+# Task Name — User Journey
+
+Brief summary of what this task involves and which actors are involved.
+
+<hr />
+
+## Step 1: [Actor] does [action]
+**Who:** Case officer / Applicant / System
+**Where:** Page or location in BOPS
+
+Narrative explanation of what happens and why.
+
+<Canvas of={TaskStories.StoryName} />
+
+## Step 2: ...
+```
+
+### Rules for journey docs
+
+1. **Title convention**: Append `/Journey` to the story title — e.g. `"Workflows/Planning Permission/2. Consultation/Press Notice/Journey"`
+2. **File naming**: Prefix with underscore so it sorts above the stories — `_PressNoticeJourney.mdx`
+3. **Numbered steps**: Use numbered circles (styled divs) for each step in the flow
+4. **Who/Where labels**: Every step must say who is performing the action and where they are
+5. **Embed stories**: Use `<Canvas of={TaskStories.StoryName} />` to show the actual rendered UI inline — no screenshots needed
+6. **Include the external journey**: If the task involves emails, external actors (applicants, press team, consultees), or system actions, document those steps too — show the email content, explain what happens when a link is clicked
+7. **Final step**: Should show the completed/resolved state with a green checkmark circle instead of a number
+8. **Keep it narrative**: Write in plain English explaining the "why" — this is a user manual, not a spec
+
+### Reference implementation
+
+See `src/stories/workflows/planning-permission/stage-2-consultation/_PressNoticeJourney.mdx` for the established pattern.
 
 ## Sample data
 
@@ -72,11 +123,15 @@ src/stories/workflows/planning-permission/
   _Overview.mdx                                    # Visual map of all stages and tasks
   stage-1-validation/
     _ValidationTaskList.stories.js                 # Full task list page in different states
-    CheckDescription.stories.js
+    _CheckDescriptionJourney.mdx                   # Journey doc (step-by-step user flow)
+    CheckDescription.stories.js                    # Story variants (UI states)
+    _CheckFeeJourney.mdx
     CheckFee.stories.js
     ...
   stage-2-consultation/
-    _ConsultationOverview.stories.js
+    _PressNoticeJourney.mdx                        # ← Reference implementation
+    PressNotice.stories.js
+    _SelectConsulteesJourney.mdx
     SelectConsultees.stories.js
     ...
   stage-3-assessment/
@@ -216,13 +271,14 @@ Priority guide:
 ## How to work through the backlog
 
 Each session, tell Claude: **"Do Task N: [name]"**. The agent will:
-1. Read the source views and components listed in the backlog
+1. Read the source views, email templates, and components listed in the backlog
 2. Import sample data from `src/stories/helpers/mockData.js` (add new entries if the task needs data not yet covered)
 3. Recreate the HTML for each interaction state using that data
-4. Create the story file at the correct path
-5. Add any missing styles to `src/styles/main.scss`
-6. Rebuild Docker and verify it renders
-7. **Mark the task as done** — edit this file and change `[ ]` to `[x]` for the completed task in the checklist below
+4. Create the story file at the correct path (with content wrapper decorator)
+5. **Create the journey MDX file** (`_[TaskName]Journey.mdx`) — step-by-step user flow with embedded `<Canvas>` previews (see "Journey documentation" section above)
+6. Add any missing styles to `src/styles/main.scss`
+7. Rebuild Docker and verify both stories and journey doc render
+8. **Mark the task as done** — edit this file and change `[ ]` to `[x]` for the completed task in the checklist below
 
 ## Layout convention
 
@@ -281,29 +337,29 @@ docker compose down && docker compose up -d --build
 ### Stage 1: Validation
 - [x] Task 1: Validation Task List
 - [x] Task 2: Review Documents
-- [ ] Task 3: Check & Request Documents
-- [ ] Task 4: Check Red Line Boundary
-- [ ] Task 5: Check Constraints
-- [ ] Task 6: Check Description
-- [ ] Task 7: Check Fee
-- [ ] Task 8: Add Reporting Details
-- [ ] Task 9: Confirm CIL
-- [ ] Task 10: Check EIA
-- [ ] Task 11: Check Ownership Certificate
-- [ ] Task 12: Other Validation Requests
-- [ ] Task 13: Review Validation Requests
-- [ ] Task 14: Send Validation Decision
+- [x] Task 3: Check & Request Documents
+- [x] Task 4: Check Red Line Boundary
+- [x] Task 5: Check Constraints
+- [x] Task 6: Check Description
+- [x] Task 7: Check Fee
+- [x] Task 8: Add Reporting Details
+- [x] Task 9: Confirm CIL
+- [x] Task 10: Check EIA
+- [x] Task 11: Check Ownership Certificate
+- [x] Task 12: Other Validation Requests
+- [x] Task 13: Review Validation Requests
+- [x] Task 14: Send Validation Decision
 
 ### Stage 2: Consultation
-- [ ] Task 15: Consultation Task List
-- [ ] Task 16: Select Neighbours
-- [ ] Task 17: Send Letters to Neighbours
+- [x] Task 15: Consultation Task List
+- [x] Task 16: Select Neighbours
+- [x] Task 17: Send Letters to Neighbours
 - [ ] Task 18: View Neighbour Responses
 - [ ] Task 19: Select Consultees
 - [ ] Task 20: Email Consultees
 - [ ] Task 21: View Consultee Responses
 - [ ] Task 22: Site Notice
-- [ ] Task 23: Press Notice
+- [x] Task 23: Press Notice
 
 ### Stage 3: Assessment
 - [ ] Task 24: Assessment Task List

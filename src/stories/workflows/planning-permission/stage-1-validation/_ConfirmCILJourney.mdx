@@ -1,0 +1,66 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ConfirmCILStories from "./ConfirmCIL.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Confirm CIL/Journey" />
+
+# Confirm CIL — User Journey
+
+This documents the journey for confirming Community Infrastructure Levy (CIL) liability. The case officer reviews data from the PlanX submission (proposed floor area and a liability recommendation) and confirms whether the application is liable for CIL. This is a **single-actor** task — only the **case officer** is involved.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the CIL task</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Confirm Community Infrastructure Levy (CIL)
+
+The case officer opens the task from the validation task list. They see information from the PlanX submission: the proposed net floor area in square metres and a recommendation of whether the application is likely liable or exempt from CIL.
+
+Below this, a Yes/No radio question asks the officer to confirm CIL liability. If PlanX recommends "liable", the Yes option includes a **(recommended based on submission data)** label.
+
+<Canvas of={ConfirmCILStories.InitialView} />
+
+If PlanX recommends the application is exempt, the "No" option gets the recommended label instead.
+
+<Canvas of={ConfirmCILStories.RecommendedExempt} />
+
+If no PlanX data is available (e.g. the application was submitted outside PlanX), a fallback message is shown and the officer must make the determination without a recommendation.
+
+<Canvas of={ConfirmCILStories.NoPlanxData} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Case officer confirms CIL liability</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Confirm CIL form
+
+The officer selects "Yes" if the application is liable for CIL, or "No" if it is not. They can agree with or override the PlanX recommendation.
+
+<Canvas of={ConfirmCILStories.SelectedYes} />
+
+<Canvas of={ConfirmCILStories.SelectedNo} />
+
+If the officer tries to save without selecting an option, a validation error is shown.
+
+<Canvas of={ConfirmCILStories.WithErrors} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task completed — CIL liability confirmed</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Confirm CIL (read-only view)
+
+After saving, the page shows a summary of the CIL liability decision. The officer can click "Edit" to return to the form and change their selection.
+
+<Canvas of={ConfirmCILStories.Completed} />

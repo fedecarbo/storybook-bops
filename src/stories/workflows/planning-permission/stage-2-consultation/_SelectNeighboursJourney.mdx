@@ -1,0 +1,124 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as SelectNeighboursStories from "./SelectNeighbours.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Select Neighbours/Journey" />
+
+# Select Neighbours — User Journey
+
+This documents how a case officer selects neighbouring addresses for consultation. Neighbours can be selected using a polygon tool on the map (which returns addresses from the OS Places API) or added manually by searching. Once addresses are confirmed, the officer proceeds to send letters.
+
+This task involves one actor: the **case officer** in BOPS.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens Select Neighbours page</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list → Select and add neighbours
+
+The case officer opens the "Select and add neighbours" task from the consultation task list. The page shows an interactive map (with the red line boundary already drawn) and collapsible instructions explaining how to select neighbours.
+
+There are two ways to add neighbours:
+1. **Draw a polygon** on the map to select all properties within the area
+2. **Search manually** by typing an address or postcode
+
+At this point, no addresses have been selected yet.
+
+<Canvas of={SelectNeighboursStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Drawing a polygon on the map to select addresses</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Select and add neighbours → Map
+
+The officer clicks and drags on the map to draw a polygon around the neighbouring properties. The system queries the OS Places API with the drawn boundary and returns all addresses found within it.
+
+The purple area on the map shows the drawn selection polygon. A summary shows how many addresses were found (e.g. "Your search has returned 8 results"). Each address appears in a list with a "Remove" link so the officer can exclude any that aren't relevant.
+
+The site address itself is not included in the results.
+
+<Canvas of={SelectNeighboursStories.MapPolygonDrawn} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Optionally searching and adding addresses manually</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Select and add neighbours → Manually add addresses
+
+If the officer knows of specific neighbours not captured by the polygon (e.g. a property across the road, or one with a non-standard address), they can expand the "Manually add addresses" section.
+
+An autocomplete search field lets the officer type an address or postcode. The OS Places API provides suggestions as they type. Selected addresses are added to the list alongside any map-selected addresses.
+
+<Canvas of={SelectNeighboursStories.ManualAddressSearch} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Reviewing the combined address list</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Select and add neighbours (combined results)
+
+The page now shows all selected addresses — both map-selected and manually added — in separate groups. The officer reviews the full list, removes any incorrect entries using the "Remove" links, and clicks **"Continue to sending letters"** when satisfied.
+
+<Canvas of={SelectNeighboursStories.AddressesSelected} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Editing existing neighbours on a return visit</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Select and add neighbours → Neighbours already selected
+
+If the officer returns to this page after neighbours have already been saved, the existing addresses appear in an accordion section titled "Neighbours already selected". Each address has **Edit** and **Remove** links.
+
+Clicking "Edit" reveals an inline text input where the officer can correct the address (e.g. fix a typo or update a flat number). They can also draw a new polygon or add more manual addresses to extend the selection.
+
+<Canvas of={SelectNeighboursStories.ExistingNeighboursEditing} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Validation error — invalid address format</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Select and add neighbours (form validation)
+
+If the officer submits an address that doesn't have the correct format (at least two comma-separated parts: property/street and postcode), a GOV.UK error summary appears at the top of the page with a link to the invalid entry. The address entry itself shows an inline error message explaining the expected format.
+
+<Canvas of={SelectNeighboursStories.WithValidationErrors} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Selection complete — ready to send letters</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Select and add neighbours (completed)
+
+Once neighbours have been saved, the task status changes to **Complete** (green tag). The accordion shows all selected addresses. The officer can still edit or remove addresses, or add more using the map or manual search.
+
+From here, the officer clicks **"Continue to sending letters"** to proceed to the next task in the neighbour workflow.
+
+<Canvas of={SelectNeighboursStories.Completed} />

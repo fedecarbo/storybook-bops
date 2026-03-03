@@ -1,0 +1,185 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as CheckDescriptionStories from "./CheckDescription.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Check Description/Journey" />
+
+# Check Description — User Journey
+
+This documents the end-to-end journey of checking whether the application description matches the development shown in the plans. It involves **three actors**: the **case officer** (in BOPS), the **system** (automatic emails), and the **applicant** (via a secure response link).
+
+The description check has two main paths: the officer confirms the description is correct (quick path), or proposes an amended description. The amended description path further branches depending on whether applicant agreement is required.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer checks the description</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Check description
+
+The officer sees the existing application description in an inset box and is asked: *"Does the description match the development or use in the plans?"*
+
+- If **Yes** → the officer saves and the task is marked complete immediately. Journey ends here.
+- If **No** → the form expands (see step 2).
+
+<Canvas of={CheckDescriptionStories.InitialView} />
+
+When "Yes" is selected — the description is correct and the officer can submit:
+
+<Canvas of={CheckDescriptionStories.SelectedYes} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer enters an amended description</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check description form (expanded)
+
+When the officer selects "No", the form expands to show:
+1. A **textarea** pre-filled with the current description, which the officer edits
+2. A **sub-question**: "Does this description change require applicant's agreement?"
+
+<Canvas of={CheckDescriptionStories.SelectedNo} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Officer chooses the approval path</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check description form (sub-radio)
+
+The officer has two options:
+
+**"Yes, applicant agreement needed"** — The amended description will be sent to the applicant for approval. They have 5 business days to respond. If they don't respond, the change is automatically accepted to avoid delaying the application.
+
+<Canvas of={CheckDescriptionStories.SelectedNoWithApproval} />
+
+**"No, update description immediately"** — The description is updated right away. The applicant receives a notification email but doesn't need to approve it. This is used for minor corrections (standardising terminology, fixing typos).
+
+<Canvas of={CheckDescriptionStories.SelectedNoImmediateUpdate} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4a</div>
+  <h2 style={{ margin: 0 }}>Immediate update path — notification email sent</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Applicant's email
+
+If the officer chose "No, update immediately", the description is changed straight away and a notification email is sent to the applicant showing the old and new descriptions. The task completes immediately.
+
+<Canvas of={CheckDescriptionStories.DescriptionUpdateEmail} />
+
+The officer then sees the completed state:
+
+<Canvas of={CheckDescriptionStories.CompletedWithUpdate} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4b</div>
+  <h2 style={{ margin: 0 }}>Approval path — email requesting agreement</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Applicant's email (or agent if one is acting on their behalf)
+
+If the officer chose "Yes, applicant agreement needed", the system sends an email with:
+- The application reference and address
+- A link to review and accept or reject the changes
+- A deadline (5 business days)
+- A warning that non-response means automatic acceptance
+
+<Canvas of={CheckDescriptionStories.DescriptionChangeEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Officer sees pending request</h2>
+</div>
+
+**Who:** Case officer (checking status)
+**Where:** Validation → Check description
+
+While waiting for the applicant to respond, the task page shows the change request details in an inset with the date it was sent and a note that the response is pending. The officer can cancel the request if needed.
+
+<Canvas of={CheckDescriptionStories.ChangeRequestSent} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Applicant reviews the proposed change</h2>
+</div>
+
+**Who:** Applicant
+**Where:** External link from email → Description change review page
+
+The applicant clicks the link in the email and sees a page with:
+- The previous and proposed descriptions side by side
+- Instructions to read, decide, and submit
+- A deadline warning with auto-accept notice
+- Radio buttons to agree or disagree (with a textarea if disagreeing)
+
+<Canvas of={CheckDescriptionStories.ApplicantReviewForm} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>7a</div>
+  <h2 style={{ margin: 0 }}>Applicant agrees — officer completes the task</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation → Check description
+
+If the applicant agrees (or doesn't respond within 5 days, triggering auto-acceptance), the officer sees the request marked as "Approved" and can save and mark the task as complete.
+
+<Canvas of={CheckDescriptionStories.ChangeRequestApproved} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>7b</div>
+  <h2 style={{ margin: 0 }}>Applicant disagrees — officer decides next steps</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation → Check description
+
+If the applicant disagrees, the officer sees the request marked as "Rejected" with a link to request a new description change. The officer can either accept the original description or propose a different change (going back to step 2).
+
+<Canvas of={CheckDescriptionStories.ChangeRequestRejected} />
+
+The applicant's disagreement page shows their objection and suggested wording:
+
+<Canvas of={CheckDescriptionStories.ApplicantDisagreed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Description confirmed — task complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list
+
+The task is complete when:
+- The officer confirmed the description was correct (selected "Yes" in step 1), or
+- The applicant approved the amended description and the officer saved, or
+- The request auto-closed after 5 days with no response, or
+- The officer chose "update immediately" (no applicant approval needed)
+
+<Canvas of={CheckDescriptionStories.Completed} />

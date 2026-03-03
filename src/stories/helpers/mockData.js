@@ -234,32 +234,80 @@ export const mockData = {
     {
       type: "Conservation area",
       name: "Camberwell Green Conservation Area",
+      category: "Heritage and conservation",
       source: "Planning data",
+      identified: true,
+      identifiedBy: "PlanX",
+      entities: [{ name: "Camberwell Green Conservation Area", id: "44006857" }],
     },
     {
       type: "Listed building",
       name: "Grade II listed",
+      category: "Heritage and conservation",
       source: "Planning data",
+      identified: true,
+      identifiedBy: "PlanX",
+      entities: [{ name: "12 Elm Grove — Grade II", id: "1065832" }],
     },
     {
       type: "Article 4 direction",
       name: "Camberwell Article 4",
+      category: "General policy",
       source: "Planning data",
+      identified: true,
+      identifiedBy: "PlanX",
+      entities: [{ name: "Camberwell Article 4 Direction Area", id: "7010002614" }],
     },
     {
       type: "Tree preservation order",
       name: "TPO 456 — Oak tree, rear garden",
+      category: "Trees",
       source: "Planning data",
+      identified: true,
+      identifiedBy: "PlanX",
+      entities: [{ name: "TPO 456", id: "7010000456" }],
     },
     {
       type: "Flood zone",
       name: "Flood Zone 2",
+      category: "General policy",
       source: "Environment Agency",
+      identified: true,
+      identifiedBy: "PlanX",
+      entities: [],
     },
     {
       type: "Archaeological priority area",
       name: "Camberwell APA",
+      category: "Heritage and conservation",
       source: "Planning data",
+      identified: true,
+      identifiedBy: "PlanX",
+      entities: [{ name: "Camberwell Archaeological Priority Area", id: "7010003201" }],
+    },
+  ],
+
+  // Additional constraints available to search and add (not yet on the application)
+  availableConstraints: [
+    {
+      type: "Smoke control area",
+      category: "General policy",
+      name: "Southwark Smoke Control Area",
+    },
+    {
+      type: "Air quality management area",
+      category: "General policy",
+      name: "Southwark AQMA",
+    },
+    {
+      type: "Site of importance for nature conservation",
+      category: "Ecology",
+      name: "SINC — Burgess Park",
+    },
+    {
+      type: "Ancient woodland",
+      category: "Ecology",
+      name: "Ancient Semi-Natural Woodland",
     },
   ],
 
@@ -310,41 +358,73 @@ export const mockData = {
       address: "10 Elm Grove, London, SE15 5DE",
       name: "R. Patel",
       status: "no_response",
+      source: "map_selection",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
     {
       address: "14 Elm Grove, London, SE15 5DE",
       name: "S. O'Brien",
       status: "objection",
+      source: "map_selection",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
     {
       address: "11 Elm Grove, London, SE15 5DD",
       name: "K. Williams",
       status: "supportive",
+      source: "map_selection",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
     {
       address: "13 Elm Grove, London, SE15 5DD",
       name: "A. Nguyen",
       status: "no_response",
+      source: "manual_add",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
     {
       address: "10A Elm Grove, London, SE15 5DE",
       name: "D. Brown",
       status: "neutral",
+      source: "map_selection",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
     {
       address: "16 Elm Grove, London, SE15 5DE",
       name: "M. Singh",
       status: "no_response",
+      source: "map_selection",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
     {
       address: "12A Elm Grove, London, SE15 5DE",
       name: "J. Taylor",
       status: "no_response",
+      source: "manual_add",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
     {
       address: "8 Elm Grove, London, SE15 5DE",
       name: "C. Evans",
       status: "objection",
+      source: "map_selection",
+      letterStatus: "new",
+      lastContacted: null,
+      selected: true,
     },
   ],
 
@@ -353,6 +433,27 @@ export const mockData = {
     paymentReference: "PAY-2024-09876",
     paymentMethod: "Online",
     exempt: false,
+    sessionId: "sess-planx-abc123def",
+    calculation: {
+      applicationFee: "462.00",
+      exemptions: ["Disability exemption"],
+      reductions: [],
+      discount: "256.00",
+      total: "206.00",
+    },
+  },
+
+  feeChangeRequest: {
+    reason:
+      "The fee paid does not match the fee required for this type of application. A householder application for a rear extension requires a fee of £258.00, but only £206.00 was received.",
+    suggestion:
+      "Please pay the outstanding balance of £52.00 to make the fee valid. If you believe you are exempt from the fee, please provide documents to support your fee exemption.",
+    response:
+      "I have now paid the outstanding balance of £52.00 via the online portal. The new payment reference is PAY-2024-09912.",
+    invalidAmount: "206.00",
+    createdAt: "15 January 2025",
+    responseDue: "22 January 2025",
+    respondedAt: "18 January 2025",
   },
 
   siteHistory: [
@@ -408,6 +509,81 @@ export const mockData = {
       code: "NPPF",
       title: "National Planning Policy Framework, Chapter 12",
       area: "National",
+    },
+  ],
+
+  // Press notice reason labels (from press_notice_reasons.yml)
+  pressNoticeReasons: {
+    conservation_area:
+      "The site is within/affecting the setting of a designated Conservation Area (Section 73)",
+    listed_building:
+      "The application relates to, or affects the setting of a Listed Building (Section 67)",
+    major_development: "The application is for a Major Development",
+    wildlife_and_countryside:
+      "The application would affect a right of way (Part III of Wildlife and Countryside Act 1981)",
+    development_plan:
+      "The application does not accord with the provisions of the development plan",
+    environment:
+      "An environmental statement accompanies this application",
+    ancient_monument:
+      "The site is affecting the setting of an Ancient Monument",
+    public_interest: "Wider Public interest",
+    other: "Other",
+  },
+
+  // Press notice mock state
+  pressNotice: {
+    required: true,
+    reasons: ["conservation_area", "listed_building"],
+    otherReason: "",
+    requestedAt: "26 Nov 2024",
+    publishedAt: "2 Dec 2024",
+    comment: "Published in Southwark News, page 12",
+    evidenceFilename: "press-notice-southwark-news.jpg",
+    evidenceUploadedAt: "3 Dec 2024",
+    notificationEmail: "press.notices@southwark.gov.uk",
+  },
+
+  // Additional document validation requests — requested by case officer during validation
+  documentRequests: [
+    {
+      id: 1,
+      documentRequestType: "Existing roof plan",
+      reason:
+        "The submitted drawings do not include a roof plan showing the existing layout. This is needed to assess the impact of the proposed rear extension on the roof structure. Please provide a roof plan at 1:50 scale showing the existing roof layout.",
+      state: "open",
+      createdAt: "18 Nov 2024 10:32",
+      responseDue: "9 December 2024",
+      closedAt: null,
+      responseDocuments: [],
+    },
+    {
+      id: 2,
+      documentRequestType: "Structural survey report",
+      reason:
+        "Given the proximity to the party wall and the proposed two-storey extension, a structural survey report is required to demonstrate the works will not affect the structural integrity of the adjoining property.",
+      state: "open",
+      createdAt: "18 Nov 2024 10:45",
+      responseDue: "9 December 2024",
+      closedAt: null,
+      responseDocuments: [],
+    },
+    {
+      id: 3,
+      documentRequestType: "Tree survey / Arboricultural impact assessment",
+      reason:
+        "The site has a Tree Preservation Order (TPO 456). An arboricultural impact assessment is required showing the root protection areas of the protected oak tree and the impact of the proposed foundations.",
+      state: "closed",
+      createdAt: "18 Nov 2024 11:00",
+      responseDue: "9 December 2024",
+      closedAt: "25 Nov 2024 14:22",
+      responseDocuments: [
+        {
+          name: "Arboricultural impact assessment",
+          filename: "arboricultural-impact-assessment.pdf",
+          uploadedAt: "25 Nov 2024",
+        },
+      ],
     },
   ],
 
@@ -508,4 +684,399 @@ export const mockData = {
       },
     ],
   },
+
+  // Red line boundary change request data
+  redLineBoundary: {
+    changeRequest: {
+      reason:
+        "The submitted red line boundary does not include the full extent of the rear garden where the proposed extension will be built. The boundary needs to be extended to include the area up to the rear fence line to accurately show the application site.",
+      createdAt: "19 November 2024, 14:30",
+      responseDue: "10 December 2024",
+      updatedAt: "25 November 2024, 09:15",
+      rejectionReason:
+        "I believe the original boundary is correct as the extension does not extend beyond the current patio area which is already within the red line.",
+    },
+  },
+
+  // Reporting types for the "Add reporting details" task
+  // Filtered by application type — householder apps see Q21 as the main option
+  reportingTypes: [
+    {
+      id: 1,
+      code: "Q21",
+      description: "Householder developments",
+      fullDescription: "Q21 – Householder developments",
+      guidance:
+        "Includes extensions, conservatories, loft conversions, garages, and other alterations to a single dwellinghouse.",
+      guidanceLink:
+        "https://www.gov.uk/guidance/making-an-application#householder-702",
+    },
+    {
+      id: 2,
+      code: "Q13",
+      description: "Dwellings (minor)",
+      fullDescription: "Q13 – Dwellings (minor)",
+      guidance:
+        "Development of 1–9 dwellings or a site area of less than 0.5 hectares where the number of dwellings is not known.",
+    },
+    {
+      id: 3,
+      code: "Q18",
+      description: "All other developments (minor)",
+      fullDescription: "Q18 – All other developments (minor)",
+    },
+    {
+      id: 4,
+      code: "Q20",
+      description: "Change of use",
+      fullDescription: "Q20 – Change of use",
+      legislation: "Town and Country Planning (Use Classes) Order 1987",
+    },
+  ],
+
+  // CIL (Community Infrastructure Levy) data from PlanX submission
+  cilLiability: {
+    proposedFloorArea: "45", // net square metres
+    result: "liable", // PlanX result: "liable", "exempt.size", or null
+  },
+
+  // Environment Impact Assessment data
+  eia: {
+    required: true,
+    emailAddress: "eia.requests@southwark.gov.uk",
+    address:
+      "Planning Department, Southwark Council, 160 Tooley Street, London, SE1 2QH",
+    fee: "15",
+  },
+
+  // Ownership certificate data
+  ownershipCertificate: {
+    certificateType: "B",
+    landOwners: [
+      {
+        name: "Margaret Thornton",
+        address: "14 Elm Grove, London, SE15 5DE",
+        noticeGiven: true,
+        noticeGivenAt: "01/10/2024",
+        noticeReason: null,
+      },
+      {
+        name: "David Thornton",
+        address: "14 Elm Grove, London, SE15 5DE",
+        noticeGiven: true,
+        noticeGivenAt: "01/10/2024",
+        noticeReason: null,
+      },
+    ],
+    updatedCertificate: {
+      certificateType: "C",
+      landOwners: [
+        {
+          name: "Margaret Thornton",
+          address: "14 Elm Grove, London, SE15 5DE",
+          noticeGiven: true,
+          noticeGivenAt: "15/11/2024",
+          noticeReason: null,
+        },
+        {
+          name: "David Thornton",
+          address: "14 Elm Grove, London, SE15 5DE",
+          noticeGiven: true,
+          noticeGivenAt: "15/11/2024",
+          noticeReason: null,
+        },
+        {
+          name: "Southwark Estates Ltd",
+          address: "Unit 3, Business Park, London, SE1 4QP",
+          noticeGiven: false,
+          noticeGivenAt: null,
+          noticeReason:
+            "Unable to identify individual to serve notice upon — company registered address used",
+        },
+      ],
+    },
+    certificateTypeA: {
+      certificateType: "A",
+      landOwners: [],
+    },
+    certificateTypeD: {
+      certificateType: "D",
+      landOwners: [
+        {
+          name: "Unknown",
+          address: "Part rear garden, 12 Elm Grove, London, SE15 5DE",
+          noticeGiven: false,
+          noticeGivenAt: null,
+          noticeReason:
+            "Owner could not be identified after reasonable enquiry. Notice published in local newspaper on 20/09/2024.",
+        },
+      ],
+    },
+    changeRequest: {
+      reason:
+        "The submitted ownership certificate states Certificate Type B, but records indicate there may be additional landowners whose interest in the land has not been declared. The rear boundary appears to include land belonging to the adjacent property at 14 Elm Grove. Please review and submit a corrected ownership certificate.",
+      createdAt: "20 November 2024",
+      createdAtShort: "20/11/2024",
+      responseDue: "11 December 2024",
+      closedAt: "28 November 2024",
+    },
+    rejectionReason:
+      "I disagree with this assessment. The land at 14 Elm Grove is not included in the application boundary. The red line boundary only covers the property at 12 Elm Grove, of which I am the sole owner along with David Thornton as listed in the original certificate.",
+    activityLogRequests: [
+      {
+        action: "Certificate submitted by applicant",
+        status: "Submitted",
+        user: "Applicant",
+        date: "28/11/2024",
+      },
+      {
+        action: "New ownership certificate requested",
+        status: "Closed",
+        user: "Sarah Johnson",
+        date: "20/11/2024",
+      },
+    ],
+  },
+
+  // Other change validation requests — generic catch-all for any validation issue
+  // not covered by specific request types (documents, description, boundary, etc.)
+  otherChangeRequests: [
+    {
+      id: 1,
+      sequence: 1,
+      reason:
+        "The application does not include details of the proposed materials for the external walls and roof of the extension. This information is required to assess the visual impact on the conservation area.",
+      suggestion:
+        "Please provide a schedule of materials specifying the type, colour, and finish of all external materials for the proposed extension, including walls, roof, windows, and doors.",
+      state: "open",
+      response: null,
+      createdAt: "20 Nov 2024 11:15",
+      responseDue: "11 December 2024",
+      closedAt: null,
+    },
+    {
+      id: 2,
+      sequence: 2,
+      reason:
+        "The submitted CIL Additional Information form appears to be incomplete — the floor area calculations for the existing and proposed development have not been filled in.",
+      suggestion:
+        "Please complete the CIL Additional Information form with the gross internal area (GIA) of the existing building and proposed development in square metres.",
+      state: "open",
+      response: null,
+      createdAt: "20 Nov 2024 11:30",
+      responseDue: "11 December 2024",
+      closedAt: null,
+    },
+    {
+      id: 3,
+      sequence: 3,
+      reason:
+        "The ownership certificate submitted with the application is Certificate A, but Land Registry records indicate that a portion of the access driveway is owned by a third party. Certificate B may be required.",
+      suggestion:
+        "Please check the Land Registry title and confirm whether all land within the red line boundary is in your sole ownership. If not, you will need to submit an amended ownership certificate (Certificate B) and serve notice on the other landowner(s).",
+      state: "closed",
+      response:
+        "I have checked the Land Registry records and confirm that the access driveway is included in my title (SGL123456). I have attached a copy of the title plan. The ownership certificate A is correct as submitted.",
+      createdAt: "20 Nov 2024 12:00",
+      responseDue: "11 December 2024",
+      closedAt: "28 Nov 2024 09:45",
+    },
+  ],
+
+  // Description change request data
+  descriptionChange: {
+    proposedDescription:
+      "Proposed two-storey rear extension measuring approximately 4m in depth and 6m in width to provide enlarged kitchen/dining area at ground floor level and additional bedroom with en-suite at first floor level. The extension would be constructed in London stock brick with a natural slate roof to match the existing dwelling. Existing single-storey outrigger to be demolished as part of the works.",
+    changeRequest: {
+      previousDescription:
+        "Proposed two-storey rear extension measuring approximately 4 metres in depth and 6 metres in width to provide enlarged kitchen and dining area on the ground floor with additional bedroom and en-suite bathroom on the first floor. Materials to match existing dwelling including London stock brick and slate roof tiles.",
+      proposedDescription:
+        "Proposed two-storey rear extension measuring approximately 4m in depth and 6m in width to provide enlarged kitchen/dining area at ground floor level and additional bedroom with en-suite at first floor level. The extension would be constructed in London stock brick with a natural slate roof to match the existing dwelling. Existing single-storey outrigger to be demolished as part of the works.",
+      createdAt: "20 November 2024",
+      responseDue: "27 November 2024",
+      updatedAt: "24 November 2024",
+      rejectionReason:
+        "I disagree with the addition of 'Existing single-storey outrigger to be demolished' as no demolition is proposed. The existing outrigger is being retained and incorporated into the new extension.",
+    },
+  },
+
+  // Validation requests summary — all request types for the "Review validation requests" page
+  validationRequests: [
+    {
+      id: 1,
+      type: "additional_document",
+      requestLabel: "New document",
+      detail: "Materials schedule",
+      state: "pending",
+      createdAt: "20 Nov 2024",
+    },
+    {
+      id: 2,
+      type: "description_change",
+      requestLabel: "Change description",
+      detail:
+        "Proposed two-storey rear extension measuring approximately 4m in depth and 6m in width to provide enlarged kitchen/dining area at ground floor level and additional bedroom with en-suite at first floor level.",
+      state: "open",
+      daysDue: 8,
+      createdAt: "18 Nov 2024",
+      notifiedAt: "18 Nov 2024",
+    },
+    {
+      id: 3,
+      type: "red_line_boundary",
+      requestLabel: "Red line boundary changes",
+      detail:
+        "The boundary includes land belonging to the adjacent property at 14 Elm Grove. Please review and submit a corrected red line boundary.",
+      state: "open",
+      daysDue: -3,
+      createdAt: "10 Nov 2024",
+      notifiedAt: "10 Nov 2024",
+    },
+    {
+      id: 4,
+      type: "replacement_document",
+      requestLabel: "Replacement document",
+      detail: "Site plan (Drawing No. 001 Rev A)",
+      state: "closed",
+      createdAt: "15 Nov 2024",
+      closedAt: "25 Nov 2024",
+    },
+    {
+      id: 5,
+      type: "other_change",
+      requestLabel: "Other",
+      detail:
+        "The application does not include details of the proposed materials for the external walls and roof of the extension.",
+      state: "closed",
+      createdAt: "20 Nov 2024",
+      closedAt: "28 Nov 2024",
+    },
+  ],
+
+  // Validation decision data — dates and request counts for
+  // the "Send validation decision" task (Task 14)
+  validationDecision: {
+    validFromDate: "15 November 2024", // received_at when no requests
+    validFromDateAfterRequests: "2 December 2024", // next business day after last request closed
+    invalidatedAt: "20 November 2024",
+    validatedAt: "22 November 2024",
+    invalidationResponseDue: "11 December 2024", // 15 business days after invalidatedAt
+    unresolvedRequestCount: 3,
+    resolvedRequestCount: 2,
+  },
+
+  // Consultation task list — section definitions for the consultation stage
+  consultationTasks: {
+    neighbourTasks: [
+      { name: "Select and add neighbours", slug: "select-neighbours" },
+      { name: "Send letters to neighbours", slug: "send-letters-to-neighbours" },
+      { name: "View neighbour responses", slug: "view-neighbour-responses" },
+    ],
+    consulteeTasks: [
+      { name: "Add and assign consultees", slug: "select-consultees" },
+      { name: "Send emails to consultees", slug: "email-consultees" },
+      { name: "View consultee responses", slug: "view-consultee-responses" },
+    ],
+    publicityTasks: [
+      { name: "Site notice", slug: "site-notice" },
+      { name: "Confirm site notice", slug: "confirm-site-notice" },
+      { name: "Press notice", slug: "press-notice" },
+      { name: "Confirm press notice", slug: "confirm-press-notice" },
+    ],
+  },
+
+  cancelledValidationRequests: [
+    {
+      id: 6,
+      type: "additional_document",
+      requestLabel: "New document",
+      detail: "Flood risk assessment",
+      cancelReason:
+        "Confirmed flood zone 1 — FRA not required for this application type.",
+      cancelledAt: "22 Nov 2024",
+    },
+  ],
+
+  // Neighbour letter template — realistic letter text with mock data substituted
+  neighbourLetterTemplate: `# Town and Country Planning Act 1990
+
+Dear Resident
+
+A planning application has been made for the development described below:
+
+Site address: 12 Elm Grove, London, SE15 5DE
+
+Proposal: Two-storey rear extension to provide enlarged kitchen/dining area and additional bedroom.
+
+Name of applicant: James Morton
+
+Application number: BPS-24-00345-HAPP
+
+You can comment on this planning application until 16 December 2024. If we receive your comments after this date, we may not be able to take them into consideration if a decision has already been made.
+
+If you are not the owner or landlord of this property, please forward this letter to the person who is.
+
+# View, comment and track planning applications online
+
+Use this link to:
+* view the application documents
+* submit your comments about the application
+
+https://southwark.bops-applicants.services/planning_applications/BPS-24-00345-HAPP
+
+# Commenting on this application
+
+Tell us about anything that you think we should consider when making a decision about this application.
+
+We can only consider comments that relate to the actual proposals. Please review the application documents before making comments.
+
+Your comments will be published on our website. Do not include any personal details or information that you do not wish to be made public.
+
+# If a decision is appealed
+
+If the Council's decision is appealed and you have commented, we will write to you to let you know. Your comments will be shared with the Planning Inspectorate. You will not be able to make any further comments if the decision is appealed.
+
+You will be notified of a decision about the appeal.
+
+# Commenting by post
+
+The quickest way to make a comment is by using the link in this letter.
+
+You can make a comment by post to this address:
+Planning Department, Southwark Council, 160 Tooley Street, London, SE1 2QH
+
+Please include the application number and site address.
+
+Yours
+
+Sarah Johnson
+Planning officer`,
+
+  // Neighbour letter batches — sent letter history for audit/archive view
+  neighbourLetterBatches: [
+    {
+      id: 1,
+      dateSent: "25 November 2024",
+      responsePeriod: 21,
+      recipients: [
+        "10 Elm Grove, London, SE15 5DE",
+        "14 Elm Grove, London, SE15 5DE",
+        "11 Elm Grove, London, SE15 5DD",
+        "13 Elm Grove, London, SE15 5DD",
+        "10A Elm Grove, London, SE15 5DE",
+        "16 Elm Grove, London, SE15 5DE",
+        "12A Elm Grove, London, SE15 5DE",
+        "8 Elm Grove, London, SE15 5DE",
+      ],
+    },
+    {
+      id: 2,
+      dateSent: "10 December 2024",
+      responsePeriod: 21,
+      recipients: [
+        "10 Elm Grove, London, SE15 5DE",
+        "14 Elm Grove, London, SE15 5DE",
+      ],
+    },
+  ],
 };

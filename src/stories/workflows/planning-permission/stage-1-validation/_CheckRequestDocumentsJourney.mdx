@@ -1,0 +1,144 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as CheckRequestDocumentStories from "./CheckRequestDocuments.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Check and Request Documents/Journey" />
+
+# Check and Request Documents — User Journey
+
+This documents the end-to-end journey of checking submitted documents for missing items and requesting additional documents from the applicant. It involves **three actors**: the **case officer** (in BOPS), the **system** (automatic emails), and the **applicant** (responding via a secure link).
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer checks submitted documents</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Check and request documents
+
+The case officer opens the "Check and request documents" task from the validation task list. They see a table of all documents submitted by the applicant, and need to check whether any required documents are missing.
+
+The page includes a link to "Add a request for a missing document" at the bottom.
+
+<Canvas of={CheckRequestDocumentStories.InitialView} />
+
+If any submitted documents are unavailable (for example due to a file security issue), a warning banner appears advising the officer to ask for replacements:
+
+<Canvas of={CheckRequestDocumentStories.WithMissingDocumentWarning} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer creates a request for a missing document</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check and request documents → Add a request for a missing document
+
+The officer clicks "Add a request for a missing document" and is taken to a form where they specify:
+1. **The document type** they need (e.g. "Existing roof plan")
+2. **The reason** for the request — written in plain English so the applicant understands what is needed and why
+
+<Canvas of={CheckRequestDocumentStories.CreateRequestForm} />
+
+Here is the form filled in with a request for a missing roof plan:
+
+<Canvas of={CheckRequestDocumentStories.CreateRequestFormFilled} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Request appears in the requests table</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check and request documents (main page)
+
+After saving, the officer returns to the main page. The request now appears in a table below the submitted documents, showing:
+- A placeholder image (no document yet)
+- The document type and reason
+- The date requested
+- A "Cancel request" link (if the request is still open)
+
+The officer can add more requests if other documents are also missing.
+
+With one request:
+
+<Canvas of={CheckRequestDocumentStories.OneRequestPending} />
+
+With multiple requests created:
+
+<Canvas of={CheckRequestDocumentStories.MultipleRequestsPending} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>System sends email to the applicant</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Applicant email (and agent if applicable)
+
+When the validation requests are sent (either immediately when created, or batched as part of the validation decision), the applicant receives an email. The email tells them that the case officer needs more information and provides a secure link to view and respond to the requests.
+
+If the applicant does not respond, the application may be closed and any payment refunded.
+
+<Canvas of={CheckRequestDocumentStories.EmailToApplicant} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Applicant views their requests</h2>
+</div>
+
+**Who:** Applicant
+**Where:** Secure link from email (external to BOPS)
+
+The applicant clicks the link in the email and sees a page listing all outstanding validation requests. Each additional document request appears as a task with an "Upload new document" link and a status tag.
+
+They must respond to all requests before the case officer can proceed. Once they respond, the status changes to "Complete" and they cannot make further changes.
+
+<Canvas of={CheckRequestDocumentStories.ApplicantLandingPage} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Applicant uploads the requested document</h2>
+</div>
+
+**Who:** Applicant
+**Where:** Upload new document page
+
+The applicant sees what document was requested and reads the case officer's reason. They have **15 business days** from the date of the request to respond — if they miss the deadline, the application may be returned with a refund.
+
+They upload a file (PNG, JPEG, or PDF, max 30MB) and submit their response. The response is sent to the case officer immediately and cannot be changed.
+
+<Canvas of={CheckRequestDocumentStories.ApplicantUploadForm} />
+
+After uploading, the applicant sees a confirmation panel:
+
+<Canvas of={CheckRequestDocumentStories.ApplicantUploaded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>All requests resolved — task complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check and request documents (main page)
+
+Once the applicant has uploaded documents for all requests, the officer returns to the main page and sees:
+- All requests now show a green "Closed" tag (no more "Cancel request" links)
+- The newly uploaded documents appear in the submitted documents table with "Not started" status — they need to be reviewed via the **Review documents** task
+
+The officer can now mark this task as complete and move on to reviewing the new documents.
+
+<Canvas of={CheckRequestDocumentStories.AllRequestsResolved} />

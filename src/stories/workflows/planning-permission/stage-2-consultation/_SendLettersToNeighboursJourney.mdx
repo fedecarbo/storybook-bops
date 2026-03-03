@@ -1,0 +1,153 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as SendLettersStories from "./SendLettersToNeighbours.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Send Letters to Neighbours/Journey" />
+
+# Send Letters to Neighbours — User Journey
+
+This documents the end-to-end journey of sending physical consultation letters to neighbours via GOV.UK Notify. It involves two actors: the **case officer** (in BOPS) and the **system** (GOV.UK Notify for physical mail delivery + email copy to the applicant).
+
+After neighbours have been selected (see the "Select Neighbours" journey), the case officer reviews the list, customises the letter template if needed, and confirms sending. Letters are physically printed and posted by GOV.UK Notify. The applicant and their agent receive an email copy.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens Send Letters page</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list → Send letters to neighbours
+
+The case officer opens the "Send letters to neighbours" task from the consultation task list. The page shows a multi-step form:
+
+- **Step 2** — a table of all previously selected neighbours with checkboxes (pre-checked), each showing the address (in uppercase), source (Map selection or Manual add), letter status (New for first-time sending), and last contacted date.
+- **Step 3** — a dropdown to choose the letter type (Notification or Renotification) and a collapsible letter template editor.
+- **Step 4** — a response period input (defaulting to 21 days).
+
+A "Back to add neighbours" link at the top lets the officer return to the Select Neighbours page if they need to add or remove addresses.
+
+<Canvas of={SendLettersStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer reviews and customises the letter template</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send letters to neighbours → View/edit letter template
+
+The officer can expand the "View/edit letter template" details section to preview or edit the letter text. The template is pre-populated with the standard consultation letter for the application type, with placeholders already filled in (site address, proposal description, applicant name, reference number, closing date).
+
+The letter uses formatting conventions: lines starting with `#` become headers in the printed letter, and lines starting with `*` become bullet points. The officer can customise the wording for this specific application before sending.
+
+<Canvas of={SendLettersStories.LetterTemplateExpanded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Officer selects recipients and sets response period</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send letters to neighbours → neighbour table + response period
+
+The officer can uncheck specific neighbours who should not receive a letter (e.g. the officer has already spoken to them, or the address is incorrect). The "Select all" checkbox in the table header toggles all neighbours at once.
+
+The response period defaults to 21 days but can be changed. This determines the consultation deadline — the date by which neighbours must submit their comments.
+
+When the officer is satisfied with the selection and settings, they click **"Confirm and send letters"** to dispatch the letters.
+
+<Canvas of={SendLettersStories.SomeDeselected} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>System sends letters via GOV.UK Notify</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Each selected neighbour (physical letter via GOV.UK Notify) + applicant/agent (email copy)
+
+When the officer confirms, the system:
+
+1. Sends a physical letter to each selected neighbour's address through GOV.UK Notify (the government's letter printing and posting service)
+2. Sends an **email copy** of the letter to the applicant and their agent (if one is listed), so they know what neighbours have been told
+3. Sets the consultation deadline based on the response period
+4. Records an audit entry of the letters sent
+
+The email copy includes the application reference, received date, site address, and the full letter content.
+
+<Canvas of={SendLettersStories.EmailCopyToApplicant} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Letters are delivered — statuses update</h2>
+</div>
+
+**Who:** System (automatic status updates from GOV.UK Notify)
+**Where:** Send letters to neighbours (return visit)
+
+After sending, the system periodically checks letter delivery status via the GOV.UK Notify API. Statuses progress through:
+
+- **Submitted** (yellow) — letter created but not yet processed
+- **Printing** (purple) — accepted by the print provider
+- **Posted** (light-blue) — successfully printed and posted
+
+If delivery fails, the status shows as a red tag (Technical failure, Permanent failure, or Rejected). The officer can return to this page to monitor delivery progress.
+
+A green success banner confirms that letters have been sent and a copy was emailed to the applicant.
+
+<Canvas of={SendLettersStories.LettersSent} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Renotification — sending updated letters later</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send letters to neighbours → Choose letter type
+
+If the application changes during the consultation period (e.g. amended plans, updated description), the officer can send **renotification** letters. They:
+
+1. Select **"Renotification"** from the letter type dropdown
+2. Provide a **reason for resending** — this text appears at the beginning of the letter under an "Application updated" heading
+3. Customise the letter template if needed
+4. Confirm and send
+
+Previously contacted neighbours now show their prior delivery status and last contacted date. The officer can choose to resend to all or only some.
+
+<Canvas of={SendLettersStories.RenotificationSelected} />
+
+If a reviewer has flagged issues with the letters, an inset text alert appears at the top of the page with their comment:
+
+<Canvas of={SendLettersStories.ReviewerRequestedChanges} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Complete — letter batch history</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Consultation → Copy of neighbour letters
+
+The officer can view a complete history of all letter batches sent for this application. Each batch shows:
+
+- The date sent
+- The response period
+- A link to download the letter as a PDF
+- A table of all recipient addresses with an orange "post" tag indicating the delivery method
+
+This provides a full audit trail. A CSV export of all letters is also available. If a renotification was sent, it appears as a separate batch entry.
+
+<Canvas of={SendLettersStories.LetterBatchHistory} />

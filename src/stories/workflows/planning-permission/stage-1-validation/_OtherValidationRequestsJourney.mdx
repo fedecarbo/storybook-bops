@@ -1,0 +1,136 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as OtherValidationRequestsStories from "./OtherValidationRequests.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Other Validation Requests/Journey" />
+
+# Other Validation Requests — User Journey
+
+This documents the end-to-end journey of flagging generic validation issues and requesting the applicant to resolve them. It involves **three actors**: the **case officer** (in BOPS), the **system** (automatic emails), and the **applicant** (responding via a secure link).
+
+"Other validation requests" is the catch-all mechanism for any validation issue not covered by specific request types (documents, description, red line boundary, fee, ownership certificate). The officer explains **why** the application is invalid and **how** the applicant can fix it. The applicant responds with free text.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the "Other validation requests" task</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Other validation requests
+
+The case officer opens the "Other validation requests" task from the validation task list sidebar. If no requests have been created yet, they see an empty state with a link to "Add another validation request".
+
+<Canvas of={OtherValidationRequestsStories.NoRequests} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer creates a validation request</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Other validation requests → Add other validation request
+
+The officer clicks "Add another validation request" and is taken to a form with two fields:
+1. **Reason** — tell the applicant why the application is invalid
+2. **Suggestion** — explain how the applicant can make the application valid
+
+The request is saved but **not sent** until the application is marked as invalid (or immediately if the application is already invalidated).
+
+<Canvas of={OtherValidationRequestsStories.CreateRequestForm} />
+
+Here is the form filled in — the officer has explained that the materials schedule is missing:
+
+<Canvas of={OtherValidationRequestsStories.CreateRequestFormFilled} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Request appears in the task list</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Other validation requests (main page)
+
+After saving, the officer returns to the task list page. The request now appears with a yellow **"Invalid"** tag. The officer can view, edit, or cancel the request. They can also add more requests if there are other issues.
+
+With one request:
+
+<Canvas of={OtherValidationRequestsStories.OneRequestOpen} />
+
+With multiple requests:
+
+<Canvas of={OtherValidationRequestsStories.MultipleRequests} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>System sends email to the applicant</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Applicant email (and agent if applicable)
+
+When the validation requests are sent (either immediately when created during an invalidated state, or batched as part of the validation decision), the applicant receives an email. The email tells them that the case officer needs more information and provides a secure link to view and respond to the requests.
+
+If the applicant does not respond within **15 business days**, the application may be returned with a refund.
+
+<Canvas of={OtherValidationRequestsStories.EmailToApplicant} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Applicant views their requests</h2>
+</div>
+
+**Who:** Applicant
+**Where:** Secure link from email (external to BOPS)
+
+The applicant clicks the link in the email and sees a page listing all outstanding validation requests. Each request appears as a task with a status tag. They must respond to all requests before the case officer can proceed.
+
+<Canvas of={OtherValidationRequestsStories.ApplicantLandingPage} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Applicant submits their response</h2>
+</div>
+
+**Who:** Applicant
+**Where:** Respond to other request page
+
+The applicant sees the officer's reason for invalidation and their suggestion for how to make the application valid. They write their response in a textarea and submit it. The response is sent to the case officer immediately and cannot be changed.
+
+The response form:
+
+<Canvas of={OtherValidationRequestsStories.ApplicantResponseForm} />
+
+After submitting, the applicant sees a confirmation panel:
+
+<Canvas of={OtherValidationRequestsStories.ApplicantResponseSubmitted} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Officer reviews response — task complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Other validation requests → View other request
+
+Once the applicant has responded, the case officer can view the response. The request now shows a turquoise **"Updated"** tag instead of the yellow "Invalid" tag. The officer reads the applicant's response in the inset text below their original request.
+
+Viewing a closed request with the applicant's response:
+
+<Canvas of={OtherValidationRequestsStories.RequestClosed} />
+
+When all requests have been resolved, the task list shows all items with "Updated" tags:
+
+<Canvas of={OtherValidationRequestsStories.AllRequestsResolved} />

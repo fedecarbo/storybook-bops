@@ -1,0 +1,72 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as CheckConstraintsStories from "./CheckConstraints.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Check Constraints/Journey" />
+
+# Check Constraints — User Journey
+
+The case officer reviews planning constraints that affect the application site. Constraints are automatically identified by **PlanX** and **Planning Data** when the application is submitted — these include things like Conservation Areas, Listed Buildings, Tree Preservation Orders, and Flood Zones. The officer checks these are correct, adds any missing constraints manually, and marks the task as complete.
+
+This is an **internal task** — there is no email or external actor involvement. It typically takes a few minutes unless the constraint data needs significant correction.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens "Check constraints"</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Validation task list → Check constraints
+
+The officer sees the constraints that were automatically identified when the application was submitted. Each constraint shows its **category** (as a grey tag), **type**, any linked **entities** on Planning Data, and the **source** (usually "PlanX").
+
+A link to "View map on Planning Data" opens a map showing all constraint geometries overlaid on the site.
+
+<Canvas of={CheckConstraintsStories.InitialView} />
+
+If no constraints were identified (e.g. a site with no designations), the officer sees an empty state:
+
+<Canvas of={CheckConstraintsStories.NoConstraints} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer searches for additional constraints</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check constraints → "Add constraints" panel
+
+If the officer knows of a constraint that wasn't automatically identified, they expand the **"Add constraints"** details panel and search by name or category. The search results show available constraints (those not already on the application) with an **"Add"** link.
+
+<Canvas of={CheckConstraintsStories.SearchExpanded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Officer adds a constraint</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check constraints
+
+After clicking "Add", the constraint appears in the identified constraints table. Unlike PlanX-identified constraints (which show `-` in the Action column), manually-added constraints show a **"Remove"** link so the officer can undo the addition if needed. The source column shows the officer's name instead of "PlanX".
+
+<Canvas of={CheckConstraintsStories.ConstraintAdded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Constraints reviewed — task complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list
+
+Once the officer is satisfied that all relevant constraints are accounted for, they click **"Save and mark as complete"**. The task status changes to **Complete** (green tag) in the task list sidebar. An audit entry "constraints_checked" is recorded against the application.
+
+<Canvas of={CheckConstraintsStories.Completed} />

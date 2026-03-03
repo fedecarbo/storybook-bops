@@ -1,0 +1,172 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as CheckRedLineBoundaryStories from "./CheckRedLineBoundary.stories";
+
+<Meta title="Workflows/Planning Permission/1. Validation/Check Red Line Boundary/Journey" />
+
+# Check Red Line Boundary — User Journey
+
+This documents the end-to-end journey of checking the applicant's red line boundary (site outline). It involves **three actors**: the **case officer** (in BOPS), the **system** (emails), and the **applicant** (via a response link). The case officer checks whether the submitted boundary is correct. If not, they propose a change which the applicant must agree or disagree with.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer checks the submitted red line boundary</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list → Check red line boundary
+
+The case officer opens the task and sees the applicant's submitted red line boundary displayed on a map. They are asked: *"Is the red line boundary correct?"*
+
+- If **Yes** → the task is saved and marked as complete. Journey ends.
+- If **No** → the officer is taken to a form to propose a new boundary.
+
+<Canvas of={CheckRedLineBoundaryStories.InitialView} />
+
+If the boundary is correct, the officer selects "Yes":
+
+<Canvas of={CheckRedLineBoundaryStories.SelectedYes} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer proposes a new red line boundary</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Propose red line boundary change form
+
+If the officer selects "No", they are taken to the propose change form. Here they:
+
+1. See the applicant's existing boundary on the map (shown in grey)
+2. Draw the proposed new boundary on the map (shown with a red dashed line)
+3. Write a reason explaining why the boundary needs to change
+4. Click "Send request" to notify the applicant
+
+<Canvas of={CheckRedLineBoundaryStories.ProposeChangeForm} />
+
+With the reason filled in and boundary drawn:
+
+<Canvas of={CheckRedLineBoundaryStories.ProposeChangeFormFilled} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>System sends email to the applicant</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** The applicant's email address
+
+Once the officer submits the proposed change, an email is sent to the applicant with:
+- The application reference and site address
+- A link to review the proposed boundary change and respond
+- A deadline — if the applicant doesn't respond within 5 business days, the change is automatically approved
+
+<Canvas of={CheckRedLineBoundaryStories.EmailToApplicant} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Officer sees pending state while waiting</h2>
+</div>
+
+**Who:** Case officer (checking status)
+**Where:** Validation → Check red line boundary
+
+While waiting for the applicant to respond, the task page shows:
+- The current boundary and proposed boundary maps side by side
+- The reason the change was requested, with the date
+- A message: "Waiting for applicant response"
+- A "Delete request" button (available before the application is sent for validation)
+
+<Canvas of={CheckRedLineBoundaryStories.ChangeRequestPending} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Applicant reviews the proposed change</h2>
+</div>
+
+**Who:** Applicant
+**Where:** External link from email → Boundary change review page
+
+The applicant clicks the link in the email and sees:
+- Instructions explaining what they need to do
+- A response deadline warning
+- The reason the case officer gave for the change
+- Their original red line boundary on a map
+- The proposed new boundary on a map
+- A radio button choice: **"Yes, I agree"** or **"No, I disagree"**
+- If they disagree, a textarea appears to explain why
+
+<Canvas of={CheckRedLineBoundaryStories.ApplicantLandingPage} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6a</div>
+  <h2 style={{ margin: 0 }}>Applicant agrees — officer marks complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation → Check red line boundary
+
+If the applicant agrees with the proposed boundary, the officer sees:
+- The approved boundary on the map
+- Confirmation text: "Change to red line boundary has been approved by the applicant"
+- A "Save and mark as complete" button
+
+<Canvas of={CheckRedLineBoundaryStories.ApplicantApproved} />
+
+The applicant's response confirmation page:
+
+<Canvas of={CheckRedLineBoundaryStories.ApplicantAgreed} />
+
+**Note:** If the applicant doesn't respond within 5 business days, the request is automatically closed and approved:
+
+<Canvas of={CheckRedLineBoundaryStories.AutoClosed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6b</div>
+  <h2 style={{ margin: 0 }}>Applicant disagrees — officer decides next step</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation → Check red line boundary
+
+If the applicant disagrees, the officer sees:
+- The proposed boundary that was rejected
+- The applicant's reason for disagreeing
+- The current (original) boundary below
+- The same Yes/No question again — the officer can either accept the original boundary ("Yes") or propose a new change ("No")
+
+<Canvas of={CheckRedLineBoundaryStories.ApplicantRejected} />
+
+The applicant's disagreement confirmation page:
+
+<Canvas of={CheckRedLineBoundaryStories.ApplicantDisagreed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Red line boundary confirmed — task complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Validation task list
+
+The task is complete when either:
+- The officer confirmed the original boundary was correct (selected "Yes" in step 1)
+- The applicant approved the proposed change and the officer saved (step 6a)
+- The request auto-closed after 5 business days and the officer saved
+
+The task status changes to **Complete** with a green tag in the validation task list.
