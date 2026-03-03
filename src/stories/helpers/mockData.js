@@ -316,6 +316,9 @@ export const mockData = {
       name: "Conservation Officer",
       organisation: "Southwark Council",
       email: "conservation@southwark.gov.uk",
+      origin: "internal",
+      role: "Conservation and design",
+      constraints: ["Conservation area", "Listed building"],
       status: "awaiting_response",
       sentAt: "25 Nov 2024",
     },
@@ -323,6 +326,9 @@ export const mockData = {
       name: "Tree Officer",
       organisation: "Southwark Council",
       email: "trees@southwark.gov.uk",
+      origin: "internal",
+      role: "Arboriculture",
+      constraints: ["Tree preservation order"],
       status: "no_response",
       sentAt: "25 Nov 2024",
     },
@@ -330,6 +336,9 @@ export const mockData = {
       name: "Highways Authority",
       organisation: "Transport for London",
       email: "highways@tfl.gov.uk",
+      origin: "external",
+      role: "Highways",
+      constraints: [],
       status: "complete",
       sentAt: "25 Nov 2024",
       respondedAt: "5 Dec 2024",
@@ -339,6 +348,9 @@ export const mockData = {
       name: "Environment Agency",
       organisation: "Environment Agency",
       email: "planning@environment-agency.gov.uk",
+      origin: "external",
+      role: "Regulatory body",
+      constraints: ["Flood zone"],
       status: "awaiting_response",
       sentAt: "25 Nov 2024",
     },
@@ -346,10 +358,38 @@ export const mockData = {
       name: "Thames Water",
       organisation: "Thames Water Utilities",
       email: "planning@thameswater.co.uk",
+      origin: "external",
+      role: "Statutory undertaker",
+      constraints: ["Flood zone"],
       status: "complete",
       sentAt: "25 Nov 2024",
       respondedAt: "2 Dec 2024",
       response: "No objection subject to conditions",
+    },
+  ],
+
+  // Additional consultees available to search and add (not yet assigned to this application)
+  availableConsultees: [
+    {
+      name: "Historic England",
+      organisation: "Historic England",
+      email: "london@historicengland.org.uk",
+      origin: "external",
+      role: "Statutory consultee",
+    },
+    {
+      name: "Ecology Officer",
+      organisation: "Southwark Council",
+      email: "ecology@southwark.gov.uk",
+      origin: "internal",
+      role: "Ecology and biodiversity",
+    },
+    {
+      name: "Metropolitan Police",
+      organisation: "Metropolitan Police — Designing Out Crime",
+      email: "designing.out.crime@met.police.uk",
+      origin: "external",
+      role: "Designing out crime",
     },
   ],
 
@@ -1205,4 +1245,34 @@ Planning officer`,
       ],
     },
   ],
+
+  // Default consultee email template (from en.yml consultee_emails)
+  consulteeEmailTemplate: {
+    subject: "Comments requested for {{reference}}",
+    body: `Dear {{name}}
+
+{{application_title_case}} number {{reference}}
+
+We have received an {{application_short_case}} for the development described below.
+
+## Proposal
+
+{{description}}
+
+## Site address
+
+{{address}}
+
+To view the {{application_short_case}} documents, visit:
+{{link}}.
+
+## Comment on this {{application_short_case}}
+
+Please submit your comments by {{closing_date}} by using the web form. You can include attachments. We may not be able to consider comments received after this date.
+
+Yours
+
+
+{{local_authority}}`,
+  },
 };

@@ -1,0 +1,109 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as SelectConsulteesStories from "./SelectConsultees.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Select Consultees/Journey" />
+
+# Select Consultees — User Journey
+
+This documents how a case officer adds and assigns consultees for a planning application. The system automatically suggests consultees based on the identified planning constraints (e.g. conservation area triggers a Conservation Officer suggestion). The officer reviews which constraints require consultation, checks the suggested consultees, and can manually add more via search.
+
+This task involves one actor: the **case officer** in BOPS.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the Add and assign consultees page</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list → Add and assign consultees
+
+The case officer opens the "Add and assign consultees" task from the consultation task list. The page has two main sections:
+
+1. **Constraint checkboxes** — each identified planning constraint is listed with a checkbox. The officer selects which constraints require consultation. Checkboxes auto-save when toggled.
+2. **Consultee table** — shows consultees grouped by the constraint they're assigned to. The system has already pre-populated suggested consultees based on the application's constraints (e.g. a Conservation Officer is suggested for the "Conservation area" constraint).
+
+At the bottom, a collapsed "Manually add a consultee" section allows searching for additional consultees.
+
+<Canvas of={SelectConsulteesStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Reviewing and toggling constraint checkboxes</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees → Constraint checkboxes
+
+The officer reviews the planning constraints and decides which ones actually need consultation for this particular application. Unchecking a constraint marks it as "Not required" in the consultee table — the assigned consultees remain visible but won't be contacted.
+
+In this example, "Article 4 direction" and "Archaeological priority area" are left unchecked because they don't require consultation for this type of work.
+
+<Canvas of={SelectConsulteesStories.SomeConstraintsUnchecked} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Manually adding a consultee via search</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees → Manually add a consultee
+
+If the officer needs to consult someone not automatically suggested (e.g. Historic England for a Grade I listed building, or a specialist ecology officer), they expand the "Manually add a consultee" section.
+
+An autocomplete search field lets the officer type a name, organisation, or role. The system searches the contacts database and shows matching results. The officer selects a consultee and clicks "Add consultee" to add them to the table.
+
+<Canvas of={SelectConsulteesStories.AddConsulteeExpanded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Newly added consultee appears in the table</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees → Consultee table
+
+After clicking "Add consultee", the new consultee appears in the table under the "Other" constraint (since they were manually added, not auto-suggested for a specific constraint). Their status is "Not consulted" — they won't be emailed until the officer completes the "Email consultees" task later.
+
+The officer can assign the consultee to a specific constraint using the "Assign consultee" links, or leave them under "Other".
+
+<Canvas of={SelectConsulteesStories.ConsulteeJustAdded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>All constraints have consultees assigned</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees → Consultee table (fully populated)
+
+The officer has now checked all 6 constraints and ensured each has at least one consultee assigned. The table shows the full picture: who will be consulted for each constraint, their current status, and options to remove or reassign.
+
+The officer is satisfied with the selections and clicks **Save** to confirm.
+
+<Canvas of={SelectConsulteesStories.AllAssigned} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task complete — consultees saved</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees (completed)
+
+After saving, the task status changes to **Complete** (green tag). The constraint checkboxes are disabled and the table shows the saved assignments in a read-only view.
+
+The next step in the consultee workflow is **Email consultees**, where the officer composes and sends consultation emails to the assigned consultees.
+
+<Canvas of={SelectConsulteesStories.Completed} />

@@ -1,0 +1,150 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as EmailConsulteesStories from "./EmailConsultees.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Email Consultees/Journey" />
+
+# Email Consultees — User Journey
+
+After the case officer has assigned consultees to the application's planning constraints (see the Select Consultees journey), the next step is to send consultation emails. This task uses a 3-step form: select which consultees to email, choose the email type and optionally customise the message, then set a response period and send. Emails are delivered via GOV.UK Notify.
+
+This task primarily involves one actor — the **case officer** — though the **system** handles email delivery automatically.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the Send emails to consultees page</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list → Send emails to consultees
+
+The case officer opens the "Send emails to consultees" task from the consultation task list. The page presents a 3-step form:
+
+1. **Step 1 — Select consultees:** A table listing all assigned consultees with checkboxes. Each row shows the consultee's name, role/organisation, which constraint(s) they're assigned to, their current status, and when they were last contacted.
+2. **Step 2 — Select consultation type:** A dropdown to choose between initial consultation, resending, or reconsultation, plus a collapsible email template editor.
+3. **Step 3 — Set response period:** A number field for how many days consultees have to respond.
+
+On first use, all consultees are shown as "Not consulted" with all checkboxes selected.
+
+<Canvas of={EmailConsulteesStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Selecting which consultees to email</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send emails to consultees → consultee table
+
+The "Select all" checkbox in the table header toggles all consultees at once. The officer can also individually check or uncheck specific consultees — for example, they might want to send to only some consultees first while waiting for additional information for others.
+
+The table always shows all assigned consultees regardless of selection state, so the officer has a clear overview of who will and won't receive an email.
+
+<Canvas of={EmailConsulteesStories.NoneSelected} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Customising the email template</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send emails to consultees → View/edit email template
+
+Expanding the "View/edit email template" section reveals the email subject and body. The default template includes placeholders like `{{name}}`, `{{reference}}`, `{{description}}`, and `{{closing_date}}` which are automatically replaced with real values when the email is sent.
+
+The officer can customise the wording for this specific consultation — for example, adding context about why a particular constraint is relevant, or highlighting specific aspects of the proposal they'd like the consultee to comment on.
+
+The message uses GOV.UK Notify formatting rules (Markdown-style headings with `##`). A "Reset message to default content" button restores the original template if needed.
+
+<Canvas of={EmailConsulteesStories.TemplateExpanded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Setting response period and sending</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send emails to consultees → Set response period
+
+In Step 3, the officer enters the number of days consultees have to respond (typically 21 days). This sets the consultation deadline — the `{{closing_date}}` placeholder in the email template will be calculated from this period.
+
+When everything is ready — consultees selected, email type chosen, template reviewed, response period set — the officer clicks **"Send emails to consultees"**. The system confirms the action before dispatching.
+
+<Canvas of={EmailConsulteesStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>System sends emails via GOV.UK Notify</h2>
+</div>
+
+**Who:** System (automatic)
+**Where:** GOV.UK Notify email delivery
+
+After the officer confirms, the system creates an email for each selected consultee via GOV.UK Notify. Placeholders in the template are replaced with real values — each consultee receives a personalised email with the application details and a unique magic link to submit their comments online.
+
+A green success banner confirms the emails have been dispatched. All selected consultees' statuses update to "Sending" while the emails are in transit.
+
+<Canvas of={EmailConsulteesStories.EmailsSentConfirmation} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Monitoring delivery status</h2>
+</div>
+
+**Who:** Case officer (checking back)
+**Where:** Send emails to consultees (return visit)
+
+The officer can return to this page at any time to check delivery progress. GOV.UK Notify updates each email's delivery status automatically:
+
+- **Sending** (grey) — email is in transit, not yet delivered
+- **Awaiting response** (light blue) — email was delivered successfully, waiting for the consultee to respond
+- **Failed** (red) — delivery failed (e.g. invalid email address, mailbox full)
+
+The "Date consulted" column shows when the email was sent. This gives the officer an at-a-glance view of how the consultation is progressing.
+
+<Canvas of={EmailConsulteesStories.MixedDeliveryStatuses} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>7</div>
+  <h2 style={{ margin: 0 }}>Resending to failed consultees</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send emails to consultees → resend flow
+
+If any emails failed to deliver, the officer can resend them. They change the email type dropdown to **"Resending to existing consultees"**, check only the failed consultee(s), and click send again. The system retries delivery via GOV.UK Notify.
+
+The officer might also need to verify or update the consultee's email address before resending (done in the Select Consultees task).
+
+<Canvas of={EmailConsulteesStories.ResendToFailed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Reconsultation — sending updated emails</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Send emails to consultees → Reconsultation
+
+If the application changes during the consultation period (e.g. the applicant submits amended plans), the officer can send reconsultation emails. They select **"Reconsultation"** from the email type dropdown, customise the template to explain what has changed, set a new (often shorter) response period, and send to all consultees.
+
+The reconsultation email uses a modified template that highlights the changes and asks consultees to review the amended proposals. This extends the consultation deadline for any consultees who haven't yet responded.
+
+This completes the email consultees workflow. The next step is to monitor and manage **consultee responses** as they come in.
+
+<Canvas of={EmailConsulteesStories.ReconsultationType} />
