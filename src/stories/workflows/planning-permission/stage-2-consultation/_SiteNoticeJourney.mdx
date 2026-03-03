@@ -1,0 +1,126 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as SiteNoticeStories from "./SiteNotice.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Site Notice/Journey" />
+
+# Site Notice — User Journey
+
+This documents the end-to-end journey of a site notice, from the case officer's initial decision through to confirmed display with photographic evidence. It involves up to **three actors**: the **case officer** (in BOPS), optionally the **internal team** (via email), and optionally the **applicant** (via email).
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer decides if a site notice is required</h2>
+</div>
+
+**Who:** Case officer in BOPS
+**Where:** Consultation task list → Site notice
+
+The case officer opens the site notice task and is asked: *"Does this application require a site notice?"*
+
+- If **No** → the task is marked complete immediately. Journey ends here.
+- If **Yes** → the officer must specify how many notices are needed, where they should be displayed, and how to deliver the notice (email or print).
+
+<Canvas of={SiteNoticeStories.InitialView} />
+
+If "No" is selected, the officer simply saves to complete the task:
+
+<Canvas of={SiteNoticeStories.NotRequired} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Case officer specifies quantity, location, and delivery method</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation → Site notice form (expanded)
+
+When "Yes" is selected, the form expands to show three sections:
+
+1. **Quantity** — how many notices to display (defaults to 1)
+2. **Location instructions** — optional text describing where the notices should go (e.g. "on the lamppost outside the property")
+3. **Delivery method** — the officer chooses one of three options:
+
+**Option A: Email to internal team** — enters the team's email address. The system sends them the PDF link with quantity and location instructions so they can print and display the notice.
+
+<Canvas of={SiteNoticeStories.RequiredEmailToTeam} />
+
+**Option B: Email to applicant** — the system sends the applicant step-by-step instructions on how to print, protect, display, and report back.
+
+<Canvas of={SiteNoticeStories.RequiredEmailToApplicant} />
+
+**Option C: Print** — the officer enters the display date and downloads a PDF to print themselves. No email is sent.
+
+<Canvas of={SiteNoticeStories.RequiredPrintNotice} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>System sends email (if email method chosen)</h2>
+</div>
+
+**Who:** System (automatic)
+**To:** Internal team or applicant, depending on method chosen
+
+If the officer chose to email the **internal team**, they receive a concise email with the application details, number of notices, location instructions, and a link to download the PDF:
+
+<Canvas of={SiteNoticeStories.EmailToInternalTeam} />
+
+If the officer chose to email the **applicant**, they receive detailed 4-step instructions explaining how to print, protect with waterproof covering, display at the site, and report back with a photo and date:
+
+<Canvas of={SiteNoticeStories.EmailToApplicant} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Notice is displayed physically</h2>
+</div>
+
+**Who:** Internal team or applicant (outside BOPS)
+**Where:** At the application site
+
+The recipient prints the site notice PDF, protects it with a waterproof covering (e.g. a clear plastic bag), and displays it at the specified location(s) near the proposed development. The notice must be visible from public roads and footpaths.
+
+The site notice must remain displayed for **21 days** (or **30 days** if the application is subject to Environmental Impact Assessment).
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Evidence uploaded — confirm site notice</h2>
+</div>
+
+**Who:** Case officer or internal team
+**Where:** Consultation → Confirm site notice
+
+Once the notice has been displayed, the "Confirm site notice" sub-task becomes available. The form shows:
+- A status bar confirming the site notice was created (with a link to download the PDF)
+- A date field: *"What date was the site notice displayed?"*
+- A file upload for evidence photos of the notice in place
+
+<Canvas of={SiteNoticeStories.ConfirmNotice} />
+
+If evidence hasn't been provided, the case officer can send a **follow-up email** requesting confirmation:
+
+<Canvas of={SiteNoticeStories.ConfirmationRequestEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Site notice confirmed — task complete</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Consultation → Site notice (completed view)
+
+Once evidence is uploaded and saved, the page shows the completed state with:
+- The status bar with a green "Complete" tag and the creation date
+- An evidence table showing the uploaded photo (thumbnail), a turquoise "Site notice evidence" tag, and the date the notice was displayed
+
+<Canvas of={SiteNoticeStories.Completed} />

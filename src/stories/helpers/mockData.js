@@ -649,6 +649,22 @@ export const mockData = {
     notificationEmail: "press.notices@southwark.gov.uk",
   },
 
+  // Site notice mock state
+  siteNotice: {
+    required: true,
+    quantity: 2,
+    locationInstructions:
+      "Display one notice on the lamppost outside 12 Elm Grove on Elm Grove road, and one on the fence panel facing the public footpath at the rear of the property.",
+    method: "internal_team",
+    internalTeamEmail: "site.notices@southwark.gov.uk",
+    createdAt: "27 Nov 2024",
+    displayedAt: "29 Nov 2024",
+    expiryDate: "20 Dec 2024",
+    evidenceFilename: "site-notice-photo-elm-grove.jpg",
+    evidenceUploadedAt: "30 Nov 2024",
+    pdfLink: "#",
+  },
+
   // Additional document validation requests — requested by case officer during validation
   documentRequests: [
     {

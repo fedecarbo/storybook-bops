@@ -358,7 +358,7 @@ docker compose down && docker compose up -d --build
 - [x] Task 19: Select Consultees
 - [x] Task 20: Email Consultees
 - [x] Task 21: View Consultee Responses
-- [ ] Task 22: Site Notice
+- [x] Task 22: Site Notice
 - [x] Task 23: Press Notice
 
 ### Stage 3: Assessment

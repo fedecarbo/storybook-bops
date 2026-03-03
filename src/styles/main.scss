@@ -356,6 +356,16 @@ h3 {
   justify-content: space-between;
 }
 
+.consultation-letter-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  p {
+    width: 109px;
+  }
+}
+
 .text-align-centre {
   text-align: center;
 }
