@@ -1,0 +1,215 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as SidebarStories from "./SidebarNavigation.stories";
+
+<Meta title="Patterns/Sidebar Navigation/Documentation" />
+
+# Sidebar navigation
+
+A persistent sidebar that shows all tasks in a workflow alongside the current task content, with status icons indicating progress.
+
+This pattern replaces the [GOV.UK task list pages pattern](https://design-system.service.gov.uk/patterns/complete-multiple-tasks/) in back-office workflows where officers need to work non-linearly and maintain an overview of the full case.
+
+<Canvas of={SidebarStories.MixedProgress} />
+
+<hr />
+
+## When to use this pattern
+
+Use sidebar navigation when:
+
+- users are **professional case workers** processing complex cases with many tasks
+- tasks are completed **non-linearly** — users jump between tasks based on the information available, not in a fixed order
+- users need to **see overall progress** at a glance while working on individual tasks
+- the workflow involves **10 or more tasks** grouped into sections
+- users handle cases across **multiple sessions** and need to quickly find where they left off
+- speed matters — users process many cases per day and need to minimise navigation clicks
+
+## When not to use this pattern
+
+Do not use sidebar navigation when:
+
+- the service is **public-facing** — use the [GOV.UK task list](https://design-system.service.gov.uk/patterns/complete-multiple-tasks/) instead, which is designed and tested for citizens completing transactions
+- tasks must be completed in a **strict linear order** — a step-by-step journey or wizard pattern is more appropriate
+- there are **fewer than 5 tasks** — a simple page with all fields visible may be sufficient
+- users are **unfamiliar with the system** and need more guidance — the full-page task list gives each task more visual prominence and focus
+
+<hr />
+
+## How it works
+
+### Structure
+
+The sidebar navigation has three main parts:
+
+1. **Sticky headers** — the GOV.UK header and BOPS header bar (showing the application reference, address, and type) stay pinned at the top of the viewport. This means the officer always knows which case they're working on, even when scrolling through task content.
+
+2. **Sidebar** — a fixed-width panel (320px) on the left showing all tasks grouped into sections. Each task has a status icon and a link. The currently active task is highlighted with bold text.
+
+3. **Main content area** — the right panel where the selected task's form or content is displayed. This area scrolls independently of the sidebar.
+
+### Status icons
+
+Each task in the sidebar shows a circular status icon to the left of the task name. There are five statuses:
+
+| Status | Icon | Meaning |
+|--------|------|---------|
+| Not started | Light blue circle | The officer has not opened this task yet |
+| In progress | Blue circle with arrow | The officer has started but not completed this task |
+| Complete | Dark blue circle with tick | The task is finished |
+| Cannot start yet | Grey dashed circle with lock | A prerequisite must be completed first |
+| Action required | Yellow circle with exclamation | Something needs the officer's attention (e.g. an applicant has responded to a request) |
+
+### All tasks not started
+
+When an officer first opens a case, every task shows the "not started" status. This is the starting point for a new application.
+
+<Canvas of={SidebarStories.AllNotStarted} />
+
+### Mixed progress
+
+The most common state during active casework. Some tasks are complete, one is in progress (the current task), and others are waiting. Tasks that depend on earlier work show "cannot start yet".
+
+<Canvas of={SidebarStories.MixedProgress} />
+
+### Action required
+
+When the system needs the officer's attention — for example, an applicant has responded to a document request — the relevant task shows a yellow "action required" icon. This draws the officer's eye to tasks that need intervention.
+
+<Canvas of={SidebarStories.WithActionRequired} />
+
+### Tasks that cannot start yet
+
+Some tasks depend on others being completed first. For example, "Send validation decision" cannot start until all other validation tasks are complete. These tasks show a locked icon and are not clickable.
+
+<Canvas of={SidebarStories.WithCannotStartYet} />
+
+### All tasks complete
+
+When every task shows a blue tick, the case is ready to move to the next stage.
+
+<Canvas of={SidebarStories.AllComplete} />
+
+### Active task highlighting
+
+The currently selected task is shown in **bold text** and marked with `aria-current="page"` for screen readers. This tells the officer exactly where they are in the workflow at all times.
+
+### Independent scrolling
+
+The sidebar and main content area scroll independently. If the task list is long, the officer can scroll the sidebar without affecting the task form they're working on, and vice versa. The sticky headers remain visible above both panels.
+
+### Mobile behaviour
+
+On screens narrower than 768px, the sidebar collapses into a horizontal bar above the content. A toggle button lets the officer expand and collapse the task list. This ensures the pattern remains usable on smaller screens, though the primary use case is desktop.
+
+<hr />
+
+## How it differs from the GOV.UK task list
+
+<Canvas of={SidebarStories.ComparisonWithTaskList} />
+
+| Aspect | GOV.UK task list | BOPS sidebar |
+|--------|-----------------|--------------|
+| **Layout** | Full-page list; clicking a task navigates to a separate page | Two-column layout; task content loads alongside the list |
+| **Navigation** | Navigate away from list → complete task → return to list | Click a task in the sidebar → content updates in place |
+| **Progress visibility** | Only visible on the task list page itself | Always visible while working on any task |
+| **Status indicators** | Text tags (e.g. "Completed", "Not yet started") | Colour-coded circular icons for faster scanning |
+| **Context** | Officer loses sight of other tasks while working | Officer can see all tasks and their statuses at all times |
+| **Suitable for** | Citizens completing applications step by step | Professional case workers processing complex cases |
+
+The GOV.UK task list was designed for services where users complete tasks one at a time in a guided flow. Planning officers work differently — they might check the description, realise they need to look at the documents, jump to the fee calculation, then return to the description. The sidebar keeps all of this visible.
+
+<hr />
+
+## Research and learnings
+
+This section documents what we've observed from planning officers using the sidebar navigation pattern.
+
+### What prompted the change
+
+BOPS originally used the GOV.UK task list pattern. Case officers reported two main problems:
+
+1. **Slow workflow.** Officers had to scroll through the task list, click a task, complete it, navigate back to the list, find the next task, and repeat. For a validation stage with 14 tasks, this created significant friction. Officers described it as "clicking around too much."
+
+2. **Loss of overview.** Planning officers don't work linearly. They might start checking the description, realise they need to verify a document first, then check a constraint before returning to the description. With the task list pattern, they lost sight of where they were in the process each time they entered a task. Officers said they "couldn't see the wood for the trees."
+
+### What we changed
+
+We introduced the sidebar navigation — a persistent task list visible alongside the task content. Officers can see all tasks and their statuses at all times, and switch between tasks with a single click.
+
+### What we've observed
+
+- **Officers report the workflow feels faster.** The reduction in page-to-page navigation means fewer clicks and less waiting. Officers can move between tasks without the overhead of returning to a central list each time.
+
+- **Non-linear work is supported.** Officers can jump to any task at any time. The sidebar makes this feel natural rather than disorienting, because the full task list is always visible as a reference point.
+
+- **Progress visibility helps officers feel in control.** Seeing status icons for all tasks at once gives officers an immediate sense of how much work remains. They can spot tasks that need attention (yellow icons) and tasks they've already finished (blue ticks) without navigating anywhere.
+
+- **The pattern is still evolving.** The best way to visualise progress is an open question. Status icons work well for individual task status, but officers have also asked about section-level progress (e.g. "3 of 5 complete") and overall case progress. This is an area for continued exploration.
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+**This is an evolving pattern.** The sidebar navigation has been tested with real planning officers and has proven effective for BOPS workflows, but it continues to be refined. If you're considering this pattern for a different back-office service, start with the GOV.UK task list and only move to a sidebar approach if you observe similar problems with non-linear work and loss of overview.
+
+</div>
+
+<hr />
+
+## Implementation
+
+### Helper functions
+
+The sidebar pattern is implemented through three main helper functions in `src/stories/helpers/pageLayout.js`:
+
+- **`renderValidationLayout(content, options)`** — the main entry point. Pass `activeTaskSlug` to enable sidebar mode. Pass `subsections` to override the default task data.
+- **`renderSidebar(subsections, activeTaskSlug)`** — renders the sidebar `<nav>` with task sections, status icons, and active task highlighting.
+- **`renderStatusIcon(status)`** — renders inline SVG icons for each of the five task statuses.
+
+### Usage
+
+```js
+import { renderValidationLayout, mockData } from "../helpers";
+
+// Sidebar layout — pass activeTaskSlug
+renderValidationLayout(content, {
+  heading: "Check description",
+  activeTaskSlug: "check-description",
+  subsections: mockData.validationTasks.subsections,
+});
+```
+
+### Data structure
+
+The sidebar expects an array of subsections, each containing an array of tasks:
+
+```js
+{
+  subsections: [
+    {
+      title: "Check application details",
+      tasks: [
+        { name: "Check description", slug: "check-description", status: "not_started" },
+        { name: "Check fee", slug: "check-fee", status: "complete" },
+      ]
+    }
+  ]
+}
+```
+
+### CSS classes
+
+| Class | Purpose |
+|-------|---------|
+| `.bops-fullwidth-container` | Two-column grid wrapper (sidebar + content) |
+| `.bops-sidebar` | The sidebar `<nav>` element |
+| `.bops-sidebar__list` | Task list within a section |
+| `.bops-sidebar__task` | Individual task item (flex layout) |
+| `.bops-sidebar__task--active` | Highlights the currently selected task |
+| `.bops-sidebar__task-icon` | Container for the 24x24 status SVG icon |
+| `.bops-headers--sticky` | Keeps headers pinned above both panels |
+
+### Accessibility
+
+- The sidebar uses a `<nav>` element with `aria-label="Application tasks"`
+- The active task link has `aria-current="page"` so screen readers announce which task is selected
+- Status icons have `role="img"` and `aria-label` describing the status (e.g. "Completed", "In progress")
+- The icon container has `aria-hidden="true"` to avoid redundant announcements, since the status is communicated through the icon's own label

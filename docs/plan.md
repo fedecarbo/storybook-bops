@@ -144,7 +144,7 @@ src/stories/workflows/planning-permission/
 
 ---
 
-## Backlog (43 tasks)
+## Backlog (52 tasks)
 
 Priority guide:
 - **P1** — Complex tasks with rich interactions (branching forms, multiple outcomes, dynamic tables)
@@ -191,7 +191,9 @@ Priority guide:
 | 22 | Site Notice | P3 | Form: number of notices, date displayed, evidence upload; completed with uploaded photo. |
 | 23 | Press Notice | P3 | Reason selection; date published; evidence upload; completed state. |
 
-### Stage 3: Assessment (7 tasks)
+### Stage 3: Assessment (17 tasks)
+
+Tasks 24–28 are in the **new task system** and can be built now. Tasks 29–39 are currently in the **legacy assessment system** — marked ⏳ Pending latest, to be built once the source app migrates them to the new task/sidebar system.
 
 | # | Task | P | Key interactions to show |
 |---|------|---|------------------------|
@@ -199,42 +201,51 @@ Priority guide:
 | 25 | Check Ownership Cert (Assessment) | P2 | Post-validation view with activity log; request change option. |
 | 26 | Check Consultees | P2 | Consultee summary list with response statuses; marking as reviewed. |
 | 27 | Check Site History | P2 | Empty history; table with planning history entries; adding a new entry form. |
-| 28 | Check Publicity | P2 | Site notice and press notice evidence review; marking as checked. |
-| 29 | Summary of Works | P2 | Empty textarea; filled summary; read-only view after completion. |
-| 30 | **Make Recommendation** | P1 | Radio: Grant / Refuse / Not required; selecting Grant (comment textarea); selecting Refuse (reason textarea); submitted recommendation view. |
+| 28 | Check Publicity | P2 | Site notice and press notice evidence review; display dates and uploaded documents; marking as checked. |
+| 29 | **Consistency Checklist** ⏳ | P1 | Multi-question form (description matches docs, plans consistent, proposal matches, site map correct, measurements match). Each "No" triggers validation request. Initial, partially completed, completed, with open requests. |
+| 30 | **Assessment Summaries (all types)** ⏳ | P1 | All 6 summary types: Summary of Works (textarea), Site Description, Consultation Summary (consultee accordions + textarea), Neighbour Summary (tagged responses per tag), Amenity (guidance + textarea), Additional Evidence. Each: empty, filled, completed, reviewer-rejected. |
+| 31 | **Assess Against Policies (Considerations)** ⏳ | P1 | Considerations list: policy area dropdown, policy references autocomplete, guidance autocomplete, assessment textarea, conclusion. Sortable list. Edit/show views. |
+| 32 | Assess Against Legislation ⏳ | P2 | Development type classification radio; policy class table (Complies / Does not comply / TBD radios + comments per row); add new assessment area. |
+| 33 | **Add Conditions** ⏳ | P1 | Empty state; add condition form (title, text, reason); sortable drag-and-drop list; edit/remove; constraints/considerations accordion for reference. |
+| 34 | Add Pre-commencement Conditions ⏳ | P2 | Same sortable list + applicant approval workflow: confirm and send, awaiting response, approved/rejected per condition. |
+| 35 | Add Informatives ⏳ | P2 | Numbered advisory notes with title + text; sortable list; "Show more" truncation; edit view. |
+| 36 | Add Heads of Terms ⏳ | P2 | S106 terms: sortable list, add form, "Confirm and send to applicant", status tags per term. |
+| 37 | Site Visit ⏳ | P2 | Yes/No "Did you visit?"; date, address, photo upload; previous visits in collapsible details. |
+| 38 | **Make Draft Recommendation** ⏳ | P1 | Assessment report accordion; committee decision radio; decision radio (Grant/Refuse/Not required); public + private comment textareas; alert banners for outstanding requests and ongoing consultation. |
+| 39 | **Review & Submit Recommendation** ⏳ | P1 | Assessment summaries accordion; decision notice preview; submit button; "Edit recommendation" link. The gate between Assessment and Review. |
 
 ### Stage 4: Review (4 tasks)
 
 | # | Task | P | Key interactions to show |
 |---|------|---|------------------------|
-| 31 | **Review Task List** | P1 | Assessor's recommendation banner; review sections; all reviewed state; changes requested state. |
-| 32 | Review Assessment Summaries | P2 | Summary with agree/disagree; editing a summary; reviewer comment added. |
-| 33 | **Sign-off Recommendation** | P1 | Accept recommendation; challenge recommendation (reason form); changes requested to assessor. |
-| 34 | Review Conditions | P3 | Conditions list; editing a condition; adding reviewer note. |
+| 40 | **Review Task List** | P1 | Assessor's recommendation banner; review sections; all reviewed state; changes requested state. |
+| 41 | Review Assessment Summaries | P2 | Summary with agree/disagree; editing a summary; reviewer comment added. |
+| 42 | **Sign-off Recommendation** | P1 | Accept recommendation; challenge recommendation (reason form); changes requested to assessor. |
+| 43 | Review Conditions | P3 | Conditions list; editing a condition; adding reviewer note. |
 
 ### Stage 5: Determination (2 tasks)
 
 | # | Task | P | Key interactions to show |
 |---|------|---|------------------------|
-| 35 | Publish Determination | P2 | Ready to publish (checklist of prerequisites); decision notice preview; published confirmation. |
-| 36 | Decision Notice Preview | P3 | Full decision notice document layout. |
+| 44 | Publish Determination | P2 | Ready to publish (checklist of prerequisites); decision notice preview; published confirmation. |
+| 45 | Decision Notice Preview | P3 | Full decision notice document layout. |
 
 ### Cross-cutting (4 tasks)
 
 | # | Task | P | What |
 |---|------|---|------|
-| 37 | Sidebar / Accordion | P2 | Application info sidebar expanded/collapsed; each accordion section with sample content. |
-| 38 | **Validation Request Lifecycle** | P1 | The full visual journey of a request: create → preview → sent → pending → applicant view → response → officer review → resolved. |
-| 39 | Application Status Bar | P3 | All stage combinations showing progress through the workflow. |
-| 40 | Flash Messages & Banners | P3 | All banner types with real message text from the app. |
+| 46 | Sidebar / Accordion | P2 | Application info sidebar expanded/collapsed; each accordion section with sample content. |
+| 47 | **Validation Request Lifecycle** | P1 | The full visual journey of a request: create → preview → sent → pending → applicant view → response → officer review → resolved. |
+| 48 | Application Status Bar | P3 | All stage combinations showing progress through the workflow. |
+| 49 | Flash Messages & Banners | P3 | All banner types with real message text from the app. |
 
 ### Workflow variants (3 tasks)
 
 | # | Task | P | What |
 |---|------|---|------|
-| 41 | Check Legislative Requirements | P3 | Prior Approval / Lawfulness only — legislation dropdown and review. |
-| 42 | Permitted Development Rights | P3 | PDR assessment form with Yes/No and reason field. |
-| 43 | Pre-Application Tasks | P3 | Meeting form, Site Visit form, Choose Application Type, Heads of Terms. |
+| 50 | Check Legislative Requirements | P3 | Prior Approval / Lawfulness only — legislation dropdown and review. |
+| 51 | Permitted Development Rights | P3 | PDR assessment form with Yes/No and reason field. |
+| 52 | Pre-Application Tasks | P3 | Meeting form, Site Visit form, Choose Application Type, Heads of Terms. |
 
 ---
 
@@ -252,7 +263,7 @@ Priority guide:
 7. Task 4: Check Red Line Boundary (map + request flow)
 8. Task 11: Check Ownership Certificate (table + request flow)
 9. Task 3: Check & Request Documents (document request lifecycle)
-10. Task 38: Validation Request Lifecycle (cross-cutting journey)
+10. Task 47: Validation Request Lifecycle (cross-cutting journey)
 
 **Sprint 3 — Remaining validation + consultation**
 11. Tasks 2, 5, 8, 9, 10, 12, 13
@@ -261,12 +272,19 @@ Priority guide:
 **Sprint 4 — Consultation tasks**
 13. Tasks 16–23
 
-**Sprint 5 — Assessment + Review**
-14. Tasks 24, 30, 31, 33 (P1 tasks)
-15. Tasks 25–29, 32, 34 (P2/P3)
+**Sprint 5 — Assessment (new task system)**
+14. Tasks 27–28 (Check Site History, Check Publicity)
 
-**Sprint 6 — Determination + polish + variants**
-16. Tasks 35–43
+**Sprint 5b — Assessment (pending migration) — build as source app migrates**
+15. Tasks 29–39 (Consistency Checklist through Review & Submit Recommendation)
+
+**Sprint 6 — Review + Determination**
+16. Tasks 40, 42 (P1 review tasks)
+17. Tasks 41, 43 (P2/P3 review)
+18. Tasks 44–45 (Determination)
+
+**Sprint 7 — Polish + variants**
+19. Tasks 46–52
 
 ## How to work through the backlog
 
@@ -364,29 +382,38 @@ docker compose down && docker compose up -d --build
 ### Stage 3: Assessment
 - [x] Task 24: Assessment Task List <!-- NOTE: GOV.UK accordion JS not expanding/collapsing in Storybook — initAll() runs but sections stay open. Needs debugging. -->
 - [x] Task 25: Check Ownership Cert (Assessment)
-- [ ] Task 26: Check Consultees
+- [x] Task 26: Check Consultees
 - [ ] Task 27: Check Site History
 - [ ] Task 28: Check Publicity
-- [ ] Task 29: Summary of Works
-- [ ] Task 30: Make Recommendation
+- [ ] Task 29: Consistency Checklist ⏳
+- [ ] Task 30: Assessment Summaries (all types) ⏳
+- [ ] Task 31: Assess Against Policies (Considerations) ⏳
+- [ ] Task 32: Assess Against Legislation ⏳
+- [ ] Task 33: Add Conditions ⏳
+- [ ] Task 34: Add Pre-commencement Conditions ⏳
+- [ ] Task 35: Add Informatives ⏳
+- [ ] Task 36: Add Heads of Terms ⏳
+- [ ] Task 37: Site Visit ⏳
+- [ ] Task 38: Make Draft Recommendation ⏳
+- [ ] Task 39: Review & Submit Recommendation ⏳
 
 ### Stage 4: Review
-- [ ] Task 31: Review Task List
-- [ ] Task 32: Review Assessment Summaries
-- [ ] Task 33: Sign-off Recommendation
-- [ ] Task 34: Review Conditions
+- [ ] Task 40: Review Task List
+- [ ] Task 41: Review Assessment Summaries
+- [ ] Task 42: Sign-off Recommendation
+- [ ] Task 43: Review Conditions
 
 ### Stage 5: Determination
-- [ ] Task 35: Publish Determination
-- [ ] Task 36: Decision Notice Preview
+- [ ] Task 44: Publish Determination
+- [ ] Task 45: Decision Notice Preview
 
 ### Cross-cutting
-- [ ] Task 37: Sidebar / Accordion
-- [ ] Task 38: Validation Request Lifecycle
-- [ ] Task 39: Application Status Bar
-- [ ] Task 40: Flash Messages & Banners
+- [x] Task 46: Sidebar / Accordion
+- [ ] Task 47: Validation Request Lifecycle
+- [ ] Task 48: Application Status Bar
+- [ ] Task 49: Flash Messages & Banners
 
 ### Workflow variants
-- [ ] Task 41: Check Legislative Requirements
-- [ ] Task 42: Permitted Development Rights
-- [ ] Task 43: Pre-Application Tasks
+- [ ] Task 50: Check Legislative Requirements
+- [ ] Task 51: Permitted Development Rights
+- [ ] Task 52: Pre-Application Tasks
