@@ -1,0 +1,78 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as CheckConsulteesStories from "./CheckConsultees.stories";
+
+<Meta title="Workflows/Planning Permission/3. Assessment/Check Consultees/Journey" />
+
+# Check Consultees Consulted (Assessment) — User Journey
+
+During the assessment stage, the case officer confirms that all statutory consultees have been consulted. The consultee selection and emailing happened in Stage 2 (Consultation) — this task is a review and confirmation step. One actor: **case officer**.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the check consultees task</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Assessment task list → Check application → Check consultees consulted
+
+The case officer opens the task from the assessment task list. The page shows a table of all consultees grouped by constraint, with their current consultation status. Most consultees will have been emailed during Stage 2 — their statuses show whether they are awaiting a response or have already responded.
+
+<Canvas of={CheckConsulteesStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer reviews consultee response statuses</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check consultees page
+
+When all consultees have responded, the status column shows the response outcomes — **No objection**, **Amendments needed**, or **Objection**. The officer reviews these at a glance to understand the consultation picture before confirming.
+
+<Canvas of={CheckConsulteesStories.AllResponded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Edge case: failed email delivery</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check consultees page
+
+If a consultee email failed to send, the status shows a red **Failed** tag. The officer should resolve this — either re-send the email or use "Add consultees" to add an alternative contact — before confirming the task.
+
+<Canvas of={CheckConsulteesStories.WithFailedEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Edge case: no consultees</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check consultees page
+
+If no constraints were identified for the application, there are no suggested consultees. The table shows an empty state message. The officer can only go back to the assessment task list.
+
+<Canvas of={CheckConsulteesStories.NoConsultees} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task completed</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Check consultees page
+
+The officer clicks **"Confirm as checked"**. A green success banner confirms the task is done. The table becomes read-only (no action links) and the form buttons are replaced with just a "Back" link. The task shows as "Complete" in the assessment task list.
+
+<Canvas of={CheckConsulteesStories.Confirmed} />

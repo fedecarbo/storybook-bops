@@ -1,0 +1,156 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ExpiredTokenStories from "./ExpiredToken.stories";
+
+<Meta title="Workflows/Authentication/Expired Token/Journey" />
+
+# Expired Token Journey — Current vs Ideal
+
+This documents the user journey when a **password reset** or **email confirmation** link has expired (after 6 hours). It covers two scenarios: a **confirmed user** resetting their password, and an **unconfirmed user** setting up their account for the first time.
+
+Both flows use the same email template and the same reset password token mechanism (via the `EmailConfirmable` concern), so the expired token experience is identical for both — which is part of the problem.
+
+---
+
+## Part A — Current Journey: Confirmed User (Reset Password)
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>User receives a password reset email</h2>
+</div>
+
+**Who:** Confirmed user (existing account)
+**Trigger:** User clicked "Forgot your password?" on the sign-in page
+
+The email tells the user the link will expire after 6 hours. This is clear.
+
+<Canvas of={ExpiredTokenStories.CurrentEmail_Confirmed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#d4351c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>User clicks the link after it has expired</h2>
+</div>
+
+**Who:** Confirmed user
+**Problem:** The form renders normally with no warning that the link has expired
+
+The user sees the "Create your password" form and has no reason to think anything is wrong. They enter a new password and confirm it.
+
+<Canvas of={ExpiredTokenStories.CurrentExpiredForm} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#d4351c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Error appears only after form submission</h2>
+</div>
+
+**Who:** Confirmed user
+**Problem:** The error message says "please request a new link" but doesn't explain how
+
+After spending time creating a valid password, the user is shown an error summary. The message is generic and doesn't guide the user to the "Forgot your password?" page.
+
+<Canvas of={ExpiredTokenStories.CurrentErrorAfterSubmit} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#d4351c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>User has to find the "Forgot your password?" page themselves</h2>
+</div>
+
+**Who:** Confirmed user
+**Problem:** No direct link or guidance to recover from the error
+
+The user must navigate back to the sign-in page, find the "Forgot your password?" link, and request a new reset email. There's nothing on the error page pointing them here.
+
+<Canvas of={ExpiredTokenStories.CurrentForgotPasswordPage} />
+
+---
+
+## Part B — Current Journey: Unconfirmed User (Confirm Email)
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>New user receives an account confirmation email</h2>
+</div>
+
+**Who:** Unconfirmed user (new account created by an admin)
+**Trigger:** Admin created the user account, system sent a confirmation email
+
+The email says "confirm your account and set a password" — different wording from the reset email, but uses the same token and the same link format.
+
+<Canvas of={ExpiredTokenStories.CurrentEmail_Unconfirmed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#d4351c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Same broken experience as confirmed users</h2>
+</div>
+
+**Who:** Unconfirmed user
+**Problem:** Identical to Part A steps 2–4
+
+The unconfirmed user sees the same form, fills it in, gets the same error referring to "reset password" (confusing — they never had a password), and has no way to recover. Worse: an unconfirmed user **cannot** use the "Forgot your password?" flow because they don't have a password set. They need their admin to resend the invitation, but the error doesn't tell them this.
+
+<Canvas of={ExpiredTokenStories.CurrentErrorAfterSubmit} />
+
+---
+
+## Part C — Ideal Journey: Confirmed User (Reset Password)
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>User clicks expired link — immediately warned</h2>
+</div>
+
+**Who:** Confirmed user
+**Improvement:** Token is validated before rendering the page. User is redirected to the sign-in page with a clear notification banner.
+
+The banner tells them exactly what happened and what to do: use the "Forgot your password?" link visible below. No wasted time filling in a form.
+
+<Canvas of={ExpiredTokenStories.IdealExpired_Confirmed} />
+
+---
+
+## Part D — Ideal Journey: Unconfirmed User (Confirm Email)
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>User clicks expired link — warned with admin contact instruction</h2>
+</div>
+
+**Who:** Unconfirmed user (new account)
+**Improvement:** The system detects the user hasn't been confirmed yet and shows a specific message directing them to contact their administrator.
+
+Unlike confirmed users who can self-serve via "Forgot your password?", unconfirmed users need their admin to click "Resend invite" in the admin panel. The message makes this clear.
+
+<Canvas of={ExpiredTokenStories.IdealExpired_Unconfirmed} />
+
+---
+
+## Summary of Changes Needed
+
+| Issue | Current | Ideal |
+|-------|---------|-------|
+| **When is the user warned?** | After filling in and submitting the form | Immediately on clicking the expired link |
+| **Error message (confirmed user)** | "The reset password link you used no longer works. Please request a new link and try again." | "Your password reset link has expired. Request a new one using the 'Forgot your password?' link below." |
+| **Error message (unconfirmed user)** | Same generic message as above | "Your account confirmation link has expired. Contact your administrator to request a new one." |
+| **Recovery path clear?** | No — user has to figure it out | Yes — message includes specific next step |
+
+### Technical implementation required
+
+1. **Create `Users::PasswordsController`** — override the `edit` action to validate the token before rendering the form
+2. **Differentiate by user status** — check `confirmed?` to show the appropriate message
+3. **Update locale strings** — add context-specific expiry messages to `config/locales/devise.en.yml`
+4. **Update routes** — add `passwords: "users/passwords"` to the `devise_for` controllers hash
