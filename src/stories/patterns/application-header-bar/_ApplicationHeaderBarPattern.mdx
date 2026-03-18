@@ -1,0 +1,181 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as HeaderBarStories from "./ApplicationHeaderBar.stories";
+
+<Meta title="Patterns/Application Header Bar/Documentation" />
+
+# Application header bar
+
+A persistent context bar shown below the GOV.UK header on every planning application page. It gives case officers instant access to the key application facts — reference, address, and proposal description — without that information taking up space inside the task form.
+
+<Canvas of={HeaderBarStories.Default} />
+
+<hr />
+
+## Why this pattern exists
+
+BOPS originally showed the full application details — reference, address, description, and more — at the top of every individual task page. This created two problems:
+
+1. **Officers had to scroll past the details to reach the task.** On every page, they saw the same block of information before they could do anything useful.
+
+2. **The details were duplicated everywhere.** Each task page maintained its own copy of the same information, making it harder to maintain consistency.
+
+The team extracted this information into a single, dedicated bar that sits persistently above the task content. Officers always know which application they're working on without losing any task space.
+
+<hr />
+
+## When to use this pattern
+
+Use the application header bar when:
+
+- you are displaying a **task or form that belongs to a specific planning application**
+- officers will be moving between multiple tasks within the same application and need **persistent context** about which case they're on
+- the page layout already has a GOV.UK header at the top and you need an **application-specific second tier** below it
+
+## When not to use this pattern
+
+Do not use the application header bar when:
+
+- the page is **not associated with a specific application** (for example, a dashboard, search results, or admin pages)
+- you are showing a **public-facing** page — this pattern is designed for back-office case officers, not applicants
+- the application context is already prominent elsewhere on the page (for example, a full application detail page)
+
+<hr />
+
+## How it works
+
+### Three zones
+
+The bar is divided into three horizontal zones:
+
+1. **Reference and address (left)** — the application reference number, shown in bold and linked to the application overview, followed by the full site address. These are always visible and cannot be hidden.
+
+2. **Description toggle (centre)** — a "Show proposal description" button that expands a panel below the bar revealing the full proposal description. This lets officers check the description text at any point without navigating away. The button toggles between "Show proposal description" and "Hide proposal description".
+
+3. **Application information link (right)** — a link to the full Application Information page, which opens in a new tab. This link can be hidden in specific contexts where it would be redundant or inappropriate (for example, when the officer is already on the application information page).
+
+### Description collapsed (default)
+
+This is the state officers see on first load. The proposal description is hidden; the bar shows only the reference, address, toggle button, and link.
+
+<Canvas of={HeaderBarStories.Default} />
+
+### Description expanded
+
+When an officer clicks "Show proposal description", a panel drops below the bar with the full proposal text. This is rendered as a separate story since the Stimulus.js toggle controller is not active in Storybook.
+
+<Canvas of={HeaderBarStories.DescriptionExpanded} />
+
+### Without application information link
+
+In some contexts the application information link is suppressed — for example, when the officer is already viewing the application information page. The right zone is empty and the bar remains functional.
+
+<Canvas of={HeaderBarStories.WithoutApplicationInfoLink} />
+
+### In context
+
+The bar sits directly below the black GOV.UK header, forming a two-tier header stack above the task content. Both tiers are sticky — they remain pinned at the top of the viewport as the officer scrolls through long task forms.
+
+<Canvas of={HeaderBarStories.InContext} />
+
+### Sticky behaviour
+
+The header bar uses `.bops-headers--sticky` on its wrapper element, which applies `position: sticky; top: 0; z-index: 2000`. This keeps both the GOV.UK header and the application bar visible at all times. The sticky behaviour is disabled when the sidebar navigation pattern is active (they don't coexist).
+
+### Responsive behaviour
+
+On screens narrower than 768px, the bar stacks vertically — each item appears on its own line. The vertical dividers between items are hidden on mobile. The primary use case is desktop.
+
+<hr />
+
+## Implementation
+
+### HTML structure
+
+```html
+<div class="bops-header-bar"
+  data-controller="toggle"
+  data-toggle-class-name-value="govuk-!-display-none"
+  data-toggle-condensed-text-value="Show proposal description"
+  data-toggle-expanded-text-value="Hide proposal description">
+
+  <ul class="bops-header-bar__list">
+    <!-- Left: reference and address -->
+    <li class="bops-header-bar__item">
+      <strong><a href="/planning_applications/123" class="govuk-link govuk-link--no-visited-state">BPS-24-00345-HAPP</a></strong>
+    </li>
+    <li class="bops-header-bar__item">12 Elm Grove, London, SE15 5DE</li>
+
+    <!-- Centre: description toggle button -->
+    <li class="bops-header-bar__item--toggle">
+      <button
+        type="button"
+        class="button-as-link govuk-link govuk-link--no-visited-state"
+        data-toggle-target="button"
+        data-action="toggle#click"
+        aria-expanded="false">
+        Show proposal description
+      </button>
+    </li>
+
+    <!-- Right: application information link -->
+    <div class="bops-header-bar__list--right">
+      <li class="bops-header-bar__item">
+        <a href="/planning_applications/123/information" class="govuk-link govuk-link--no-visited-state" target="_blank" rel="noopener noreferrer">
+          Application information
+        </a>
+      </li>
+    </div>
+  </ul>
+
+  <!-- Description panel (hidden by default) -->
+  <div class="bops-header-bar__toggle-panel govuk-!-display-none"
+    data-toggle-target="content"
+    aria-live="polite">
+    <p class="govuk-!-margin-0">Proposed two-storey rear extension...</p>
+  </div>
+</div>
+```
+
+### CSS classes
+
+| Class | Purpose |
+|-------|---------|
+| `.bops-header-bar` | Bar wrapper — light blue background, bottom border, flex layout |
+| `.bops-header-bar__list` | Flex row containing all left items and the toggle button |
+| `.bops-header-bar__item` | Individual item — inline flex, padded, with a left border separator |
+| `.bops-header-bar__item--toggle` | Wrapper for the description toggle button |
+| `.bops-header-bar__list--right` | Right-aligned group for the application information link |
+| `.bops-header-bar__toggle-panel` | Collapsible description panel below the bar |
+| `.bops-headers--sticky` | Applied to the outer wrapper to pin both headers at the top of the viewport |
+
+### Stimulus controller
+
+The description toggle is powered by the `toggle` Stimulus controller. The controller reads three data attributes from the container element:
+
+| Attribute | Value | Purpose |
+|-----------|-------|---------|
+| `data-controller` | `"toggle"` | Activates the controller on this element |
+| `data-toggle-class-name-value` | `"govuk-!-display-none"` | CSS class added/removed to show/hide the panel |
+| `data-toggle-condensed-text-value` | `"Show proposal description"` | Button label when panel is hidden |
+| `data-toggle-expanded-text-value` | `"Hide proposal description"` | Button label when panel is visible |
+
+The button uses `data-toggle-target="button"` and the panel uses `data-toggle-target="content"`.
+
+### Ruby (ViewComponent)
+
+```ruby
+render BopsCore::HeaderBarComponent.new(
+  left: [
+    { text: tag.strong(govuk_link_to(planning_application.reference, planning_application_path(planning_application), no_visited_state: true)) },
+    { text: planning_application.full_address }
+  ],
+  right: [
+    { label: "Application information", href: planning_application_information_path(planning_application) }
+  ],
+  toggle: {
+    condensed_text: "Show proposal description",
+    expanded_text:  "Hide proposal description",
+    content: content_tag(:p, planning_application.description, class: "govuk-!-margin-0")
+  }
+)
+```
