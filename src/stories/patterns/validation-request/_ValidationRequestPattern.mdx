@@ -1,0 +1,189 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ValidationRequestStories from "./ValidationRequest.stories";
+
+<Meta title="Patterns/Validation Request/Documentation" />
+
+# Validation request
+
+A structured request-response cycle where case officers ask applicants for information or agreement during the validation stage of a planning application. All 10 request types share a common lifecycle and UI skeleton with 3 response mechanisms.
+
+<Canvas of={ValidationRequestStories.LifecycleOverview} />
+
+<hr />
+
+## Why this pattern exists
+
+Validation requests are the primary mechanism for officer-applicant communication during the validation stage. When a submitted application is incomplete or needs changes, the case officer creates one or more validation requests — each targeting a specific issue.
+
+There are **10 distinct request types** in the system, but they all follow the same lifecycle and fall into just **3 response mechanisms**. This pattern documents the shared skeleton so that:
+
+- New request types can be designed consistently
+- Existing types can be improved against a documented baseline
+- Designers can understand the common structure without reading 10 separate implementations
+
+<div style={{ marginTop: "24px", padding: "12px 16px", background: "#f3f2f1", borderLeft: "4px solid #505a5f", fontSize: "14px" }}>
+  This is a baseline documentation of the current validation request pattern. The UX has known issues and is likely to evolve. This pattern exists to establish what validation requests currently are, so improvements can be designed against a documented starting point.
+</div>
+
+<hr />
+
+## When to use this pattern
+
+- When building any new validation request type
+- When the interaction requires the officer to send a structured request to the applicant and receive a structured response
+- When the applicant's response follows one of the 3 mechanisms (agree/disagree, text, document upload)
+
+## When not to use this pattern
+
+- For officer-to-officer communication (use internal notes or assignments instead)
+- For automated system notifications that don't require a response
+- For post-decision communication with applicants
+
+<hr />
+
+## The lifecycle
+
+Every validation request passes through the same 5 stages, regardless of type.
+
+<Canvas of={ValidationRequestStories.LifecycleOverview} />
+
+### Status tags
+
+The status tags progress through a fixed sequence as the request moves through the lifecycle.
+
+<Canvas of={ValidationRequestStories.StatusProgression} />
+
+<hr />
+
+## Officer side: creating a request
+
+All request creation forms share a common structure: a heading, a context block showing what the applicant submitted, a reason field, and type-specific fields. The wireframe below shows the generic skeleton.
+
+<Canvas of={ValidationRequestStories.OfficerFormSkeleton} />
+
+### After sending
+
+Once the request is sent, the officer sees a summary of the request with its current status and the applicant's details. The response area is empty until the applicant responds.
+
+<Canvas of={ValidationRequestStories.OfficerReviewView} />
+
+<hr />
+
+## System notification
+
+When a request is sent, the system emails the applicant with a secure link to respond. All types use the same email template structure — only the subject line and body details vary by type.
+
+<Canvas of={ValidationRequestStories.EmailNotification} />
+
+<hr />
+
+## Applicant landing page
+
+After clicking the email link, the applicant sees a landing page listing all open requests as a task list. This page aggregates requests across all types — the applicant works through them one by one.
+
+<Canvas of={ValidationRequestStories.ApplicantLandingPage} />
+
+<hr />
+
+## Response type 1: Agree / Disagree
+
+Used when the officer proposes a change and needs the applicant's agreement to proceed. The applicant sees what was submitted, what is proposed, and chooses to agree or disagree. If they disagree, they must provide a reason.
+
+<Canvas of={ValidationRequestStories.ResponseAgreeDisagree} />
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th>Request type</th>
+      <th>What the applicant agrees/disagrees with</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Description change</td>
+      <td>Proposed new application description</td>
+    </tr>
+    <tr>
+      <td>Red line boundary change</td>
+      <td>Proposed new site boundary</td>
+    </tr>
+    <tr>
+      <td>Ownership certificate</td>
+      <td>Officer's finding about land ownership</td>
+    </tr>
+    <tr>
+      <td>Time extension</td>
+      <td>Proposed extension of decision deadline</td>
+    </tr>
+    <tr>
+      <td>Pre-commencement conditions</td>
+      <td>Proposed planning conditions</td>
+    </tr>
+    <tr>
+      <td>Heads of terms</td>
+      <td>Proposed planning obligations</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Response type 2: Free text
+
+Used when the officer needs the applicant to provide information in their own words. The applicant sees the officer's reason for the request and a suggestion for how to resolve it, then writes a free-text response.
+
+<Canvas of={ValidationRequestStories.ResponseTextInput} />
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th>Request type</th>
+      <th>What the applicant provides</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Other change</td>
+      <td>Information about any issue not covered by specific types</td>
+    </tr>
+    <tr>
+      <td>Fee change</td>
+      <td>Response to fee calculation discrepancies</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Response type 3: Document upload
+
+Used when the officer needs the applicant to provide new or replacement documents. The applicant sees what document is needed and why, then uploads the file.
+
+<Canvas of={ValidationRequestStories.ResponseDocumentUpload} />
+
+<table style={{ width: "100%" }}>
+  <thead>
+    <tr>
+      <th>Request type</th>
+      <th>What the applicant uploads</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Additional document</td>
+      <td>A new document not included in the original submission</td>
+    </tr>
+    <tr>
+      <td>Replacement document</td>
+      <td>A corrected version of an existing document</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+## Confirmation
+
+After submitting any response, the applicant sees a GOV.UK confirmation panel. This is identical across all request types.
+
+<Canvas of={ValidationRequestStories.ApplicantConfirmation} />
