@@ -5,7 +5,11 @@ import * as ValidationRequestStories from "./ValidationRequest.stories";
 
 # Validation request
 
-A structured request-response cycle where case officers ask applicants for information or agreement during the validation stage of a planning application. All 10 request types share a common lifecycle and UI skeleton with 3 response mechanisms.
+Before a planning application can be assessed on its merits, a case officer checks that the submission is complete and correct. This checking stage is called validation. If something is missing or wrong — a document not uploaded, a fee not paid, a description that doesn't match the plans — the officer needs to go back to the applicant and get it sorted before the application can proceed.
+
+Getting validation right matters because incomplete applications cannot be decided. Every issue that slips through creates delays later. When validation is thorough, the application moves cleanly into assessment. When it isn't, weeks get lost to back-and-forth that should have happened upfront.
+
+Previously, this back-and-forth happened over email. Officers would write to applicants asking for missing information, applicants would reply (sometimes to the wrong thread, sometimes weeks later), and the context lived in individual inboxes where no one else on the team could see it. Validation requests bring this conversation into the system — structured, trackable, and consistent across every officer and every application.
 
 <Canvas of={ValidationRequestStories.LifecycleOverview} />
 
@@ -13,13 +17,19 @@ A structured request-response cycle where case officers ask applicants for infor
 
 ## Why this pattern exists
 
-Validation requests are the primary mechanism for officer-applicant communication during the validation stage. When a submitted application is incomplete or needs changes, the case officer creates one or more validation requests — each targeting a specific issue.
+BOPS originally had no structured way for officers to communicate validation issues to applicants. Officers sent emails explaining what was needed, and applicants replied by email. This created several problems:
 
-There are **10 distinct request types** in the system, but they all follow the same lifecycle and fall into just **3 response mechanisms**. This pattern documents the shared skeleton so that:
+1. **Context got lost.** Email threads about validation issues were buried in individual inboxes. If an officer was away, no one else could pick up the conversation. If an applicant replied weeks later, the officer had to re-read the chain to remember what was outstanding.
 
-- New request types can be designed consistently
-- Existing types can be improved against a documented baseline
-- Designers can understand the common structure without reading 10 separate implementations
+2. **Every officer did it differently.** Without a standard structure, one officer might write a detailed explanation while another sent a one-line request. Applicants received inconsistent communication depending on who handled their case.
+
+3. **There was no team visibility.** The rest of the team had no way to see which issues had been raised, which were resolved, and which were still waiting for a response. Progress tracking happened in people's heads, not in the system.
+
+4. **Responses were unstructured.** Applicants replied in free-form email, sometimes addressing the wrong issue or providing information in a format that was hard to process. Officers had to manually interpret responses and update the system.
+
+The validation request pattern replaces all of this with a structured in-system interaction. The officer creates a request targeting a specific issue, the system sends a notification with a secure link, the applicant responds through a structured form, and the officer reviews the response — all tracked with statuses visible to the whole team.
+
+Despite there being **10 different request types** in the system, they all follow the same lifecycle and fall into just **3 response mechanisms** (agree/disagree, free text, or document upload). This pattern documents the shared skeleton so that new types can be designed consistently and existing types can be improved against a documented baseline.
 
 <div style={{ marginTop: "24px", padding: "12px 16px", background: "#f3f2f1", borderLeft: "4px solid #505a5f", fontSize: "14px" }}>
   This is a baseline documentation of the current validation request pattern. The UX has known issues and is likely to evolve. This pattern exists to establish what validation requests currently are, so improvements can be designed against a documented starting point.
@@ -29,19 +39,25 @@ There are **10 distinct request types** in the system, but they all follow the s
 
 ## When to use this pattern
 
-- When building any new validation request type
-- When the interaction requires the officer to send a structured request to the applicant and receive a structured response
-- When the applicant's response follows one of the 3 mechanisms (agree/disagree, text, document upload)
+Use this pattern when:
+
+- building any new validation request type
+- the interaction requires the officer to send a structured request to the applicant and receive a structured response
+- the applicant's response follows one of the 3 mechanisms (agree/disagree, text, document upload)
 
 ## When not to use this pattern
 
-- For officer-to-officer communication (use internal notes or assignments instead)
-- For automated system notifications that don't require a response
-- For post-decision communication with applicants
+Do not use this pattern when:
+
+- the communication is officer-to-officer (use internal notes or assignments instead)
+- the notification is automated and doesn't require a response
+- the communication happens after a decision has been made
 
 <hr />
 
-## The lifecycle
+## How it works
+
+### The lifecycle
 
 Every validation request passes through the same 5 stages, regardless of type.
 
@@ -53,39 +69,35 @@ The status tags progress through a fixed sequence as the request moves through t
 
 <Canvas of={ValidationRequestStories.StatusProgression} />
 
-<hr />
-
-## Officer side: creating a request
+### Officer side: creating a request
 
 All request creation forms share a common structure: a heading, a context block showing what the applicant submitted, a reason field, and type-specific fields. The wireframe below shows the generic skeleton.
 
 <Canvas of={ValidationRequestStories.OfficerFormSkeleton} />
 
-### After sending
+#### After sending
 
 Once the request is sent, the officer sees a summary of the request with its current status and the applicant's details. The response area is empty until the applicant responds.
 
 <Canvas of={ValidationRequestStories.OfficerReviewView} />
 
-<hr />
-
-## System notification
+### System notification
 
 When a request is sent, the system emails the applicant with a secure link to respond. All types use the same email template structure — only the subject line and body details vary by type.
 
 <Canvas of={ValidationRequestStories.EmailNotification} />
 
-<hr />
-
-## Applicant landing page
+### Applicant landing page
 
 After clicking the email link, the applicant sees a landing page listing all open requests as a task list. This page aggregates requests across all types — the applicant works through them one by one.
 
 <Canvas of={ValidationRequestStories.ApplicantLandingPage} />
 
-<hr />
+### Response mechanisms
 
-## Response type 1: Agree / Disagree
+All 10 request types use one of three response mechanisms. The mechanism determines the form the applicant sees.
+
+#### Agree / Disagree
 
 Used when the officer proposes a change and needs the applicant's agreement to proceed. The applicant sees what was submitted, what is proposed, and chooses to agree or disagree. If they disagree, they must provide a reason.
 
@@ -126,9 +138,7 @@ Used when the officer proposes a change and needs the applicant's agreement to p
   </tbody>
 </table>
 
-<hr />
-
-## Response type 2: Free text
+#### Free text
 
 Used when the officer needs the applicant to provide information in their own words. The applicant sees the officer's reason for the request and a suggestion for how to resolve it, then writes a free-text response.
 
@@ -153,9 +163,7 @@ Used when the officer needs the applicant to provide information in their own wo
   </tbody>
 </table>
 
-<hr />
-
-## Response type 3: Document upload
+#### Document upload
 
 Used when the officer needs the applicant to provide new or replacement documents. The applicant sees what document is needed and why, then uploads the file.
 
@@ -180,10 +188,14 @@ Used when the officer needs the applicant to provide new or replacement document
   </tbody>
 </table>
 
-<hr />
-
-## Confirmation
+### Confirmation
 
 After submitting any response, the applicant sees a GOV.UK confirmation panel. This is identical across all request types.
 
 <Canvas of={ValidationRequestStories.ApplicantConfirmation} />
+
+<hr />
+
+## Research and learnings
+
+_This section will be updated as we gather more evidence from officers and applicants using the validation request pattern in production._
