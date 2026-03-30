@@ -2,8 +2,9 @@
  * Select Consultees (WIPv2) — Trello-inspired 3-page architecture.
  *
  * Page 1: Main overview — Summary Cards (one per constraint), "Manage" actions.
- * Page 2: Detail page per constraint — full consultee management.
- * Page 3: Add a reason — search/add new constraint before assigning.
+ * Page 2: Detail page — manage an existing constraint OR add a new consultation.
+ *         Same template, two states: pre-populated (with constraint + consultees)
+ *         or empty (search for reason, then assign consultee).
  *
  * Framing: "Review and confirm" — the system pre-populated, officer validates.
  */
@@ -265,6 +266,41 @@ function renderNotRequiredCheckbox(checked = false) {
     </div>`;
 }
 
+function renderReasonSearchSection(options = {}) {
+  const { searchQuery = "", showSuggestions = false } = options;
+
+  const suggestionsHtml = showSuggestions
+    ? `<ul role="listbox" style="border: 1px solid #b1b4b6; list-style: none; padding: 0; margin-top: -1px; background: #fff; max-height: 200px; overflow-y: auto; position: absolute; width: 100%; z-index: 10; box-shadow: 0 2px 6px rgba(0,0,0,.15);">
+        ${availableConstraints
+          .filter((c) =>
+            c.type.toLowerCase().includes(searchQuery.toLowerCase()),
+          )
+          .map(
+            (c, i) =>
+              `<li style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #f3f2f1;${i === 0 ? " background: #1d70b8; color: #fff;" : ""}">
+                <strong>${c.type}</strong><br>
+                <span style="font-size: 14px; color: ${i === 0 ? "#fff" : "#505a5f"};">${c.category}</span>
+              </li>`,
+          )
+          .join("")}
+       </ul>`
+    : "";
+
+  return `
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="add-reason">
+        Reason for consultation
+      </label>
+      <div id="add-reason-hint" class="govuk-hint">
+        Search for a planning constraint or type a custom reason
+      </div>
+      <div style="position: relative;">
+        <input class="govuk-input" id="add-reason" type="text" value="${searchQuery}" autocomplete="off" aria-describedby="add-reason-hint">
+        ${suggestionsHtml}
+      </div>
+    </div>`;
+}
+
 function renderDetailPage(reason, options = {}) {
   const {
     showSearch = true,
@@ -274,6 +310,31 @@ function renderDetailPage(reason, options = {}) {
     banner = "",
   } = options;
 
+  // When reason is null, this is the empty "add new" state
+  if (!reason) {
+    return `
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        ${renderBackLink()}
+        <h1 class="govuk-heading-l">Add a consultation</h1>
+        <p class="govuk-body">Search for a planning constraint or enter a custom reason, then assign a consultee.</p>
+
+        ${renderReasonSearchSection({ searchQuery, showSuggestions })}
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        ${renderSearchSection()}
+
+        ${renderNotRequiredCheckbox()}
+
+        <div class="govuk-button-group govuk-!-margin-top-6">
+          <button class="govuk-button" type="submit">Save and return</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Existing constraint — show its details and consultee management
   const consulteeBlocks =
     reason.consultees && reason.consultees.length > 0
       ? `<h2 class="govuk-heading-m">Assigned consultees</h2>
@@ -311,58 +372,6 @@ function renderDetailPage(reason, options = {}) {
 
         <div class="govuk-button-group govuk-!-margin-top-6">
           <button class="govuk-button" type="submit">Save and return</button>
-        </div>
-      </div>
-    </div>`;
-}
-
-// ---------------------------------------------------------------------------
-// Page 3: Add a reason
-// ---------------------------------------------------------------------------
-
-function renderAddReasonPage(options = {}) {
-  const { searchQuery = "", showSuggestions = false } = options;
-
-  const suggestionsHtml = showSuggestions
-    ? `<ul role="listbox" style="border: 1px solid #b1b4b6; list-style: none; padding: 0; margin-top: -1px; background: #fff; max-height: 200px; overflow-y: auto; position: absolute; width: 100%; z-index: 10; box-shadow: 0 2px 6px rgba(0,0,0,.15);">
-        ${availableConstraints
-          .filter((c) =>
-            c.type.toLowerCase().includes(searchQuery.toLowerCase()),
-          )
-          .map(
-            (c, i) =>
-              `<li style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #f3f2f1;${i === 0 ? " background: #1d70b8; color: #fff;" : ""}">
-                <strong>${c.type}</strong><br>
-                <span style="font-size: 14px; color: ${i === 0 ? "#fff" : "#505a5f"};">${c.category}</span>
-              </li>`,
-          )
-          .join("")}
-       </ul>`
-    : "";
-
-  return `
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        ${renderBackLink()}
-        <h1 class="govuk-heading-l">Add a reason for consultation</h1>
-        <p class="govuk-body">Search for a planning constraint or enter a custom reason. After adding, you will be able to assign a consultee.</p>
-
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="add-reason">
-            Reason for consultation
-          </label>
-          <div id="add-reason-hint" class="govuk-hint">
-            Search for a planning constraint or type a custom reason
-          </div>
-          <div style="position: relative;">
-            <input class="govuk-input" id="add-reason" type="text" value="${searchQuery}" autocomplete="off" aria-describedby="add-reason-hint">
-            ${suggestionsHtml}
-          </div>
-        </div>
-
-        <div class="govuk-button-group">
-          <button class="govuk-button" type="submit">Add reason</button>
-          <a class="govuk-link" href="#">Cancel</a>
         </div>
       </div>
     </div>`;
@@ -482,7 +491,7 @@ export const NoConstraintsIdentified = {
 };
 
 // ===========================================================================
-// Stories — Page 2: Manage constraint detail
+// Stories — Page 2: Detail page (manage existing or add new)
 // ===========================================================================
 
 /** Detail page for "Conservation area" — one consultee assigned. */
@@ -536,17 +545,13 @@ export const ManageNotRequired = {
   },
 };
 
-// ===========================================================================
-// Stories — Page 3: Add a reason
-// ===========================================================================
-
-/** Fresh "Add a reason" form with empty search. */
-export const AddReason = {
-  render: () => renderAddReasonPage(),
+/** Empty state — adding a new consultation (no constraint selected yet). */
+export const AddNew = {
+  render: () => renderDetailPage(null),
 };
 
-/** "Add a reason" with search results showing. */
-export const AddReasonWithResults = {
+/** Adding a new consultation — reason search with results showing. */
+export const AddNewWithSearch = {
   render: () =>
-    renderAddReasonPage({ searchQuery: "Eco", showSuggestions: true }),
+    renderDetailPage(null, { searchQuery: "Eco", showSuggestions: true }),
 };
