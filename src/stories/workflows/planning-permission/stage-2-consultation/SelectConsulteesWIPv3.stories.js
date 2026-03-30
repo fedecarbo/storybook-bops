@@ -128,9 +128,7 @@ function renderReasonCard(reason, options = {}) {
       .join("");
   }
 
-  // "Not needed" cards are visually subdued
-  const cardStyle =
-    reason.status === "not_required" ? ' style="opacity: 0.5;"' : "";
+  const cardStyle = "";
 
   // Title with optional "Not needed" tag
   const titleTag =
