@@ -57,7 +57,7 @@ Every task **must** have a companion `_[TaskName]Journey.mdx` file alongside the
 ### Structure
 
 ```mdx
-import { Meta, Canvas } from "@storybook/blocks";
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
 import * as TaskStories from "./TaskName.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Task Name/Journey" />
