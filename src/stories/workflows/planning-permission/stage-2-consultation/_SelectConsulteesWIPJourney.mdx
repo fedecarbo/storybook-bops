@@ -1,0 +1,98 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import * as SelectConsulteesWIPStories from "./SelectConsulteesWIP.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Select Consultees (WIP)/Journey" />
+
+# Select Consultees (WIP) — User Journey
+
+This documents the redesigned consultee selection flow using GOV.UK Summary Cards. Each "reason for consultation" (usually a planning constraint) is presented as a card. The case officer reviews the cards, assigns consultees, and can mark reasons as not required or add custom reasons.
+
+This task involves one actor: the **case officer** in BOPS.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Case officer opens the page — pre-populated cards</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list > Add and assign consultees
+
+The system has automatically identified planning constraints and created a **Summary Card** for each one. Cards that have a default consultee (e.g. Conservation Officer for "Conservation area") are pre-populated with the consultee's name and type (Internal/External). Cards without a suggested consultee show an "Assign consultee" link. Each card's only card-level action is "Mark as not required".
+
+At the bottom, an "Add a reason for consultation" button allows the officer to create cards for non-constraint reasons.
+
+<Canvas of={SelectConsulteesWIPStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Marking a reason as not required</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees > Card action links
+
+If a constraint does not need consultation for this application, the officer clicks "Mark as not required" on the card. The card greys out and shows a "Not required" tag. An "Undo" link allows restoring it.
+
+In this example, "Article 4 direction" and "Archaeological priority area" have been marked as not required.
+
+<Canvas of={SelectConsulteesWIPStories.ReasonMarkedNotRequired} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Adding a custom reason for consultation</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees > Add a reason for consultation
+
+If the officer needs to consult someone for a reason not covered by constraints (e.g. an ecology concern from the submitted documents), they click "Add a reason for consultation". An inline form appears with autocomplete search for constraint types, or they can enter a custom reason.
+
+<Canvas of={SelectConsulteesWIPStories.AddReasonExpanded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Assigning a consultee to a reason</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees > Individual card
+
+The officer clicks "Assign consultee" within a card. After selecting from the autocomplete search, the consultee appears inside the card as a Summary List with two rows: their name (with "Change | Remove" actions) and type (Internal/External tag). An "Add another consultee" link below allows assigning additional consultees to the same reason. A success banner confirms the assignment.
+
+<Canvas of={SelectConsulteesWIPStories.ConsulteeAssigned} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>All reasons addressed</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees (fully populated)
+
+Every card now has at least one consultee assigned. The officer reviews the full picture and clicks **Save and continue** to confirm.
+
+<Canvas of={SelectConsulteesWIPStories.AllAssigned} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task complete</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Add and assign consultees (completed)
+
+After saving, the task status changes to **Complete** (green tag). All cards become read-only with no action links. The next step in the workflow is **Email consultees**.
+
+<Canvas of={SelectConsulteesWIPStories.Completed} />

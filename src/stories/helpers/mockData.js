@@ -1422,4 +1422,98 @@ Yours
       },
     ],
   },
+
+  // ---------------------------------------------------------------------------
+  // Consultation reasons — used by the redesigned Select Consultees (WIP) story.
+  // Each "reason" is a constraint or custom justification for consulting someone.
+  // ---------------------------------------------------------------------------
+  consultationReasons: [
+    {
+      id: "conservation-area",
+      title: "Conservation area",
+      subtitle: "Camberwell Green Conservation Area",
+      source: "auto",
+      status: "assigned",
+      consultees: [
+        {
+          name: "Conservation Officer",
+          organisation: "Southwark Council",
+          email: "conservation@southwark.gov.uk",
+          origin: "internal",
+          role: "Conservation and design",
+        },
+      ],
+    },
+    {
+      id: "listed-building",
+      title: "Listed building",
+      subtitle: "Grade II listed",
+      source: "auto",
+      status: "assigned",
+      consultees: [
+        {
+          name: "Conservation Officer",
+          organisation: "Southwark Council",
+          email: "conservation@southwark.gov.uk",
+          origin: "internal",
+          role: "Conservation and design",
+        },
+      ],
+    },
+    {
+      id: "article-4-direction",
+      title: "Article 4 direction",
+      subtitle: "Camberwell Article 4",
+      source: "auto",
+      status: "unassigned",
+      consultees: [],
+    },
+    {
+      id: "tree-preservation-order",
+      title: "Tree preservation order",
+      subtitle: "TPO 456 — Oak tree, rear garden",
+      source: "auto",
+      status: "assigned",
+      consultees: [
+        {
+          name: "Tree Officer",
+          organisation: "Southwark Council",
+          email: "trees@southwark.gov.uk",
+          origin: "internal",
+          role: "Arboriculture",
+        },
+      ],
+    },
+    {
+      id: "flood-zone",
+      title: "Flood zone",
+      subtitle: "Flood Zone 2",
+      source: "auto",
+      status: "assigned",
+      consultees: [
+        {
+          name: "Environment Agency",
+          organisation: "Environment Agency",
+          email: "planning@environment-agency.gov.uk",
+          origin: "external",
+          role: "Regulatory body",
+        },
+        {
+          name: "Thames Water",
+          organisation: "Thames Water Utilities",
+          email: "planning@thameswater.co.uk",
+          origin: "external",
+          role: "Statutory undertaker",
+        },
+      ],
+    },
+    {
+      id: "archaeological-priority-area",
+      title: "Archaeological priority area",
+      subtitle: "Camberwell APA",
+      source: "auto",
+      status: "unassigned",
+      consultees: [],
+    },
+  ],
 };
