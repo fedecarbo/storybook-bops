@@ -6,14 +6,15 @@
  * 2. Heading: "Add and assign consultees" (matches task list name)
  * 3. Not-needed cards: no content rows, just tag in title — less redundancy
  * 4. Detail page: removed opacity:0.5 on not-needed state
- * 5. AddNew: shows only reason search first, separate story for after reason chosen
- * 6. AddNew: no "not needed" checkbox (nonsensical for new consultations)
+ * 5. AddNew: simplified to just consultee search (no reason search — can't add constraints)
+ * 6. Manually-added consultees shown under "Other" card on overview
  * 7. New story: overview with success banner after returning from detail page
  * 8. Detail page: "Add another consultee" heading when consultees already exist
  * 9. Empty state: no submit button when there's nothing to confirm
  * 10. Removed dead cardStyle variable
  * 11. renderSuccessBanner now used in a story
  * 12. Breadcrumb matches heading
+ * 13. "Add a consultee" link (not "Add another consultation" — can't add constraints)
  */
 import { mockData, renderStatusTag } from "../../../helpers";
 
@@ -33,8 +34,7 @@ export default {
 // Data
 // ---------------------------------------------------------------------------
 
-const { consultationReasons, availableConsultees, availableConstraints } =
-  mockData;
+const { consultationReasons, availableConsultees } = mockData;
 
 // ---------------------------------------------------------------------------
 // Shared helpers
@@ -154,8 +154,46 @@ function renderReasonCard(reason, options = {}) {
     </div>`;
 }
 
+function renderOtherCard(otherConsultees, options = {}) {
+  const { readOnly = false } = options;
+  if (!otherConsultees || otherConsultees.length === 0) return "";
+
+  const consulteeRows = otherConsultees
+    .map((c, i) => {
+      const label =
+        otherConsultees.length > 1 ? `Consultee ${i + 1}` : "Consultee";
+      return `
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">${label}</dt>
+        <dd class="govuk-summary-list__value">${c.name}, ${c.organisation}</dd>
+      </div>`;
+    })
+    .join("");
+
+  const cardAction = readOnly
+    ? ""
+    : `<ul class="govuk-summary-card__actions">
+        <li class="govuk-summary-card__action">
+          <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> other consultees</span></a>
+        </li>
+      </ul>`;
+
+  return `
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">Other</h2>
+        ${cardAction}
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          ${consulteeRows}
+        </dl>
+      </div>
+    </div>`;
+}
+
 function renderOverviewPage(reasons, options = {}) {
-  const { readOnly = false, banner = "" } = options;
+  const { readOnly = false, banner = "", otherConsultees = [] } = options;
 
   const statusTag = readOnly
     ? `<p class="govuk-!-margin-bottom-4">${renderStatusTag("complete")}</p>`
@@ -166,11 +204,12 @@ function renderOverviewPage(reasons, options = {}) {
     : `<p class="govuk-body">Consultees have been automatically matched to this application's planning constraints. Check the assignments are correct, make any changes, then confirm.</p>`;
 
   const cards = reasons.map((r) => renderReasonCard(r, options)).join("");
+  const otherCardHtml = renderOtherCard(otherConsultees, options);
 
   const addLink = readOnly
     ? ""
     : `<p class="govuk-body govuk-!-margin-top-4">
-        <a class="govuk-link" href="#">Add another consultation</a>
+        <a class="govuk-link" href="#">Add a consultee</a>
       </p>`;
 
   const formButtons = readOnly
@@ -186,6 +225,7 @@ function renderOverviewPage(reasons, options = {}) {
         ${statusTag}
         ${intro}
         ${cards}
+        ${otherCardHtml}
         ${addLink}
         ${formButtons}
       </div>
@@ -279,41 +319,6 @@ function renderNotNeededCheckbox(checked = false) {
     </div>`;
 }
 
-function renderReasonSearchSection(options = {}) {
-  const { searchQuery = "", showSuggestions = false } = options;
-
-  const suggestionsHtml = showSuggestions
-    ? `<ul role="listbox" style="border: 1px solid #b1b4b6; list-style: none; padding: 0; margin-top: -1px; background: #fff; max-height: 200px; overflow-y: auto; position: absolute; width: 100%; z-index: 10; box-shadow: 0 2px 6px rgba(0,0,0,.15);">
-        ${availableConstraints
-          .filter((c) =>
-            c.type.toLowerCase().includes(searchQuery.toLowerCase()),
-          )
-          .map(
-            (c, i) =>
-              `<li style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #f3f2f1;${i === 0 ? " background: #1d70b8; color: #fff;" : ""}">
-                <strong>${c.type}</strong><br>
-                <span style="font-size: 14px; color: ${i === 0 ? "#fff" : "#505a5f"};">${c.category}</span>
-              </li>`,
-          )
-          .join("")}
-       </ul>`
-    : "";
-
-  return `
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="add-reason">
-        Reason for consultation
-      </label>
-      <div id="add-reason-hint" class="govuk-hint">
-        Search for a planning constraint or type a custom reason
-      </div>
-      <div style="position: relative;">
-        <input class="govuk-input" id="add-reason" type="text" value="${searchQuery}" autocomplete="off" aria-describedby="add-reason-hint">
-        ${suggestionsHtml}
-      </div>
-    </div>`;
-}
-
 function renderDetailPage(reason, options = {}) {
   const {
     showSearch = true,
@@ -321,38 +326,16 @@ function renderDetailPage(reason, options = {}) {
     showSuggestions = false,
     notNeededChecked = false,
     banner = "",
-    reasonSelected = false,
   } = options;
 
-  // Empty state — adding a new consultation (step 1: pick a reason)
-  if (!reason && !reasonSelected) {
+  // Add a consultee (not tied to a constraint — goes under "Other")
+  if (!reason) {
     return `
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         ${renderBackLink()}
-        <h1 class="govuk-heading-l">Add a consultation</h1>
-        <p class="govuk-body">Search for a planning constraint or enter a custom reason.</p>
-
-        ${renderReasonSearchSection({ searchQuery, showSuggestions })}
-
-        <div class="govuk-button-group govuk-!-margin-top-6">
-          <button class="govuk-button" type="submit">Continue</button>
-        </div>
-      </div>
-    </div>`;
-  }
-
-  // Empty state — reason selected, now assign a consultee (step 2)
-  if (!reason && reasonSelected) {
-    return `
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        ${renderBackLink()}
-        <h1 class="govuk-heading-l">Ecology — habitat regulations</h1>
-        <p class="govuk-body">Custom reason</p>
-        <p class="govuk-hint">Manually added</p>
-
-        <div class="govuk-inset-text">No consultees have been assigned to this constraint. Use the search below to find and assign one.</div>
+        <h1 class="govuk-heading-l">Add a consultee</h1>
+        <p class="govuk-body">Search for a consultee to add. They will not be linked to a specific constraint.</p>
 
         ${renderSearchSection({ searchQuery, showSuggestions })}
 
@@ -525,7 +508,24 @@ export const Completed = {
   },
 };
 
-/** No constraints identified — empty state with add link, no submit button. */
+/** Overview with a manually-added consultee under "Other". */
+export const WithOtherConsultee = {
+  render: () => {
+    return renderOverviewPage(consultationReasons, {
+      otherConsultees: [
+        {
+          name: "Highways Authority",
+          organisation: "Transport for London",
+          email: "highways@tfl.gov.uk",
+          origin: "external",
+          role: "Highways",
+        },
+      ],
+    });
+  },
+};
+
+/** No constraints identified — empty state with add link, no confirm button. */
 export const NoConstraintsIdentified = {
   render: () => `
     <div class="govuk-grid-row">
@@ -534,11 +534,11 @@ export const NoConstraintsIdentified = {
         <h1 class="govuk-heading-l">Add and assign consultees</h1>
 
         <div class="govuk-inset-text">
-          No planning constraints have been identified for this application. You can add consultations manually.
+          No planning constraints have been identified for this application. You can still add consultees manually.
         </div>
 
         <p class="govuk-body">
-          <a class="govuk-link" href="#">Add a consultation</a>
+          <a class="govuk-link" href="#">Add a consultee</a>
         </p>
 
         <div class="govuk-button-group govuk-!-margin-top-6">
@@ -603,18 +603,13 @@ export const ManageNotNeeded = {
   },
 };
 
-/** Adding a new consultation — step 1: pick a reason (no consultee search yet). */
-export const AddNewStep1 = {
+/** Add a consultee (not tied to a constraint) — empty search. */
+export const AddConsultee = {
   render: () => renderDetailPage(null),
 };
 
-/** Adding a new consultation — step 1 with search results. */
-export const AddNewStep1WithSearch = {
+/** Add a consultee — search with results showing. */
+export const AddConsulteeWithSearch = {
   render: () =>
-    renderDetailPage(null, { searchQuery: "Eco", showSuggestions: true }),
-};
-
-/** Adding a new consultation — step 2: reason chosen, now assign a consultee. */
-export const AddNewStep2 = {
-  render: () => renderDetailPage(null, { reasonSelected: true }),
+    renderDetailPage(null, { searchQuery: "Hist", showSuggestions: true }),
 };
