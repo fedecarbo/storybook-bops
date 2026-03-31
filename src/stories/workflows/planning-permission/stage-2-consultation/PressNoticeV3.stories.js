@@ -1,11 +1,11 @@
 /**
  * Press Notice v3 — Multi-notice support with GDS Summary Cards.
  *
- * Builds on v2 (overview-first, single creation form, timeline) and adds:
+ * Builds on v2 (overview-first, single creation form) and adds:
  * - Overview shows multiple notices as GDS Summary Cards
  * - "Add another press notice" button
  * - Two variants to compare:
- *   - Variant A: Full detail on card (timeline, evidence inline)
+ *   - Variant A: Full detail on card (all rows including status + evidence)
  *   - Variant B: Compact card, click through to detail page
  */
 import { mockData, renderStatusTag } from "../../../helpers";
@@ -25,7 +25,7 @@ export default {
 // Data
 // ---------------------------------------------------------------------------
 
-const { pressNoticeV3: pnV3, pressNoticeReasons, application, people, dates } = mockData;
+const { pressNoticeV3: pnV3, pressNoticeReasons, dates } = mockData;
 
 function reasonLabel(key) {
   return pressNoticeReasons[key] || key;
@@ -36,31 +36,8 @@ function reasonsList(reasons) {
 }
 
 // ---------------------------------------------------------------------------
-// Shared helpers
+// Helpers
 // ---------------------------------------------------------------------------
-
-function renderEvidenceSection(notice) {
-  if (!notice.evidence) {
-    return `<p class="govuk-body-s govuk-!-margin-top-4" style="color: #505a5f;">No evidence uploaded yet.</p>`;
-  }
-
-  const publishedLine = notice.publishedAt
-    ? `<br>Published: ${notice.publishedAt}`
-    : "";
-  const commentLine = notice.comment
-    ? `<br>${notice.comment}`
-    : "";
-
-  return `
-    <div class="govuk-!-margin-top-4">
-      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Evidence</h3>
-      <div style="padding: 12px 16px; background: #f3f2f1; border-left: 4px solid #b1b4b6;">
-        <p class="govuk-body-s govuk-!-margin-bottom-0">
-          <strong>${notice.evidence.filename}</strong>${publishedLine}${commentLine}
-        </p>
-      </div>
-    </div>`;
-}
 
 function renderSummaryList(rows) {
   const items = rows
@@ -74,6 +51,16 @@ function renderSummaryList(rows) {
     .join("");
 
   return `<dl class="govuk-summary-list govuk-!-margin-bottom-0">${items}</dl>`;
+}
+
+function evidenceValue(notice) {
+  if (!notice.evidence) {
+    return `<a class="govuk-link" href="#">Upload evidence</a>`;
+  }
+  const lines = [notice.evidence.filename];
+  if (notice.publishedAt) lines.push(`Published: ${notice.publishedAt}`);
+  if (notice.comment) lines.push(notice.comment);
+  return lines.join("<br>");
 }
 
 function renderReasonCheckboxes(checkedReasons = [], showOtherTextarea = false) {
@@ -119,30 +106,14 @@ function renderReasonCheckboxes(checkedReasons = [], showOtherTextarea = false) 
 }
 
 // ---------------------------------------------------------------------------
-// Summary card helpers
+// Summary card renderers
 // ---------------------------------------------------------------------------
 
 function renderSummaryCardA(notice, index) {
-  const statusTag = renderStatusTag(notice.status);
-  const isActionable = notice.status === "requested";
-
-  const actions = isActionable
-    ? `<div class="govuk-!-margin-top-4">
-        <a href="#" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 govuk-!-margin-right-2" data-module="govuk-button">
-          Confirm publication
-        </a>
-        <a class="govuk-link" href="#">Send reminder</a>
-      </div>`
-    : "";
-
-  const commentRow = notice.comment
-    ? [{ key: "Comment", value: notice.comment }]
-    : [];
-
   return `
     <div class="govuk-summary-card">
       <div class="govuk-summary-card__title-wrapper">
-        <h2 class="govuk-summary-card__title">Press notice ${index + 1} ${statusTag}</h2>
+        <h2 class="govuk-summary-card__title">Press notice ${index + 1}</h2>
         <ul class="govuk-summary-card__actions">
           <li class="govuk-summary-card__action">
             <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> press notice ${index + 1}</span></a>
@@ -155,21 +126,18 @@ function renderSummaryCardA(notice, index) {
           { key: "Sent to", value: notice.notificationEmail },
           { key: "Requested", value: notice.requestedAt },
           ...(notice.publishedAt ? [{ key: "Published", value: notice.publishedAt }] : []),
-          ...commentRow,
+          { key: "Status", value: renderStatusTag(notice.status) },
+          { key: "Evidence", value: evidenceValue(notice) },
         ])}
-        ${renderEvidenceSection(notice)}
-        ${actions}
       </div>
     </div>`;
 }
 
 function renderSummaryCardB(notice, index) {
-  const statusTag = renderStatusTag(notice.status);
-
   return `
     <div class="govuk-summary-card">
       <div class="govuk-summary-card__title-wrapper">
-        <h2 class="govuk-summary-card__title">Press notice ${index + 1} ${statusTag}</h2>
+        <h2 class="govuk-summary-card__title">Press notice ${index + 1}</h2>
         <ul class="govuk-summary-card__actions">
           <li class="govuk-summary-card__action">
             <a class="govuk-link" href="#">View details<span class="govuk-visually-hidden"> for press notice ${index + 1}</span></a>
@@ -178,9 +146,9 @@ function renderSummaryCardB(notice, index) {
       </div>
       <div class="govuk-summary-card__content">
         ${renderSummaryList([
-          { key: "Reasons", value: reasonsList(notice.reasons) },
           { key: "Sent to", value: notice.notificationEmail },
-          { key: "Requested", value: notice.requestedAt },
+          { key: "Status", value: renderStatusTag(notice.status) },
+          { key: "Evidence", value: evidenceValue(notice) },
         ])}
       </div>
     </div>`;
@@ -215,38 +183,18 @@ function renderOverviewPage(notices, variant) {
 }
 
 function renderDetailPage(notice, index) {
-  const statusTag = renderStatusTag(notice.status);
-  const isActionable = notice.status === "requested";
-
-  const commentRow = notice.comment
-    ? [{ key: "Comment", value: notice.comment }]
-    : [];
-
-  const actions = isActionable
-    ? `
-      <div class="govuk-button-group">
-        <a href="#" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
-          Confirm publication
-        </a>
-        <a class="govuk-link" href="#">Send reminder email</a>
-      </div>`
-    : "";
-
   return `
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <a class="govuk-back-link" href="#">Back to all press notices</a>
 
-        <h1 class="govuk-heading-l">
-          Press notice ${index + 1}
-          <span class="govuk-!-margin-left-2">${statusTag}</span>
-        </h1>
+        <h1 class="govuk-heading-l">Press notice ${index + 1}</h1>
 
         <dl class="govuk-summary-list">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">Reasons</dt>
             <dd class="govuk-summary-list__value">${reasonsList(notice.reasons)}</dd>
-            <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Edit</a></dd>
+            <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Change</a></dd>
           </div>
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">Sent to</dt>
@@ -264,17 +212,19 @@ function renderDetailPage(notice, index) {
             <dd class="govuk-summary-list__value">${notice.publishedAt}</dd>
             <dd class="govuk-summary-list__actions"></dd>
           </div>` : ""}
-          ${notice.comment ? `
           <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Comment</dt>
-            <dd class="govuk-summary-list__value">${notice.comment}</dd>
+            <dt class="govuk-summary-list__key">Status</dt>
+            <dd class="govuk-summary-list__value">${renderStatusTag(notice.status)}</dd>
             <dd class="govuk-summary-list__actions"></dd>
-          </div>` : ""}
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Evidence</dt>
+            <dd class="govuk-summary-list__value">${evidenceValue(notice)}</dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
         </dl>
 
-        ${renderEvidenceSection(notice)}
-
-        ${actions}
+        <a class="govuk-link" href="#">Back to all press notices</a>
       </div>
     </div>`;
 }
@@ -377,7 +327,7 @@ export const DetailPageComplete_B = {
   render: () => renderDetailPage(pnV3.notices[0], 0),
 };
 
-/** Confirm publication — short form (same as v2). */
+/** Confirm publication — short dedicated form. */
 export const ConfirmPublication = {
   render: () => `
     <div class="govuk-grid-row">
@@ -432,7 +382,7 @@ export const ConfirmPublication = {
             Comment (optional)
           </label>
           <div class="govuk-hint">
-            E.g. which publication and page number.
+            For example, which publication and page number.
           </div>
           <textarea class="govuk-textarea" id="comment" name="comment" rows="3"></textarea>
         </div>

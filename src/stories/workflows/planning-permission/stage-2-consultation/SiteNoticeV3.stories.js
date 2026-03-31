@@ -1,11 +1,11 @@
 /**
  * Site Notice v3 — Multi-notice support with GDS Summary Cards.
  *
- * Builds on v2 (overview-first, single creation form, timeline) and adds:
+ * Builds on v2 (overview-first, single creation form) and adds:
  * - Overview shows multiple notices as GDS Summary Cards
  * - "Add another site notice" button
  * - Two variants to compare:
- *   - Variant A: Full detail on card (timeline, evidence inline)
+ *   - Variant A: Full detail on card (all rows including status + evidence)
  *   - Variant B: Compact card, click through to detail page
  */
 import { mockData, renderStatusTag } from "../../../helpers";
@@ -25,32 +25,11 @@ export default {
 // Data
 // ---------------------------------------------------------------------------
 
-const { siteNoticeV3: snV3, siteNoticeV2: sn, application, people, pressNoticeReasons } = mockData;
+const { siteNoticeV3: snV3, siteNoticeV2: sn, application, people } = mockData;
 
 // ---------------------------------------------------------------------------
-// Shared helpers (same as v2)
+// Helpers
 // ---------------------------------------------------------------------------
-
-function renderEvidenceSection(notice) {
-  if (!notice.evidence) {
-    return `<p class="govuk-body-s govuk-!-margin-top-4" style="color: #505a5f;">No evidence uploaded yet.</p>`;
-  }
-
-  const expiryLine = notice.expiryDate
-    ? `<br>Expires: ${notice.expiryDate}`
-    : "";
-
-  return `
-    <div class="govuk-!-margin-top-4">
-      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Evidence</h3>
-      <div style="padding: 12px 16px; background: #f3f2f1; border-left: 4px solid #b1b4b6;">
-        <p class="govuk-body-s govuk-!-margin-bottom-0">
-          <strong>${notice.evidence.filename}</strong><br>
-          Displayed: ${notice.displayedAt}${expiryLine}
-        </p>
-      </div>
-    </div>`;
-}
 
 function renderSummaryList(rows) {
   const items = rows
@@ -94,31 +73,31 @@ function renderDateInput(id, legend, hint) {
     </fieldset>`;
 }
 
+function evidenceValue(notice) {
+  if (!notice.evidence) {
+    return `<a class="govuk-link" href="#">Upload evidence</a>`;
+  }
+  const lines = [notice.evidence.filename];
+  if (notice.displayedAt) lines.push(`Displayed: ${notice.displayedAt}`);
+  if (notice.expiryDate) lines.push(`Expires: ${notice.expiryDate}`);
+  return lines.join("<br>");
+}
+
+function arrangedViaValue(notice) {
+  return notice.internalTeamEmail
+    ? `${notice.methodLabel} (${notice.internalTeamEmail})`
+    : notice.methodLabel;
+}
+
 // ---------------------------------------------------------------------------
-// Summary card helpers
+// Summary card renderers
 // ---------------------------------------------------------------------------
 
 function renderSummaryCardA(notice, index) {
-  const statusTag = renderStatusTag(notice.status);
-  const isActionable = notice.status === "sent";
-
-  const actions = isActionable
-    ? `<div class="govuk-!-margin-top-4">
-        <a href="#" role="button" draggable="false" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0 govuk-!-margin-right-2" data-module="govuk-button">
-          Upload evidence
-        </a>
-        <a class="govuk-link" href="#">Send reminder</a>
-      </div>`
-    : "";
-
-  const arrangedVia = notice.internalTeamEmail
-    ? `${notice.methodLabel} (${notice.internalTeamEmail})`
-    : notice.methodLabel;
-
   return `
     <div class="govuk-summary-card">
       <div class="govuk-summary-card__title-wrapper">
-        <h2 class="govuk-summary-card__title">Site notice ${index + 1} ${statusTag}</h2>
+        <h2 class="govuk-summary-card__title">Site notice ${index + 1}</h2>
         <ul class="govuk-summary-card__actions">
           <li class="govuk-summary-card__action">
             <a class="govuk-link" href="#">Edit<span class="govuk-visually-hidden"> site notice ${index + 1}</span></a>
@@ -129,27 +108,20 @@ function renderSummaryCardA(notice, index) {
         ${renderSummaryList([
           { key: "Notices", value: String(notice.quantity) },
           { key: "Locations", value: notice.locationInstructions },
-          { key: "Arranged via", value: arrangedVia },
-          { key: "Created", value: notice.createdAt },
+          { key: "Arranged via", value: arrangedViaValue(notice) },
           { key: "PDF", value: `<a class="govuk-link" href="${notice.pdfLink}">Download site notice</a>` },
+          { key: "Status", value: renderStatusTag(notice.status) },
+          { key: "Evidence", value: evidenceValue(notice) },
         ])}
-        ${renderEvidenceSection(notice)}
-        ${actions}
       </div>
     </div>`;
 }
 
 function renderSummaryCardB(notice, index) {
-  const statusTag = renderStatusTag(notice.status);
-
-  const arrangedVia = notice.internalTeamEmail
-    ? `${notice.methodLabel} (${notice.internalTeamEmail})`
-    : notice.methodLabel;
-
   return `
     <div class="govuk-summary-card">
       <div class="govuk-summary-card__title-wrapper">
-        <h2 class="govuk-summary-card__title">Site notice ${index + 1} ${statusTag}</h2>
+        <h2 class="govuk-summary-card__title">Site notice ${index + 1}</h2>
         <ul class="govuk-summary-card__actions">
           <li class="govuk-summary-card__action">
             <a class="govuk-link" href="#">View details<span class="govuk-visually-hidden"> for site notice ${index + 1}</span></a>
@@ -158,9 +130,9 @@ function renderSummaryCardB(notice, index) {
       </div>
       <div class="govuk-summary-card__content">
         ${renderSummaryList([
-          { key: "Notices", value: String(notice.quantity) },
-          { key: "Arranged via", value: arrangedVia },
-          { key: "Created", value: notice.createdAt },
+          { key: "Arranged via", value: arrangedViaValue(notice) },
+          { key: "Status", value: renderStatusTag(notice.status) },
+          { key: "Evidence", value: evidenceValue(notice) },
         ])}
       </div>
     </div>`;
@@ -195,52 +167,27 @@ function renderOverviewPage(notices, variant) {
 }
 
 function renderDetailPage(notice, index) {
-  const statusTag = renderStatusTag(notice.status);
-  const isActionable = notice.status === "sent";
-
-  const arrangedVia = notice.internalTeamEmail
-    ? `${notice.methodLabel} (${notice.internalTeamEmail})`
-    : notice.methodLabel;
-
-  const actions = isActionable
-    ? `
-      <div class="govuk-button-group">
-        <a href="#" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
-          Upload evidence
-        </a>
-        <a class="govuk-link" href="#">Send reminder email</a>
-      </div>`
-    : "";
-
   return `
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <a class="govuk-back-link" href="#">Back to all site notices</a>
 
-        <h1 class="govuk-heading-l">
-          Site notice ${index + 1}
-          <span class="govuk-!-margin-left-2">${statusTag}</span>
-        </h1>
+        <h1 class="govuk-heading-l">Site notice ${index + 1}</h1>
 
         <dl class="govuk-summary-list">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">Notices</dt>
             <dd class="govuk-summary-list__value">${notice.quantity}</dd>
-            <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Edit</a></dd>
+            <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Change</a></dd>
           </div>
           <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Display locations</dt>
+            <dt class="govuk-summary-list__key">Locations</dt>
             <dd class="govuk-summary-list__value">${notice.locationInstructions}</dd>
-            <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Edit</a></dd>
+            <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Change</a></dd>
           </div>
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">Arranged via</dt>
-            <dd class="govuk-summary-list__value">${arrangedVia}</dd>
-            <dd class="govuk-summary-list__actions"></dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Created</dt>
-            <dd class="govuk-summary-list__value">${notice.createdAt}</dd>
+            <dd class="govuk-summary-list__value">${arrangedViaValue(notice)}</dd>
             <dd class="govuk-summary-list__actions"></dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -248,11 +195,19 @@ function renderDetailPage(notice, index) {
             <dd class="govuk-summary-list__value"><a class="govuk-link" href="${notice.pdfLink}">Download site notice</a></dd>
             <dd class="govuk-summary-list__actions"></dd>
           </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Status</dt>
+            <dd class="govuk-summary-list__value">${renderStatusTag(notice.status)}</dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Evidence</dt>
+            <dd class="govuk-summary-list__value">${evidenceValue(notice)}</dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
         </dl>
 
-        ${renderEvidenceSection(notice)}
-
-        ${actions}
+        <a class="govuk-link" href="#">Back to all site notices</a>
       </div>
     </div>`;
 }
@@ -287,7 +242,7 @@ export const EmptyState = {
     </div>`,
 };
 
-/** Creation form — same as v2, single clean page. */
+/** Creation form — single clean page. */
 export const CreateForm = {
   render: () => `
     <div class="govuk-grid-row">
@@ -386,19 +341,19 @@ export const OverviewMultipleMixed_B = {
   render: () => renderOverviewPage(snV3.notices, "B"),
 };
 
-/** Variant B detail page — sent notice with timeline and actions. */
+/** Variant B detail page — sent notice. */
 export const DetailPageSent_B = {
   name: "Detail Page: Sent (B)",
   render: () => renderDetailPage(snV3.notices[1], 1),
 };
 
-/** Variant B detail page — completed notice with evidence in timeline. */
+/** Variant B detail page — completed notice with evidence. */
 export const DetailPageComplete_B = {
   name: "Detail Page: Complete (B)",
   render: () => renderDetailPage(snV3.notices[0], 0),
 };
 
-/** Upload evidence — short dedicated form (same as v2). */
+/** Upload evidence — short dedicated form. */
 export const UploadEvidence = {
   render: () => `
     <div class="govuk-grid-row">
@@ -416,7 +371,7 @@ export const UploadEvidence = {
             Upload a photo of the notice in place
           </label>
           <div class="govuk-hint">
-            Add any photos of the site notice being displayed.
+            Add any photos showing the site notice on display.
           </div>
           <input class="govuk-file-upload" id="evidence-upload" name="documents[]" type="file" multiple>
         </div>
