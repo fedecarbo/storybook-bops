@@ -51,6 +51,10 @@ export const statusColourMap = {
   cannot_start_yet: "grey",
   checked: "green",
   review_complete: "green",
+  sent: "light-blue",
+  requested: "light-blue",
+  awaiting_evidence: "yellow",
+  awaiting_publication: "yellow",
 };
 
 export const statusLabelMap = {
@@ -93,6 +97,10 @@ export const statusLabelMap = {
   cannot_start_yet: "Cannot start yet",
   checked: "Checked",
   review_complete: "Review complete",
+  sent: "Sent",
+  requested: "Requested",
+  awaiting_evidence: "Awaiting evidence",
+  awaiting_publication: "Awaiting publication",
 };
 
 // ---------------------------------------------------------------------------

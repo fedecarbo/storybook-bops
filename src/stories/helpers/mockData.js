@@ -1106,6 +1106,63 @@ export const mockData = {
     ],
   },
 
+  // ---------------------------------------------------------------------------
+  // V2 redesign — site notice & press notice
+  // ---------------------------------------------------------------------------
+
+  siteNoticeV2: {
+    quantity: 2,
+    locationInstructions:
+      "Display one notice on the lamppost outside 12 Elm Grove on Elm Grove road, and one on the fence panel facing the public footpath at the rear of the property.",
+    method: "internal_team", // "internal_team" | "applicant" | "print"
+    internalTeamEmail: "site.notices@southwark.gov.uk",
+    pdfLink: "#",
+    timeline: [
+      {
+        date: "27 Nov 2024",
+        label: "Site notice created and emailed to site.notices@southwark.gov.uk",
+        status: "complete",
+      },
+      {
+        date: "29 Nov 2024",
+        label: "Notice displayed — evidence uploaded",
+        status: "complete",
+        evidence: {
+          filename: "site-notice-photo-elm-grove.jpg",
+          displayedAt: "29 Nov 2024",
+        },
+      },
+      {
+        date: "20 Dec 2024",
+        label: "21-day display period ends",
+        status: "complete",
+      },
+    ],
+  },
+
+  pressNoticeV2: {
+    reasons: ["conservation_area", "listed_building"],
+    otherReason: "",
+    notificationEmail: "press.notices@southwark.gov.uk",
+    timeline: [
+      {
+        date: "26 Nov 2024",
+        label: "Press notice requested — email sent to press.notices@southwark.gov.uk",
+        status: "complete",
+      },
+      {
+        date: "2 Dec 2024",
+        label: "Published — evidence uploaded",
+        status: "complete",
+        evidence: {
+          filename: "press-notice-southwark-news.jpg",
+          publishedAt: "2 Dec 2024",
+          comment: "Published in Southwark News, page 12",
+        },
+      },
+    ],
+  },
+
   cancelledValidationRequests: [
     {
       id: 6,

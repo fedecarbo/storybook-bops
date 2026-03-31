@@ -1,0 +1,113 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as SiteNoticeV2Stories from "./SiteNoticeV2.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Site Notice v2/Journey" />
+
+# Site Notice v2 — Redesigned User Journey
+
+This documents the redesigned site notice workflow. Key differences from v1:
+
+- **Overview-first**: the landing page is the status page (or empty state), not a form
+- **One page to create**: a single, clean creation form — no multi-page wizard, no massive conditional reveals
+- **Single task, evolving status**: no separate "confirm" sub-task — one task that progresses through `Not started` → `Sent` → `Complete`
+- **Timeline view**: the overview shows a timeline of everything that's happened and what's pending
+
+---
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Officer lands on the site notice page</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list → Site notice
+
+The officer sees either the **empty state** (if no notice exists) or the **overview** (if one has been created). No form questions — just clear actions.
+
+The empty state offers two buttons: **Create site notice** or **Mark as not required**. No "Does this require a site notice?" yes/no radio — the choice is implicit in which button you press.
+
+<Canvas of={SiteNoticeV2Stories.EmptyState} />
+
+If "Mark as not required" is chosen, the task is done:
+
+<Canvas of={SiteNoticeV2Stories.NotRequired} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer creates the site notice</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Create site notice page
+
+A single, well-structured form with two sections:
+
+1. **Notice details** — how many notices and where to display them
+2. **Arrangement method** — three radios, each with a minimal conditional reveal (one field at most)
+
+The three methods:
+- **Email internal team** → shows an email input (pre-populated)
+- **Email applicant** → shows a confirmation line (no extra input needed)
+- **Print it myself** → shows a date input for when it will be displayed
+
+<Canvas of={SiteNoticeV2Stories.CreateForm} />
+
+With "Email applicant" selected:
+
+<Canvas of={SiteNoticeV2Stories.CreateFormApplicant} />
+
+With "Print it myself" selected:
+
+<Canvas of={SiteNoticeV2Stories.CreateFormPrint} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Overview page — track progress</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Site notice overview (the "home" for this task)
+
+After creation, the officer lands on the overview page. This is the page they always come back to. It shows:
+
+- A **summary list** of what was set up (with an Edit link)
+- A **timeline** showing what's happened and what's pending
+- **Actions**: upload evidence, send a reminder email
+
+<Canvas of={SiteNoticeV2Stories.OverviewSent} />
+
+If evidence hasn't arrived, the officer can send a reminder with a preview first:
+
+<Canvas of={SiteNoticeV2Stories.ReminderEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Upload evidence of display</h2>
+</div>
+
+**Who:** Case officer or internal team
+**Where:** Confirm site notice page
+
+A short, focused page with just two fields: the display date and a file upload for photo evidence.
+
+<Canvas of={SiteNoticeV2Stories.UploadEvidence} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task complete</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Site notice overview
+
+The overview updates to show the complete timeline with evidence inline. No separate "completed view" — it's the same page, just with a green `Complete` tag and the full timeline.
+
+<Canvas of={SiteNoticeV2Stories.OverviewComplete} />

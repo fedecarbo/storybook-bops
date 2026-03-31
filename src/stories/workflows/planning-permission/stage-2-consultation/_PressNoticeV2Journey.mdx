@@ -1,0 +1,95 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as PressNoticeV2Stories from "./PressNoticeV2.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Press Notice v2/Journey" />
+
+# Press Notice v2 — Redesigned User Journey
+
+This documents the redesigned press notice workflow. It follows the same pattern as the site notice v2 redesign:
+
+- **Overview-first**: the landing page is the status page (or empty state), not a form
+- **One page to create**: a single form with statutory reason checkboxes
+- **Single task, evolving status**: no separate "confirm" sub-task — one task that progresses through `Not started` → `Requested` → `Complete`
+- **Timeline view**: the overview shows a timeline of everything that's happened
+
+---
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Officer lands on the press notice page</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Consultation task list → Press notice
+
+The officer sees either the **empty state** (if no notice exists) or the **overview** (if one has been created). Two buttons: **Create press notice** or **Mark as not required**.
+
+<Canvas of={PressNoticeV2Stories.EmptyState} />
+
+If "Mark as not required" is chosen, the task is done:
+
+<Canvas of={PressNoticeV2Stories.NotRequired} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Officer creates the press notice</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Create press notice page
+
+A single form with the statutory reason checkboxes. The email recipient is shown as a confirmation — the officer doesn't need to enter it.
+
+<Canvas of={PressNoticeV2Stories.CreateForm} />
+
+With "Other" reason selected, showing the conditional textarea:
+
+<Canvas of={PressNoticeV2Stories.CreateFormOther} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Overview page — track progress</h2>
+</div>
+
+**Who:** Case officer
+**Where:** Press notice overview
+
+After creation, the officer lands on the overview. It shows the reasons, who was notified, a timeline, and actions (confirm publication or send a reminder).
+
+<Canvas of={PressNoticeV2Stories.OverviewRequested} />
+
+If confirmation hasn't arrived, the officer can send a reminder:
+
+<Canvas of={PressNoticeV2Stories.ReminderEmail} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Confirm publication</h2>
+</div>
+
+**Who:** Case officer or press team
+**Where:** Confirm press notice page
+
+A short page: publication date, evidence upload, and an optional comment (e.g. "Southwark News, page 12").
+
+<Canvas of={PressNoticeV2Stories.ConfirmPublication} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Task complete</h2>
+</div>
+
+**Who:** Case officer (reviewing)
+**Where:** Press notice overview
+
+The overview updates with the full timeline showing the publication evidence inline.
+
+<Canvas of={PressNoticeV2Stories.OverviewComplete} />
