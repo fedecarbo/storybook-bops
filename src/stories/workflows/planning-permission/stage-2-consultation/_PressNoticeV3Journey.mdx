@@ -1,0 +1,93 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as PressNoticeV3Stories from "./PressNoticeV3.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Press Notice v3/Journey" />
+
+# Press Notice v3 — Multi-notice Support
+
+v3 builds on v2's overview-first approach and adds support for **multiple press notices per application** using GDS Summary Cards. Same two layout variants as site notice v3.
+
+**What's new in v3:**
+- Overview page displays notices as **GDS Summary Cards**
+- **"Add another press notice"** button
+- **Variant A**: Full detail on each card (reasons, timeline, evidence inline)
+- **Variant B**: Compact cards with "View details" link to a detail page
+
+---
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Empty state</h2>
+</div>
+
+Clean landing page with two actions.
+
+<Canvas of={PressNoticeV3Stories.EmptyState} />
+
+If not required:
+
+<Canvas of={PressNoticeV3Stories.NotRequired} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Create a press notice</h2>
+</div>
+
+Single form with statutory reason checkboxes and confirmation of the email recipient.
+
+<Canvas of={PressNoticeV3Stories.CreateForm} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Overview — Variant A (full detail on card)</h2>
+</div>
+
+Each card shows reasons, timeline, evidence, and actions inline.
+
+**Single notice:**
+
+<Canvas of={PressNoticeV3Stories.OverviewSingleRequested_A} />
+
+**Multiple notices:**
+
+<Canvas of={PressNoticeV3Stories.OverviewMultipleMixed_A} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Overview — Variant B (compact cards + detail pages)</h2>
+</div>
+
+Compact cards with a click-through to detail pages.
+
+**Compact cards:**
+
+<Canvas of={PressNoticeV3Stories.OverviewSingleRequested_B} />
+
+<Canvas of={PressNoticeV3Stories.OverviewMultipleMixed_B} />
+
+**Detail pages:**
+
+Requested notice — with actions to confirm publication:
+
+<Canvas of={PressNoticeV3Stories.DetailPageRequested_B} />
+
+Completed notice — with full timeline and evidence:
+
+<Canvas of={PressNoticeV3Stories.DetailPageComplete_B} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Confirm publication</h2>
+</div>
+
+Short form: publication date, evidence upload, optional comment.
+
+<Canvas of={PressNoticeV3Stories.ConfirmPublication} />

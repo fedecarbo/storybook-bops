@@ -1,0 +1,93 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as SiteNoticeV3Stories from "./SiteNoticeV3.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Site Notice v3/Journey" />
+
+# Site Notice v3 — Multi-notice Support
+
+v3 builds on v2's overview-first approach and adds support for **multiple site notices per application** using GDS Summary Cards. Two layout variants are provided for comparison.
+
+**What's new in v3:**
+- Overview page displays notices as **GDS Summary Cards** (works for one or many)
+- **"Add another site notice"** button for creating additional notices
+- **Variant A**: Full detail on each card (timeline, evidence, actions inline)
+- **Variant B**: Compact cards with a "View details" link to a separate detail page
+
+---
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Empty state</h2>
+</div>
+
+Same as v2 — clean landing page with two actions. No form questions.
+
+<Canvas of={SiteNoticeV3Stories.EmptyState} />
+
+If not required:
+
+<Canvas of={SiteNoticeV3Stories.NotRequired} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Create a site notice</h2>
+</div>
+
+Same creation form as v2 — quantity, location, and delivery method on a single clean page.
+
+<Canvas of={SiteNoticeV3Stories.CreateForm} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Overview — Variant A (full detail on card)</h2>
+</div>
+
+Each notice is a summary card showing all details, timeline, and actions inline. Nothing hidden — everything at a glance.
+
+**Single notice:**
+
+<Canvas of={SiteNoticeV3Stories.OverviewSingleSent_A} />
+
+**Multiple notices (one complete, one awaiting evidence):**
+
+<Canvas of={SiteNoticeV3Stories.OverviewMultipleMixed_A} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Overview — Variant B (compact cards + detail pages)</h2>
+</div>
+
+Cards show a compact summary. Click "View details" to see the full timeline, evidence, and actions on a dedicated page.
+
+**Compact cards:**
+
+<Canvas of={SiteNoticeV3Stories.OverviewSingleSent_B} />
+
+<Canvas of={SiteNoticeV3Stories.OverviewMultipleMixed_B} />
+
+**Detail pages (reached by clicking "View details"):**
+
+Sent notice — with actions to upload evidence or send a reminder:
+
+<Canvas of={SiteNoticeV3Stories.DetailPageSent_B} />
+
+Completed notice — with full timeline and evidence:
+
+<Canvas of={SiteNoticeV3Stories.DetailPageComplete_B} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Upload evidence</h2>
+</div>
+
+Same focused form as v2 — display date and photo upload.
+
+<Canvas of={SiteNoticeV3Stories.UploadEvidence} />
