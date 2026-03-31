@@ -31,51 +31,23 @@ const { siteNoticeV3: snV3, siteNoticeV2: sn, application, people, pressNoticeRe
 // Shared helpers (same as v2)
 // ---------------------------------------------------------------------------
 
-function renderTimeline(events) {
-  const items = events
-    .map((event) => {
-      const isComplete = event.status === "complete";
-      const isPending = event.status === "pending";
+function renderEvidenceSection(notice) {
+  if (!notice.evidence) {
+    return `<p class="govuk-body-s govuk-!-margin-top-4" style="color: #505a5f;">No evidence uploaded yet.</p>`;
+  }
 
-      const icon = isComplete
-        ? `<span style="color: #00703c; font-weight: bold;">&#10003;</span>`
-        : isPending
-          ? `<span style="color: #b1b4b6;">&#9675;</span>`
-          : `<span style="color: #f47738;">&#9675;</span>`;
-
-      const dateCol = event.date
-        ? `<span class="govuk-body-s" style="color: #505a5f; min-width: 110px; display: inline-block;">${event.date}</span>`
-        : `<span class="govuk-body-s" style="color: #505a5f; min-width: 110px; display: inline-block; font-style: italic;">${event.status === "pending" ? "Pending" : "Awaiting"}</span>`;
-
-      const evidenceHtml = event.evidence
-        ? `
-        <div style="margin-top: 8px; padding: 12px 16px; background: #f3f2f1; border-left: 4px solid #b1b4b6;">
-          <p class="govuk-body-s govuk-!-margin-bottom-0">
-            <strong>${event.evidence.filename}</strong><br>
-            Displayed: ${event.evidence.displayedAt}
-          </p>
-        </div>`
-        : "";
-
-      return `
-        <div style="display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; ${!isComplete && !event.date ? "opacity: 0.7;" : ""}">
-          <span style="font-size: 18px; line-height: 1; flex-shrink: 0; width: 24px; text-align: center;">${icon}</span>
-          <div style="flex: 1;">
-            <div style="display: flex; gap: 12px; align-items: baseline;">
-              ${dateCol}
-              <span class="govuk-body-s govuk-!-margin-bottom-0">${event.label}</span>
-            </div>
-            ${evidenceHtml}
-          </div>
-        </div>`;
-    })
-    .join("");
+  const expiryLine = notice.expiryDate
+    ? `<br>Expires: ${notice.expiryDate}`
+    : "";
 
   return `
-    <div class="govuk-!-margin-top-4 govuk-!-margin-bottom-2">
-      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Timeline</h3>
-      <div style="border-left: 3px solid #b1b4b6; margin-left: 11px; padding-left: 0;">
-        ${items}
+    <div class="govuk-!-margin-top-4">
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Evidence</h3>
+      <div style="padding: 12px 16px; background: #f3f2f1; border-left: 4px solid #b1b4b6;">
+        <p class="govuk-body-s govuk-!-margin-bottom-0">
+          <strong>${notice.evidence.filename}</strong><br>
+          Displayed: ${notice.displayedAt}${expiryLine}
+        </p>
       </div>
     </div>`;
 }
@@ -158,9 +130,10 @@ function renderSummaryCardA(notice, index) {
           { key: "Notices", value: String(notice.quantity) },
           { key: "Locations", value: notice.locationInstructions },
           { key: "Arranged via", value: arrangedVia },
+          { key: "Created", value: notice.createdAt },
           { key: "PDF", value: `<a class="govuk-link" href="${notice.pdfLink}">Download site notice</a>` },
         ])}
-        ${renderTimeline(notice.timeline)}
+        ${renderEvidenceSection(notice)}
         ${actions}
       </div>
     </div>`;
@@ -185,9 +158,9 @@ function renderSummaryCardB(notice, index) {
       </div>
       <div class="govuk-summary-card__content">
         ${renderSummaryList([
+          { key: "Notices", value: String(notice.quantity) },
           { key: "Arranged via", value: arrangedVia },
           { key: "Created", value: notice.createdAt },
-          { key: "Notices", value: String(notice.quantity) },
         ])}
       </div>
     </div>`;
@@ -266,13 +239,18 @@ function renderDetailPage(notice, index) {
             <dd class="govuk-summary-list__actions"></dd>
           </div>
           <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">Created</dt>
+            <dd class="govuk-summary-list__value">${notice.createdAt}</dd>
+            <dd class="govuk-summary-list__actions"></dd>
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">PDF</dt>
             <dd class="govuk-summary-list__value"><a class="govuk-link" href="${notice.pdfLink}">Download site notice</a></dd>
             <dd class="govuk-summary-list__actions"></dd>
           </div>
         </dl>
 
-        ${renderTimeline(notice.timeline)}
+        ${renderEvidenceSection(notice)}
 
         ${actions}
       </div>

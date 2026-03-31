@@ -39,52 +39,25 @@ function reasonsList(reasons) {
 // Shared helpers
 // ---------------------------------------------------------------------------
 
-function renderTimeline(events) {
-  const items = events
-    .map((event) => {
-      const isComplete = event.status === "complete";
-      const isPending = event.status === "pending";
+function renderEvidenceSection(notice) {
+  if (!notice.evidence) {
+    return `<p class="govuk-body-s govuk-!-margin-top-4" style="color: #505a5f;">No evidence uploaded yet.</p>`;
+  }
 
-      const icon = isComplete
-        ? `<span style="color: #00703c; font-weight: bold;">&#10003;</span>`
-        : isPending
-          ? `<span style="color: #b1b4b6;">&#9675;</span>`
-          : `<span style="color: #f47738;">&#9675;</span>`;
-
-      const dateCol = event.date
-        ? `<span class="govuk-body-s" style="color: #505a5f; min-width: 110px; display: inline-block;">${event.date}</span>`
-        : `<span class="govuk-body-s" style="color: #505a5f; min-width: 110px; display: inline-block; font-style: italic;">${event.status === "pending" ? "Pending" : "Awaiting"}</span>`;
-
-      const evidenceHtml = event.evidence
-        ? `
-        <div style="margin-top: 8px; padding: 12px 16px; background: #f3f2f1; border-left: 4px solid #b1b4b6;">
-          <p class="govuk-body-s govuk-!-margin-bottom-0">
-            <strong>${event.evidence.filename}</strong>
-            ${event.evidence.publishedAt ? `<br>Published: ${event.evidence.publishedAt}` : ""}
-            ${event.evidence.comment ? `<br>${event.evidence.comment}` : ""}
-          </p>
-        </div>`
-        : "";
-
-      return `
-        <div style="display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; ${!isComplete && !event.date ? "opacity: 0.7;" : ""}">
-          <span style="font-size: 18px; line-height: 1; flex-shrink: 0; width: 24px; text-align: center;">${icon}</span>
-          <div style="flex: 1;">
-            <div style="display: flex; gap: 12px; align-items: baseline;">
-              ${dateCol}
-              <span class="govuk-body-s govuk-!-margin-bottom-0">${event.label}</span>
-            </div>
-            ${evidenceHtml}
-          </div>
-        </div>`;
-    })
-    .join("");
+  const publishedLine = notice.publishedAt
+    ? `<br>Published: ${notice.publishedAt}`
+    : "";
+  const commentLine = notice.comment
+    ? `<br>${notice.comment}`
+    : "";
 
   return `
-    <div class="govuk-!-margin-top-4 govuk-!-margin-bottom-2">
-      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Timeline</h3>
-      <div style="border-left: 3px solid #b1b4b6; margin-left: 11px; padding-left: 0;">
-        ${items}
+    <div class="govuk-!-margin-top-4">
+      <h3 class="govuk-heading-s govuk-!-margin-bottom-2">Evidence</h3>
+      <div style="padding: 12px 16px; background: #f3f2f1; border-left: 4px solid #b1b4b6;">
+        <p class="govuk-body-s govuk-!-margin-bottom-0">
+          <strong>${notice.evidence.filename}</strong>${publishedLine}${commentLine}
+        </p>
       </div>
     </div>`;
 }
@@ -184,7 +157,7 @@ function renderSummaryCardA(notice, index) {
           ...(notice.publishedAt ? [{ key: "Published", value: notice.publishedAt }] : []),
           ...commentRow,
         ])}
-        ${renderTimeline(notice.timeline)}
+        ${renderEvidenceSection(notice)}
         ${actions}
       </div>
     </div>`;
@@ -299,7 +272,7 @@ function renderDetailPage(notice, index) {
           </div>` : ""}
         </dl>
 
-        ${renderTimeline(notice.timeline)}
+        ${renderEvidenceSection(notice)}
 
         ${actions}
       </div>

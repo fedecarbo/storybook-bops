@@ -1502,27 +1502,6 @@ Yours
           filename: "site-notice-photo-elm-grove.jpg",
           uploadedAt: "30 Nov 2024",
         },
-        timeline: [
-          {
-            date: "27 Nov 2024",
-            label: "Created and emailed to site.notices@southwark.gov.uk",
-            status: "complete",
-          },
-          {
-            date: "29 Nov 2024",
-            label: "Notice displayed — evidence uploaded",
-            status: "complete",
-            evidence: {
-              filename: "site-notice-photo-elm-grove.jpg",
-              displayedAt: "29 Nov 2024",
-            },
-          },
-          {
-            date: "20 Dec 2024",
-            label: "21-day display period ends",
-            status: "complete",
-          },
-        ],
       },
       {
         id: 2,
@@ -1538,17 +1517,6 @@ Yours
         expiryDate: null,
         pdfLink: "#",
         evidence: null,
-        timeline: [
-          {
-            date: "5 Dec 2024",
-            label: "Created and emailed to applicant (james.morton@email.com)",
-            status: "complete",
-          },
-          {
-            label: "Evidence of display",
-            status: "pending",
-          },
-        ],
       },
     ],
   },
@@ -1571,23 +1539,6 @@ Yours
           filename: "press-notice-southwark-news.jpg",
           uploadedAt: "3 Dec 2024",
         },
-        timeline: [
-          {
-            date: "26 Nov 2024",
-            label: "Requested — email sent to press.notices@southwark.gov.uk",
-            status: "complete",
-          },
-          {
-            date: "2 Dec 2024",
-            label: "Published — evidence uploaded",
-            status: "complete",
-            evidence: {
-              filename: "press-notice-southwark-news.jpg",
-              publishedAt: "2 Dec 2024",
-              comment: "Published in Southwark News, page 12",
-            },
-          },
-        ],
       },
       {
         id: 2,
@@ -1599,17 +1550,6 @@ Yours
         publishedAt: null,
         comment: "",
         evidence: null,
-        timeline: [
-          {
-            date: "10 Dec 2024",
-            label: "Requested — email sent to press.notices@southwark.gov.uk",
-            status: "complete",
-          },
-          {
-            label: "Confirmation of publication",
-            status: "pending",
-          },
-        ],
       },
     ],
   },
