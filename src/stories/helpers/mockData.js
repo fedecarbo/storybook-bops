@@ -1555,6 +1555,82 @@ Yours
   },
 
   // ---------------------------------------------------------------------------
+  // Site Notice v4 — addresses workflow gaps from planning officer review
+  // ---------------------------------------------------------------------------
+  siteNoticeV4: {
+    notices: [
+      {
+        id: 1,
+        quantity: 2,
+        locationInstructions:
+          "Display one notice on the lamppost outside 12 Elm Grove on Elm Grove road, and one on the fence panel facing the public footpath at the rear of the property.",
+        method: "internal_team",
+        methodLabel: "Email to internal team",
+        internalTeamEmail: "site.notices@southwark.gov.uk",
+        status: "complete",
+        createdAt: "27 Nov 2024",
+        displayedAt: "29 Nov 2024",
+        expiryDate: "20 Dec 2024",
+        pdfLink: "#",
+        evidence: {
+          filename: "site-notice-photo-elm-grove.jpg",
+          uploadedAt: "30 Nov 2024",
+        },
+      },
+      {
+        id: 2,
+        quantity: 1,
+        locationInstructions:
+          "On the hoarding at the front of the construction site, visible from the main road.",
+        method: "applicant",
+        methodLabel: "Email to applicant",
+        internalTeamEmail: null,
+        status: "sent",
+        createdAt: "5 Dec 2024",
+        displayedAt: null,
+        expiryDate: null,
+        pdfLink: "#",
+        evidence: null,
+      },
+    ],
+    notRequiredReason: null,
+  },
+
+  // ---------------------------------------------------------------------------
+  // Press Notice v4 — addresses workflow gaps from planning officer review
+  // ---------------------------------------------------------------------------
+  pressNoticeV4: {
+    notices: [
+      {
+        id: 1,
+        reasons: ["conservation_area", "listed_building"],
+        otherReason: "",
+        notificationEmail: "press.notices@southwark.gov.uk",
+        status: "complete",
+        requestedAt: "26 Nov 2024",
+        publishedAt: "2 Dec 2024",
+        comment: "Published in Southwark News, page 12",
+        evidence: {
+          filename: "press-notice-southwark-news.jpg",
+          uploadedAt: "3 Dec 2024",
+        },
+      },
+      {
+        id: 2,
+        reasons: ["major_development"],
+        otherReason: "",
+        notificationEmail: "press.notices@southwark.gov.uk",
+        status: "requested",
+        requestedAt: "10 Dec 2024",
+        publishedAt: null,
+        comment: "",
+        evidence: null,
+      },
+    ],
+    notRequiredReason: null,
+  },
+
+  // ---------------------------------------------------------------------------
   // Consultation reasons — used by the redesigned Select Consultees (WIP) story.
   // Each "reason" is a constraint or custom justification for consulting someone.
   // ---------------------------------------------------------------------------

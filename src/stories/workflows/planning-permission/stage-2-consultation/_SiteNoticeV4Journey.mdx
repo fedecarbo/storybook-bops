@@ -1,0 +1,101 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as SiteNoticeV4Stories from "./SiteNoticeV4.stories";
+
+<Meta title="Workflows/Planning Permission/2. Consultation/Site Notice v4/Journey" />
+
+# Site Notice v4 — Workflow improvements
+
+v4 builds on v3's multi-notice summary cards and addresses gaps identified in a planning officer walkthrough. Key changes:
+
+- **Check your answers** page before sending (GDS best practice)
+- **Context-aware card actions** — pending cards show "Confirm displayed" as primary action
+- **Created date** shown on all cards for audit trail
+- **Send reminder** link for notices awaiting confirmation
+- **"Not required" captures a reason** for audit purposes
+- **Specific button text** throughout ("Confirm display", not "Save")
+- **Single variant** — full detail cards only (no A/B comparison)
+
+---
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Empty state</h2>
+</div>
+
+Clean landing page with two actions: create a notice or mark as not required.
+
+<Canvas of={SiteNoticeV4Stories.EmptyState} />
+
+If not required (now shows the captured reason):
+
+<Canvas of={SiteNoticeV4Stories.NotRequired} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Create a site notice</h2>
+</div>
+
+Single-page form with quantity, location, and delivery method. Button says "Continue" — takes you to check your answers before sending.
+
+<Canvas of={SiteNoticeV4Stories.CreateForm} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Check your answers</h2>
+</div>
+
+GDS "check your answers" pattern — review all entered values with "Change" links before confirming. Inset text makes clear what will happen (email sent).
+
+<Canvas of={SiteNoticeV4Stories.CheckAnswers} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
+  <h2 style={{ margin: 0 }}>Overview — pending notice</h2>
+</div>
+
+After creation, the overview shows the notice as a summary card. The card action says "Confirm displayed" — guiding the officer to their next task. "Send reminder" link available for pending notices.
+
+<Canvas of={SiteNoticeV4Stories.OverviewSingleSent} />
+
+**Multiple notices (one complete, one pending):**
+
+<Canvas of={SiteNoticeV4Stories.OverviewMultipleMixed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <h2 style={{ margin: 0 }}>Confirm displayed</h2>
+</div>
+
+Focused form to confirm the notice has been put up — display date and photo evidence. Button says "Confirm display" (not generic "Save").
+
+<Canvas of={SiteNoticeV4Stories.ConfirmDisplayed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <h2 style={{ margin: 0 }}>Overview — all complete</h2>
+</div>
+
+Once all notices are confirmed as displayed, overall status changes to "Complete". Evidence details shown inline.
+
+<Canvas of={SiteNoticeV4Stories.OverviewComplete} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>7</div>
+  <h2 style={{ margin: 0 }}>Mark as not required</h2>
+</div>
+
+New in v4 — captures a reason for the decision (audit trail).
+
+<Canvas of={SiteNoticeV4Stories.MarkNotRequired} />
