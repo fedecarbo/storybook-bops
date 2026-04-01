@@ -40,4 +40,52 @@
     font-size: 19px !important;
     line-height: 1.5 !important;
   }
+
+  /* Cap docs prose at two-thirds width (matching GOV.UK reading width) */
+  .sbdocs-content h1,
+  .sbdocs-content h2,
+  .sbdocs-content h3,
+  .sbdocs-content h4,
+  .sbdocs-content p,
+  .sbdocs-content ul,
+  .sbdocs-content ol {
+    max-width: 720px !important;
+  }
+
+  /* But let preview containers use full width */
+  .sbdocs-preview,
+  .sbdocs-preview * {
+    max-width: none !important;
+  }
+
+  /* Story step headings — no border, no underline, badge aligned to top */
+  .sbdocs-content h2 {
+    border-bottom: none !important;
+  }
+
+  .sbdocs-content h2 a {
+    text-decoration: none !important;
+  }
+
+  /* Force step heading flex container to align badge to top */
+  .sbdocs-content div:has(> h2) {
+    align-items: flex-start !important;
+  }
+
+  /* Size the circle badge to match heading first line */
+  .sbdocs-content div:has(> h2) > div:first-child {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    font-size: 14px !important;
+    margin-top: 5px !important;
+  }
+
+  /* GDS-style preview containers — simple border, no shadow */
+  .sbdocs-preview {
+    border: 1px solid #b1b4b6 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 30px !important;
+  }
 </style>
