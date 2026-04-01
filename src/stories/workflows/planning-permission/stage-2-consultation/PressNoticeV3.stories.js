@@ -169,6 +169,8 @@ function renderOverviewPage(notices, variant) {
           <span class="govuk-!-margin-left-2">${renderStatusTag(overallStatus)}</span>
         </h1>
 
+        <p class="govuk-body">Check the status of each press notice and confirm publication once they appear in print.</p>
+
         ${cards}
 
         <div class="govuk-button-group govuk-!-margin-top-4">
@@ -189,6 +191,8 @@ function renderDetailPage(notice, index) {
         <a class="govuk-back-link" href="#">Back to all press notices</a>
 
         <h1 class="govuk-heading-l">Press notice ${index + 1}</h1>
+
+        <p class="govuk-body">Review the details for this press notice. Use the change links to update any information.</p>
 
         <dl class="govuk-summary-list">
           <div class="govuk-summary-list__row">
@@ -243,7 +247,7 @@ export const EmptyState = {
           <span class="govuk-!-margin-left-2">${renderStatusTag("not_started")}</span>
         </h1>
 
-        <p class="govuk-body">No press notices have been created for this application.</p>
+        <p class="govuk-body">You must publish a press notice if the application meets any of the statutory requirements. Create a press notice or mark this step as not required.</p>
 
         <div class="govuk-button-group govuk-!-margin-top-6">
           <a href="#" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
@@ -267,6 +271,8 @@ export const CreateForm = {
         <a class="govuk-back-link" href="#">Back to all press notices</a>
 
         <h1 class="govuk-heading-l">Create press notice</h1>
+
+        <p class="govuk-body">Select the statutory reasons for this press notice. A request for publication will be sent by email.</p>
 
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
@@ -335,6 +341,8 @@ export const ConfirmPublication = {
         <a class="govuk-back-link" href="#">Back to press notice</a>
 
         <h1 class="govuk-heading-l">Confirm press notice publication</h1>
+
+        <p class="govuk-body">Enter the date the notice was published and upload evidence of the publication.</p>
 
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset" role="group">

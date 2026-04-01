@@ -153,6 +153,8 @@ function renderOverviewPage(notices, variant) {
           <span class="govuk-!-margin-left-2">${renderStatusTag(overallStatus)}</span>
         </h1>
 
+        <p class="govuk-body">Check the status of each site notice and upload evidence once they are displayed.</p>
+
         ${cards}
 
         <div class="govuk-button-group govuk-!-margin-top-4">
@@ -173,6 +175,8 @@ function renderDetailPage(notice, index) {
         <a class="govuk-back-link" href="#">Back to all site notices</a>
 
         <h1 class="govuk-heading-l">Site notice ${index + 1}</h1>
+
+        <p class="govuk-body">Review the details for this site notice. Use the change links to update any information.</p>
 
         <dl class="govuk-summary-list">
           <div class="govuk-summary-list__row">
@@ -226,7 +230,7 @@ export const EmptyState = {
           <span class="govuk-!-margin-left-2">${renderStatusTag("not_started")}</span>
         </h1>
 
-        <p class="govuk-body">No site notices have been created for this application.</p>
+        <p class="govuk-body">You must display a site notice near the application site to let the public know about the planning application. Create a site notice or mark this step as not required.</p>
 
         <div class="govuk-button-group govuk-!-margin-top-6">
           <a href="#" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
@@ -250,6 +254,8 @@ export const CreateForm = {
         <a class="govuk-back-link" href="#">Back to all site notices</a>
 
         <h1 class="govuk-heading-l">Create site notice</h1>
+
+        <p class="govuk-body">Enter the details for the site notice and choose how it will be arranged.</p>
 
         <h2 class="govuk-heading-m">Notice details</h2>
 
@@ -361,6 +367,8 @@ export const UploadEvidence = {
         <a class="govuk-back-link" href="#">Back to site notice</a>
 
         <h1 class="govuk-heading-l">Confirm site notice is displayed</h1>
+
+        <p class="govuk-body">Enter the date the notice was displayed and upload a photo as evidence.</p>
 
         <div class="govuk-form-group">
           ${renderDateInput("displayed-at", "When was the site notice displayed?", null)}
