@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as ConfirmCILStories from "./ConfirmCIL.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Confirm CIL/Journey" />
@@ -21,15 +22,15 @@ The case officer opens the task from the validation task list. They see informat
 
 Below this, a Yes/No radio question asks the officer to confirm CIL liability. If PlanX recommends "liable", the Yes option includes a **(recommended based on submission data)** label.
 
-<Canvas of={ConfirmCILStories.InitialView} />
+<GdsCanvas of={ConfirmCILStories.InitialView} />
 
 If PlanX recommends the application is exempt, the "No" option gets the recommended label instead.
 
-<Canvas of={ConfirmCILStories.RecommendedExempt} />
+<GdsCanvas of={ConfirmCILStories.RecommendedExempt} />
 
 If no PlanX data is available (e.g. the application was submitted outside PlanX), a fallback message is shown and the officer must make the determination without a recommendation.
 
-<Canvas of={ConfirmCILStories.NoPlanxData} />
+<GdsCanvas of={ConfirmCILStories.NoPlanxData} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -43,13 +44,13 @@ If no PlanX data is available (e.g. the application was submitted outside PlanX)
 
 The officer selects "Yes" if the application is liable for CIL, or "No" if it is not. They can agree with or override the PlanX recommendation.
 
-<Canvas of={ConfirmCILStories.SelectedYes} />
+<GdsCanvas of={ConfirmCILStories.SelectedYes} />
 
-<Canvas of={ConfirmCILStories.SelectedNo} />
+<GdsCanvas of={ConfirmCILStories.SelectedNo} />
 
 If the officer tries to save without selecting an option, a validation error is shown.
 
-<Canvas of={ConfirmCILStories.WithErrors} />
+<GdsCanvas of={ConfirmCILStories.WithErrors} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -63,4 +64,4 @@ If the officer tries to save without selecting an option, a validation error is 
 
 After saving, the page shows a summary of the CIL liability decision. The officer can click "Edit" to return to the form and change their selection.
 
-<Canvas of={ConfirmCILStories.Completed} />
+<GdsCanvas of={ConfirmCILStories.Completed} />

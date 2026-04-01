@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SidebarStories from "./SidebarNavigation.stories";
 
 <Meta title="Patterns/Sidebar Navigation/Documentation" />
@@ -9,7 +10,7 @@ A persistent sidebar that shows all tasks in a workflow alongside the current ta
 
 This pattern replaces the [GOV.UK task list pages pattern](https://design-system.service.gov.uk/patterns/complete-multiple-tasks/) in back-office workflows where officers need to work non-linearly and maintain an overview of the full case.
 
-<Canvas of={SidebarStories.MixedProgress} />
+<GdsCanvas of={SidebarStories.MixedProgress} />
 
 <hr />
 
@@ -63,31 +64,31 @@ Each task in the sidebar shows a circular status icon to the left of the task na
 
 When an officer first opens a case, every task shows the "not started" status. This is the starting point for a new application.
 
-<Canvas of={SidebarStories.AllNotStarted} />
+<GdsCanvas of={SidebarStories.AllNotStarted} />
 
 ### Mixed progress
 
 The most common state during active casework. Some tasks are complete, one is in progress (the current task), and others are waiting. Tasks that depend on earlier work show "cannot start yet".
 
-<Canvas of={SidebarStories.MixedProgress} />
+<GdsCanvas of={SidebarStories.MixedProgress} />
 
 ### Action required
 
 When the system needs the officer's attention — for example, an applicant has responded to a document request — the relevant task shows a yellow "action required" icon. This draws the officer's eye to tasks that need intervention.
 
-<Canvas of={SidebarStories.WithActionRequired} />
+<GdsCanvas of={SidebarStories.WithActionRequired} />
 
 ### Tasks that cannot start yet
 
 Some tasks depend on others being completed first. For example, "Send validation decision" cannot start until all other validation tasks are complete. These tasks show a locked icon and are not clickable.
 
-<Canvas of={SidebarStories.WithCannotStartYet} />
+<GdsCanvas of={SidebarStories.WithCannotStartYet} />
 
 ### All tasks complete
 
 When every task shows a blue tick, the case is ready to move to the next stage.
 
-<Canvas of={SidebarStories.AllComplete} />
+<GdsCanvas of={SidebarStories.AllComplete} />
 
 ### Active task highlighting
 
@@ -105,7 +106,7 @@ On screens narrower than 768px, the sidebar collapses into a horizontal bar abov
 
 ## How it differs from the GOV.UK task list
 
-<Canvas of={SidebarStories.ComparisonWithTaskList} />
+<GdsCanvas of={SidebarStories.ComparisonWithTaskList} />
 
 | Aspect | GOV.UK task list | BOPS sidebar |
 |--------|-----------------|--------------|

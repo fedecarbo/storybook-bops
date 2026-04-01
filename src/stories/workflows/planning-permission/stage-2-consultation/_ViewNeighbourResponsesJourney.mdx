@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as ViewNeighbourResponsesStories from "./ViewNeighbourResponses.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/View Neighbour Responses/Journey" />
@@ -25,7 +26,7 @@ The page shows:
 - A message: "No neighbour responses yet"
 - A link to manually add a new response
 
-<Canvas of={ViewNeighbourResponsesStories.NoResponsesYet} />
+<GdsCanvas of={ViewNeighbourResponsesStories.NoResponsesYet} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -46,7 +47,7 @@ As responses come in, they appear in an accordion grouped by type:
 
 Each response displays the respondent's name, email, address, date received, a truncated preview of the comment text, and any concern tags (light, privacy, noise, design, etc.).
 
-<Canvas of={ViewNeighbourResponsesStories.ResponsesComingIn} />
+<GdsCanvas of={ViewNeighbourResponsesStories.ResponsesComingIn} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -69,7 +70,7 @@ When a comment is received by post or email (not through the online portal), the
 7. **Redacted response** — the version to be published (with personal data removed)
 8. **Documents** — any attached letters or evidence from the respondent
 
-<Canvas of={ViewNeighbourResponsesStories.AddNewResponse} />
+<GdsCanvas of={ViewNeighbourResponsesStories.AddNewResponse} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -88,7 +89,7 @@ The case officer can see:
 - Attached documents with thumbnails and tags
 - Links to "Redact and publish" or "Edit" the response
 
-<Canvas of={ViewNeighbourResponsesStories.ResponseDetail} />
+<GdsCanvas of={ViewNeighbourResponsesStories.ResponseDetail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -111,7 +112,7 @@ Before a neighbour response can be published on the planning register, the case 
 
 Once saved, the response on the main page shows "Redacted by: [officer name]" next to the "Redact and publish" link.
 
-<Canvas of={ViewNeighbourResponsesStories.RedactAndPublish} />
+<GdsCanvas of={ViewNeighbourResponsesStories.RedactAndPublish} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -131,4 +132,4 @@ Once the consultation period has ended and all responses have been reviewed, red
 
 The consultation task list will show a green "Complete" tag against "View neighbour responses".
 
-<Canvas of={ViewNeighbourResponsesStories.Completed} />
+<GdsCanvas of={ViewNeighbourResponsesStories.Completed} />

@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SiteNoticeV4Stories from "./SiteNoticeV4.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Site Notice v4/Journey" />
@@ -24,11 +25,11 @@ v4 builds on v3's multi-notice summary cards and addresses gaps identified in a 
 
 Clean landing page with two actions: create a notice or mark as not required.
 
-<Canvas of={SiteNoticeV4Stories.EmptyState} />
+<GdsCanvas of={SiteNoticeV4Stories.EmptyState} />
 
 If not required (now shows the captured reason):
 
-<Canvas of={SiteNoticeV4Stories.NotRequired} />
+<GdsCanvas of={SiteNoticeV4Stories.NotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -39,7 +40,7 @@ If not required (now shows the captured reason):
 
 Single-page form with quantity, location, and delivery method. Button says "Continue" — takes you to check your answers before sending.
 
-<Canvas of={SiteNoticeV4Stories.CreateForm} />
+<GdsCanvas of={SiteNoticeV4Stories.CreateForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -50,7 +51,7 @@ Single-page form with quantity, location, and delivery method. Button says "Cont
 
 GDS "check your answers" pattern — review all entered values with "Change" links before confirming. Inset text makes clear what will happen (email sent).
 
-<Canvas of={SiteNoticeV4Stories.CheckAnswers} />
+<GdsCanvas of={SiteNoticeV4Stories.CheckAnswers} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -61,11 +62,11 @@ GDS "check your answers" pattern — review all entered values with "Change" lin
 
 After creation, the overview shows the notice as a summary card. The card action says "Confirm displayed" — guiding the officer to their next task. "Send reminder" link available for pending notices.
 
-<Canvas of={SiteNoticeV4Stories.OverviewSingleSent} />
+<GdsCanvas of={SiteNoticeV4Stories.OverviewSingleSent} />
 
 **Multiple notices (one complete, one pending):**
 
-<Canvas of={SiteNoticeV4Stories.OverviewMultipleMixed} />
+<GdsCanvas of={SiteNoticeV4Stories.OverviewMultipleMixed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -76,7 +77,7 @@ After creation, the overview shows the notice as a summary card. The card action
 
 Focused form to confirm the notice has been put up — display date and photo evidence. Button says "Confirm display" (not generic "Save").
 
-<Canvas of={SiteNoticeV4Stories.ConfirmDisplayed} />
+<GdsCanvas of={SiteNoticeV4Stories.ConfirmDisplayed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -87,7 +88,7 @@ Focused form to confirm the notice has been put up — display date and photo ev
 
 Once all notices are confirmed as displayed, overall status changes to "Complete". Evidence details shown inline.
 
-<Canvas of={SiteNoticeV4Stories.OverviewComplete} />
+<GdsCanvas of={SiteNoticeV4Stories.OverviewComplete} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -98,4 +99,4 @@ Once all notices are confirmed as displayed, overall status changes to "Complete
 
 New in v4 — captures a reason for the decision (audit trail).
 
-<Canvas of={SiteNoticeV4Stories.MarkNotRequired} />
+<GdsCanvas of={SiteNoticeV4Stories.MarkNotRequired} />

@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as ReviewDocumentStories from "./ReviewDocuments.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Review Documents/Journey" />
@@ -21,11 +22,11 @@ The case officer opens the "Review documents" task from the validation task list
 
 Each document starts as "Not started". The officer works through them one by one by clicking the document name.
 
-<Canvas of={ReviewDocumentStories.DocumentList} />
+<GdsCanvas of={ReviewDocumentStories.DocumentList} />
 
 If no documents have been submitted (rare, but possible), the page shows an empty state:
 
-<Canvas of={ReviewDocumentStories.EmptyDocumentList} />
+<GdsCanvas of={ReviewDocumentStories.EmptyDocumentList} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -44,7 +45,7 @@ Clicking a document opens the edit view. The officer sees:
 
 When a document has no tags yet, the tag section shows "No tags added" with a collapsed "Edit tags" details panel:
 
-<Canvas of={ReviewDocumentStories.EditingDocumentNoTags} />
+<GdsCanvas of={ReviewDocumentStories.EditingDocumentNoTags} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -66,7 +67,7 @@ They also:
 
 Here is a fully completed document with tags expanded, all radios selected, and the document marked as valid:
 
-<Canvas of={ReviewDocumentStories.EditingDocumentWithTags} />
+<GdsCanvas of={ReviewDocumentStories.EditingDocumentWithTags} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -80,7 +81,7 @@ Here is a fully completed document with tags expanded, all radios selected, and 
 
 If the officer selects "No" for "Is the document valid?", a textarea appears asking them to list all issues with the document in plain English. This message will be shown to the applicant as part of any validation request.
 
-<Canvas of={ReviewDocumentStories.EditingDocumentInvalid} />
+<GdsCanvas of={ReviewDocumentStories.EditingDocumentInvalid} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -96,7 +97,7 @@ After saving each document, the officer returns to the list. Documents they have
 
 Here the officer has reviewed 3 of 8 documents:
 
-<Canvas of={ReviewDocumentStories.SomeDocumentsChecked} />
+<GdsCanvas of={ReviewDocumentStories.SomeDocumentsChecked} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -110,4 +111,4 @@ Here the officer has reviewed 3 of 8 documents:
 
 Once every document has been checked and tagged, all rows show a green "Checked" status. The task can now be marked as complete in the validation task list, and the officer moves on to the next validation task.
 
-<Canvas of={ReviewDocumentStories.AllDocumentsChecked} />
+<GdsCanvas of={ReviewDocumentStories.AllDocumentsChecked} />

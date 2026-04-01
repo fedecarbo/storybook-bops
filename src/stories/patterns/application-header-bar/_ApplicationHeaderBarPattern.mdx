@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as HeaderBarStories from "./ApplicationHeaderBar.stories";
 
 <Meta title="Patterns/Application Header Bar/Documentation" />
@@ -7,7 +8,7 @@ import * as HeaderBarStories from "./ApplicationHeaderBar.stories";
 
 A persistent context bar shown below the GOV.UK header on every planning application page. It gives case officers instant access to the key application facts — reference, address, and proposal description — without that information taking up space inside the task form.
 
-<Canvas of={HeaderBarStories.Default} />
+<GdsCanvas of={HeaderBarStories.Default} />
 
 <hr />
 
@@ -57,25 +58,25 @@ The bar is divided into three horizontal zones:
 
 This is the state officers see on first load. The proposal description is hidden; the bar shows only the reference, address, toggle button, and link.
 
-<Canvas of={HeaderBarStories.Default} />
+<GdsCanvas of={HeaderBarStories.Default} />
 
 ### Description expanded
 
 When an officer clicks "Show proposal description", a panel drops below the bar with the full proposal text. This is rendered as a separate story since the Stimulus.js toggle controller is not active in Storybook.
 
-<Canvas of={HeaderBarStories.DescriptionExpanded} />
+<GdsCanvas of={HeaderBarStories.DescriptionExpanded} />
 
 ### Without application information link
 
 In some contexts the application information link is suppressed — for example, when the officer is already viewing the application information page. The right zone is empty and the bar remains functional.
 
-<Canvas of={HeaderBarStories.WithoutApplicationInfoLink} />
+<GdsCanvas of={HeaderBarStories.WithoutApplicationInfoLink} />
 
 ### In context
 
 The bar sits directly below the black GOV.UK header, forming a two-tier header stack above the task content. Both tiers are sticky — they remain pinned at the top of the viewport as the officer scrolls through long task forms.
 
-<Canvas of={HeaderBarStories.InContext} />
+<GdsCanvas of={HeaderBarStories.InContext} />
 
 ### Sticky behaviour
 

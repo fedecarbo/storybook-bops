@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SendValidationDecisionStories from "./SendValidationDecision.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Send Validation Decision/Journey" />
@@ -21,7 +22,7 @@ The case officer arrives here after all other validation tasks are complete. The
 
 All validation tasks are complete and correct. The case officer opens "Send validation decision" from the sidebar. They see a message confirming the application has not yet been marked as valid or invalid, a radio asking whether to publish on the BOPS Public Portal, and a green button to validate.
 
-<Canvas of={SendValidationDecisionStories.ReadyToValidate} />
+<GdsCanvas of={SendValidationDecisionStories.ReadyToValidate} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -39,19 +40,19 @@ If all checks passed and there are no outstanding issues, the officer clicks **"
 3. Moves the application status to "In assessment"
 4. Shows a success confirmation
 
-<Canvas of={SendValidationDecisionStories.SuccessConfirmation} />
+<GdsCanvas of={SendValidationDecisionStories.SuccessConfirmation} />
 
 The applicant/agent receives an email confirming the application is valid and providing a target decision date:
 
-<Canvas of={SendValidationDecisionStories.ValidationEmail} />
+<GdsCanvas of={SendValidationDecisionStories.ValidationEmail} />
 
 The page now shows a read-only confirmed state with a link to view the formal validation notice:
 
-<Canvas of={SendValidationDecisionStories.Validated} />
+<GdsCanvas of={SendValidationDecisionStories.Validated} />
 
 Clicking "View notification" shows the formal validation notice — a letter-format document with legislation reference, appeal rights, and signatory details:
 
-<Canvas of={SendValidationDecisionStories.ValidationNotice} />
+<GdsCanvas of={SendValidationDecisionStories.ValidationNotice} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -67,7 +68,7 @@ If the officer has flagged issues during earlier validation tasks (e.g. requeste
 
 The only available action is to **invalidate** — this sends all pending requests to the applicant in one batch notification.
 
-<Canvas of={SendValidationDecisionStories.CannotValidate} />
+<GdsCanvas of={SendValidationDecisionStories.CannotValidate} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -81,7 +82,7 @@ The only available action is to **invalidate** — this sends all pending reques
 
 When the officer clicks "Mark the application as invalid", the system sends an email to the applicant/agent. The email explains that more information is needed and provides a **secure link** to view and respond to all validation requests. The applicant has **15 business days** to respond before the application may be closed with a refund.
 
-<Canvas of={SendValidationDecisionStories.InvalidationEmail} />
+<GdsCanvas of={SendValidationDecisionStories.InvalidationEmail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -97,7 +98,7 @@ While the applicant is responding to the requests, the page shows the invalidate
 
 There is no action button in this state — the officer must wait for the applicant to respond.
 
-<Canvas of={SendValidationDecisionStories.Invalidated} />
+<GdsCanvas of={SendValidationDecisionStories.Invalidated} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -113,7 +114,7 @@ Once the applicant has responded to all validation requests (or any remaining re
 
 Note: the "valid from" date is now the **next business day after the last request was closed**, not the original received date.
 
-<Canvas of={SendValidationDecisionStories.InvalidatedRequestsResolved} />
+<GdsCanvas of={SendValidationDecisionStories.InvalidatedRequestsResolved} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -129,4 +130,4 @@ The application is now validated. The applicant receives a validation email (see
 
 The validation decision page becomes read-only, showing the confirmation and a link to view the formal notice.
 
-<Canvas of={SendValidationDecisionStories.Validated} />
+<GdsCanvas of={SendValidationDecisionStories.Validated} />

@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SelectConsulteesWIPStories from "./SelectConsulteesWIP.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Select Consultees (WIP)/Journey" />
@@ -23,7 +24,7 @@ The system has automatically identified planning constraints and created a **Sum
 
 At the bottom, an "Add a reason for consultation" button allows the officer to create cards for non-constraint reasons.
 
-<Canvas of={SelectConsulteesWIPStories.InitialView} />
+<GdsCanvas of={SelectConsulteesWIPStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -39,7 +40,7 @@ If a constraint does not need consultation for this application, the officer cli
 
 In this example, "Article 4 direction" and "Archaeological priority area" have been marked as not required.
 
-<Canvas of={SelectConsulteesWIPStories.ReasonMarkedNotRequired} />
+<GdsCanvas of={SelectConsulteesWIPStories.ReasonMarkedNotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -53,7 +54,7 @@ In this example, "Article 4 direction" and "Archaeological priority area" have b
 
 If the officer needs to consult someone for a reason not covered by constraints (e.g. an ecology concern from the submitted documents), they click "Add a reason for consultation". An inline form appears with autocomplete search for constraint types, or they can enter a custom reason.
 
-<Canvas of={SelectConsulteesWIPStories.AddReasonExpanded} />
+<GdsCanvas of={SelectConsulteesWIPStories.AddReasonExpanded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -67,7 +68,7 @@ If the officer needs to consult someone for a reason not covered by constraints 
 
 The officer clicks "Assign consultee" within a card. After selecting from the autocomplete search, the consultee appears inside the card as a Summary List with two rows: their name (with "Change | Remove" actions) and type (Internal/External tag). An "Add another consultee" link below allows assigning additional consultees to the same reason. A success banner confirms the assignment.
 
-<Canvas of={SelectConsulteesWIPStories.ConsulteeAssigned} />
+<GdsCanvas of={SelectConsulteesWIPStories.ConsulteeAssigned} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -81,7 +82,7 @@ The officer clicks "Assign consultee" within a card. After selecting from the au
 
 Every card now has at least one consultee assigned. The officer reviews the full picture and clicks **Save and continue** to confirm.
 
-<Canvas of={SelectConsulteesWIPStories.AllAssigned} />
+<GdsCanvas of={SelectConsulteesWIPStories.AllAssigned} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -95,4 +96,4 @@ Every card now has at least one consultee assigned. The officer reviews the full
 
 After saving, the task status changes to **Complete** (green tag). All cards become read-only with no action links. The next step in the workflow is **Email consultees**.
 
-<Canvas of={SelectConsulteesWIPStories.Completed} />
+<GdsCanvas of={SelectConsulteesWIPStories.Completed} />

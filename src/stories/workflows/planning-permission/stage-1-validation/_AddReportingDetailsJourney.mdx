@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as AddReportingDetailsStories from "./AddReportingDetails.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Add Reporting Details/Journey" />
@@ -23,7 +24,7 @@ Each type may include guidance text explaining what it covers, a link to further
 
 Below the reporting type selection, there is a question about local authority land ownership.
 
-<Canvas of={AddReportingDetailsStories.InitialView} />
+<GdsCanvas of={AddReportingDetailsStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -37,11 +38,11 @@ Below the reporting type selection, there is a question about local authority la
 
 The officer selects the development type that best matches the application. For most householder applications, this will be **Q21 — Householder developments**.
 
-<Canvas of={AddReportingDetailsStories.WithTypeSelected} />
+<GdsCanvas of={AddReportingDetailsStories.WithTypeSelected} />
 
 If the local authority is the land owner, the officer selects "Yes" and a sub-question appears asking whether the LA is carrying out the proposed works. This determines whether **Regulation 3** (LA carrying out works) or **Regulation 4** (LA not carrying out works) applies.
 
-<Canvas of={AddReportingDetailsStories.WithRegulation3} />
+<GdsCanvas of={AddReportingDetailsStories.WithRegulation3} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -55,11 +56,11 @@ If the local authority is the land owner, the officer selects "Yes" and a sub-qu
 
 If the officer tries to save without selecting a reporting type, a validation error is shown. The reporting type selection is required (when types are configured for the application type).
 
-<Canvas of={AddReportingDetailsStories.WithErrors} />
+<GdsCanvas of={AddReportingDetailsStories.WithErrors} />
 
 If no reporting types are configured for the application type, the form shows an information message explaining this. The officer can still complete the task and answer the regulation questions.
 
-<Canvas of={AddReportingDetailsStories.NoTypesAvailable} />
+<GdsCanvas of={AddReportingDetailsStories.NoTypesAvailable} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -73,4 +74,4 @@ If no reporting types are configured for the application type, the form shows an
 
 After saving, the page shows a summary of the selected reporting type and regulation answers. The officer can click "Edit" to return to the form and change their selections.
 
-<Canvas of={AddReportingDetailsStories.Completed} />
+<GdsCanvas of={AddReportingDetailsStories.Completed} />

@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as PressNoticeV3Stories from "./PressNoticeV3.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Press Notice v3/Journey" />
@@ -22,11 +23,11 @@ v3 builds on v2's overview-first approach and adds support for **multiple press 
 
 Clean landing page with two actions.
 
-<Canvas of={PressNoticeV3Stories.EmptyState} />
+<GdsCanvas of={PressNoticeV3Stories.EmptyState} />
 
 If not required:
 
-<Canvas of={PressNoticeV3Stories.NotRequired} />
+<GdsCanvas of={PressNoticeV3Stories.NotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -37,7 +38,7 @@ If not required:
 
 Single form with statutory reason checkboxes and confirmation of the email recipient.
 
-<Canvas of={PressNoticeV3Stories.CreateForm} />
+<GdsCanvas of={PressNoticeV3Stories.CreateForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -50,11 +51,11 @@ Each card shows reasons, timeline, evidence, and actions inline.
 
 **Single notice:**
 
-<Canvas of={PressNoticeV3Stories.OverviewSingleRequested_A} />
+<GdsCanvas of={PressNoticeV3Stories.OverviewSingleRequested_A} />
 
 **Multiple notices:**
 
-<Canvas of={PressNoticeV3Stories.OverviewMultipleMixed_A} />
+<GdsCanvas of={PressNoticeV3Stories.OverviewMultipleMixed_A} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -67,19 +68,19 @@ Compact cards with a click-through to detail pages.
 
 **Compact cards:**
 
-<Canvas of={PressNoticeV3Stories.OverviewSingleRequested_B} />
+<GdsCanvas of={PressNoticeV3Stories.OverviewSingleRequested_B} />
 
-<Canvas of={PressNoticeV3Stories.OverviewMultipleMixed_B} />
+<GdsCanvas of={PressNoticeV3Stories.OverviewMultipleMixed_B} />
 
 **Detail pages:**
 
 Requested notice — with actions to confirm publication:
 
-<Canvas of={PressNoticeV3Stories.DetailPageRequested_B} />
+<GdsCanvas of={PressNoticeV3Stories.DetailPageRequested_B} />
 
 Completed notice — with full timeline and evidence:
 
-<Canvas of={PressNoticeV3Stories.DetailPageComplete_B} />
+<GdsCanvas of={PressNoticeV3Stories.DetailPageComplete_B} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -90,4 +91,4 @@ Completed notice — with full timeline and evidence:
 
 Short form: publication date, evidence upload, optional comment.
 
-<Canvas of={PressNoticeV3Stories.ConfirmPublication} />
+<GdsCanvas of={PressNoticeV3Stories.ConfirmPublication} />

@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SelectConsulteesStories from "./SelectConsultees.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Select Consultees/Journey" />
@@ -26,7 +27,7 @@ The case officer opens the "Add and assign consultees" task from the consultatio
 
 At the bottom, a collapsed "Manually add a consultee" section allows searching for additional consultees.
 
-<Canvas of={SelectConsulteesStories.InitialView} />
+<GdsCanvas of={SelectConsulteesStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -42,7 +43,7 @@ The officer reviews the planning constraints and decides which ones actually nee
 
 In this example, "Article 4 direction" and "Archaeological priority area" are left unchecked because they don't require consultation for this type of work.
 
-<Canvas of={SelectConsulteesStories.SomeConstraintsUnchecked} />
+<GdsCanvas of={SelectConsulteesStories.SomeConstraintsUnchecked} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -58,7 +59,7 @@ If the officer needs to consult someone not automatically suggested (e.g. Histor
 
 An autocomplete search field lets the officer type a name, organisation, or role. The system searches the contacts database and shows matching results. The officer selects a consultee and clicks "Add consultee" to add them to the table.
 
-<Canvas of={SelectConsulteesStories.AddConsulteeExpanded} />
+<GdsCanvas of={SelectConsulteesStories.AddConsulteeExpanded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -74,7 +75,7 @@ After clicking "Add consultee", the new consultee appears in the table under the
 
 The officer can assign the consultee to a specific constraint using the "Assign consultee" links, or leave them under "Other".
 
-<Canvas of={SelectConsulteesStories.ConsulteeJustAdded} />
+<GdsCanvas of={SelectConsulteesStories.ConsulteeJustAdded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -90,7 +91,7 @@ The officer has now checked all 6 constraints and ensured each has at least one 
 
 The officer is satisfied with the selections and clicks **Save** to confirm.
 
-<Canvas of={SelectConsulteesStories.AllAssigned} />
+<GdsCanvas of={SelectConsulteesStories.AllAssigned} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -106,4 +107,4 @@ After saving, the task status changes to **Complete** (green tag). The constrain
 
 The next step in the consultee workflow is **Email consultees**, where the officer composes and sends consultation emails to the assigned consultees.
 
-<Canvas of={SelectConsulteesStories.Completed} />
+<GdsCanvas of={SelectConsulteesStories.Completed} />

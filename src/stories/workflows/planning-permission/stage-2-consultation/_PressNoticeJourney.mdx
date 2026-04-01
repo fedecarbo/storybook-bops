@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as PressNoticeStories from "./PressNotice.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Press Notice/Journey" />
@@ -22,15 +23,15 @@ The case officer opens the press notice task and is asked: *"Does this applicati
 - If **No** → the task is marked complete immediately. Journey ends here.
 - If **Yes** → the officer must select one or more statutory reasons from a checklist (e.g. Conservation Area, Listed Building, Major Development). If none of the standard reasons apply, they can select "Other" and provide a custom reason.
 
-<Canvas of={PressNoticeStories.InitialView} />
+<GdsCanvas of={PressNoticeStories.InitialView} />
 
 When "Yes" is selected with reasons:
 
-<Canvas of={PressNoticeStories.RequiredWithReasons} />
+<GdsCanvas of={PressNoticeStories.RequiredWithReasons} />
 
 When "Other" is selected, a textarea appears for the custom reason:
 
-<Canvas of={PressNoticeStories.RequiredWithOther} />
+<GdsCanvas of={PressNoticeStories.RequiredWithOther} />
 
 When the officer saves, two things happen:
 1. The press notice is recorded against the application
@@ -53,7 +54,7 @@ The email includes:
 - The statutory reasons selected by the case officer
 - A link to the confirmation page in BOPS where the press team can upload evidence
 
-<Canvas of={PressNoticeStories.EmailToPress} />
+<GdsCanvas of={PressNoticeStories.EmailToPress} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -72,11 +73,11 @@ While waiting for the press team to publish the notice and provide evidence, the
 
 The case officer can also manually send a **follow-up email** requesting confirmation if the press team hasn't responded.
 
-<Canvas of={PressNoticeStories.AwaitingConfirmation} />
+<GdsCanvas of={PressNoticeStories.AwaitingConfirmation} />
 
 The follow-up confirmation request email:
 
-<Canvas of={PressNoticeStories.ConfirmationRequestEmail} />
+<GdsCanvas of={PressNoticeStories.ConfirmationRequestEmail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -93,7 +94,7 @@ The press team clicks the link in the email, which takes them to a form where th
 2. **Upload a photo** of the published press notice as evidence
 3. Optionally add a **comment** (e.g. which newspaper, which page)
 
-<Canvas of={PressNoticeStories.ConfirmPublication} />
+<GdsCanvas of={PressNoticeStories.ConfirmPublication} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -112,4 +113,4 @@ Once evidence is uploaded, the page shows the completed state:
 - A thumbnail of the uploaded evidence document with a "Published" tag
 - Links to **edit publication details** or **add a new press notice response** (if a new notice is needed later)
 
-<Canvas of={PressNoticeStories.Completed} />
+<GdsCanvas of={PressNoticeStories.Completed} />

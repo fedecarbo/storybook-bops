@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as ViewConsulteeResponsesStories from "./ViewConsulteeResponses.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/View Consultee Responses/Journey" />
@@ -21,7 +22,7 @@ After consultation emails have been sent (see "Email Consultees"), the case offi
 
 Each consultee is shown in a panel card with their name, role, organisation, type badge (Internal/External), and a "Last contacted on" date.
 
-<Canvas of={ViewConsulteeResponsesStories.NoResponses} />
+<GdsCanvas of={ViewConsulteeResponsesStories.NoResponses} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -40,7 +41,7 @@ Consultees receive an email with a link to the consultee portal where they submi
 - "Last received on" dates and response snippets appear on responded panels
 - Consultees still awaiting show "Awaiting response" with their original "Last contacted on" date
 
-<Canvas of={ViewConsulteeResponsesStories.AwaitingResponses} />
+<GdsCanvas of={ViewConsulteeResponsesStories.AwaitingResponses} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -61,7 +62,7 @@ When a response is received by letter, email, or phone (not through the online p
 5. **Redacted response** — a version safe for publication with personal data removed
 6. **Documents** — any attached letters, reports, or evidence
 
-<Canvas of={ViewConsulteeResponsesStories.UploadingResponse} />
+<GdsCanvas of={ViewConsulteeResponsesStories.UploadingResponse} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -82,7 +83,7 @@ Once all consultees have responded, the page shows the full picture:
 
 Each panel shows a truncated snippet of the response text (~200 characters) with a "View all responses" link for the full detail.
 
-<Canvas of={ViewConsulteeResponsesStories.AllResponded} />
+<GdsCanvas of={ViewConsulteeResponsesStories.AllResponded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -96,7 +97,7 @@ Each panel shows a truncated snippet of the response text (~200 characters) with
 
 The case officer clicks a filter tab to focus on a specific response type. This is especially useful for quickly finding objections or amendment requests that need attention. Here the "Objection" tab is selected, showing only the Environment Agency.
 
-<Canvas of={ViewConsulteeResponsesStories.FilteredByObjection} />
+<GdsCanvas of={ViewConsulteeResponsesStories.FilteredByObjection} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -119,7 +120,7 @@ Clicking "View all responses" on a consultee's panel opens their detail page. Th
   - Any attached documents as download links
   - A "Redact and publish" link to prepare the response for publication
 
-<Canvas of={ViewConsulteeResponsesStories.IndividualConsulteeDetail} />
+<GdsCanvas of={ViewConsulteeResponsesStories.IndividualConsulteeDetail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -133,4 +134,4 @@ Clicking "View all responses" on a consultee's panel opens their detail page. Th
 
 After uploading a response (or when all expected responses have been received through the portal), a green success banner confirms the action. The tab view reflects the updated response counts. The consultation task list will show updated progress against "View consultee responses".
 
-<Canvas of={ViewConsulteeResponsesStories.ResponseUploaded} />
+<GdsCanvas of={ViewConsulteeResponsesStories.ResponseUploaded} />

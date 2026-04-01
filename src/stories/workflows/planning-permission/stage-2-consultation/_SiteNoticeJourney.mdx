@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SiteNoticeStories from "./SiteNotice.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Site Notice/Journey" />
@@ -22,11 +23,11 @@ The case officer opens the site notice task and is asked: *"Does this applicatio
 - If **No** → the task is marked complete immediately. Journey ends here.
 - If **Yes** → the officer must specify how many notices are needed, where they should be displayed, and how to deliver the notice (email or print).
 
-<Canvas of={SiteNoticeStories.InitialView} />
+<GdsCanvas of={SiteNoticeStories.InitialView} />
 
 If "No" is selected, the officer simply saves to complete the task:
 
-<Canvas of={SiteNoticeStories.NotRequired} />
+<GdsCanvas of={SiteNoticeStories.NotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -46,15 +47,15 @@ When "Yes" is selected, the form expands to show three sections:
 
 **Option A: Email to internal team** — enters the team's email address. The system sends them the PDF link with quantity and location instructions so they can print and display the notice.
 
-<Canvas of={SiteNoticeStories.RequiredEmailToTeam} />
+<GdsCanvas of={SiteNoticeStories.RequiredEmailToTeam} />
 
 **Option B: Email to applicant** — the system sends the applicant step-by-step instructions on how to print, protect, display, and report back.
 
-<Canvas of={SiteNoticeStories.RequiredEmailToApplicant} />
+<GdsCanvas of={SiteNoticeStories.RequiredEmailToApplicant} />
 
 **Option C: Print** — the officer enters the display date and downloads a PDF to print themselves. No email is sent.
 
-<Canvas of={SiteNoticeStories.RequiredPrintNotice} />
+<GdsCanvas of={SiteNoticeStories.RequiredPrintNotice} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -68,11 +69,11 @@ When "Yes" is selected, the form expands to show three sections:
 
 If the officer chose to email the **internal team**, they receive a concise email with the application details, number of notices, location instructions, and a link to download the PDF:
 
-<Canvas of={SiteNoticeStories.EmailToInternalTeam} />
+<GdsCanvas of={SiteNoticeStories.EmailToInternalTeam} />
 
 If the officer chose to email the **applicant**, they receive detailed 4-step instructions explaining how to print, protect with waterproof covering, display at the site, and report back with a photo and date:
 
-<Canvas of={SiteNoticeStories.EmailToApplicant} />
+<GdsCanvas of={SiteNoticeStories.EmailToApplicant} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -103,11 +104,11 @@ Once the notice has been displayed, the "Confirm site notice" sub-task becomes a
 - A date field: *"What date was the site notice displayed?"*
 - A file upload for evidence photos of the notice in place
 
-<Canvas of={SiteNoticeStories.ConfirmNotice} />
+<GdsCanvas of={SiteNoticeStories.ConfirmNotice} />
 
 If evidence hasn't been provided, the case officer can send a **follow-up email** requesting confirmation:
 
-<Canvas of={SiteNoticeStories.ConfirmationRequestEmail} />
+<GdsCanvas of={SiteNoticeStories.ConfirmationRequestEmail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -123,4 +124,4 @@ Once evidence is uploaded and saved, the page shows the completed state with:
 - The status bar with a green "Complete" tag and the creation date
 - An evidence table showing the uploaded photo (thumbnail), a turquoise "Site notice evidence" tag, and the date the notice was displayed
 
-<Canvas of={SiteNoticeStories.Completed} />
+<GdsCanvas of={SiteNoticeStories.Completed} />

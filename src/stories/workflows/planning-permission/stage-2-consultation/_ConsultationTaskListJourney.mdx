@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as ConsultationTaskListStories from "./_ConsultationTaskList.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Consultation Task List/Journey" />
@@ -25,7 +26,7 @@ After an application is validated, the case officer navigates to the consultatio
 
 Below the task list is a **dates bar** showing the validation date, consultation end date, and target decision date. At the bottom, a **Details** accordion provides access to the consultation audit log.
 
-<Canvas of={ConsultationTaskListStories.FullAllNotStarted} />
+<GdsCanvas of={ConsultationTaskListStories.FullAllNotStarted} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -46,7 +47,7 @@ The case officer works through the sections in parallel. Typically:
 
 As tasks progress, their status tags update to show the current state.
 
-<Canvas of={ConsultationTaskListStories.FullInProgress} />
+<GdsCanvas of={ConsultationTaskListStories.FullInProgress} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -65,7 +66,7 @@ During this waiting period, the officer can:
 - Send follow-up emails to consultees who haven't responded
 - Check the consultation end date and request an extension if needed
 
-<Canvas of={ConsultationTaskListStories.FullAwaitingResponses} />
+<GdsCanvas of={ConsultationTaskListStories.FullAwaitingResponses} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -84,7 +85,7 @@ When a site notice or press notice is marked as **required**, a **"Confirm"** ta
 
 These confirm tasks only appear once the parent notice task has been completed with "Yes, required".
 
-<Canvas of={ConsultationTaskListStories.WithNoticeConfirmations} />
+<GdsCanvas of={ConsultationTaskListStories.WithNoticeConfirmations} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -98,7 +99,7 @@ These confirm tasks only appear once the parent notice task has been completed w
 
 When all tasks in every section are marked as complete, the consultation stage is finished. The application can now move to the **Assessment** stage.
 
-<Canvas of={ConsultationTaskListStories.FullAllComplete} />
+<GdsCanvas of={ConsultationTaskListStories.FullAllComplete} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -111,7 +112,7 @@ When all tasks in every section are marked as complete, the consultation stage i
 
 Only the **Manage consultees** section is shown. The officer adds consultees, sends emails, and reviews responses.
 
-<Canvas of={ConsultationTaskListStories.ConsulteesOnly} />
+<GdsCanvas of={ConsultationTaskListStories.ConsulteesOnly} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -124,4 +125,4 @@ Only the **Manage consultees** section is shown. The officer adds consultees, se
 
 The page shows an inset message explaining that no consultation is required. The officer simply clicks **Back** to return to the application overview.
 
-<Canvas of={ConsultationTaskListStories.NoConsultation} />
+<GdsCanvas of={ConsultationTaskListStories.NoConsultation} />

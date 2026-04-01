@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as CheckRedLineBoundaryStories from "./CheckRedLineBoundary.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Check Red Line Boundary/Journey" />
@@ -22,11 +23,11 @@ The case officer opens the task and sees the applicant's submitted red line boun
 - If **Yes** → the task is saved and marked as complete. Journey ends.
 - If **No** → the officer is taken to a form to propose a new boundary.
 
-<Canvas of={CheckRedLineBoundaryStories.InitialView} />
+<GdsCanvas of={CheckRedLineBoundaryStories.InitialView} />
 
 If the boundary is correct, the officer selects "Yes":
 
-<Canvas of={CheckRedLineBoundaryStories.SelectedYes} />
+<GdsCanvas of={CheckRedLineBoundaryStories.SelectedYes} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -45,11 +46,11 @@ If the officer selects "No", they are taken to the propose change form. Here the
 3. Write a reason explaining why the boundary needs to change
 4. Click "Send request" to notify the applicant
 
-<Canvas of={CheckRedLineBoundaryStories.ProposeChangeForm} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ProposeChangeForm} />
 
 With the reason filled in and boundary drawn:
 
-<Canvas of={CheckRedLineBoundaryStories.ProposeChangeFormFilled} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ProposeChangeFormFilled} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -66,7 +67,7 @@ Once the officer submits the proposed change, an email is sent to the applicant 
 - A link to review the proposed boundary change and respond
 - A deadline — if the applicant doesn't respond within 5 business days, the change is automatically approved
 
-<Canvas of={CheckRedLineBoundaryStories.EmailToApplicant} />
+<GdsCanvas of={CheckRedLineBoundaryStories.EmailToApplicant} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -84,7 +85,7 @@ While waiting for the applicant to respond, the task page shows:
 - A message: "Waiting for applicant response"
 - A "Delete request" button (available before the application is sent for validation)
 
-<Canvas of={CheckRedLineBoundaryStories.ChangeRequestPending} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ChangeRequestPending} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -105,7 +106,7 @@ The applicant clicks the link in the email and sees:
 - A radio button choice: **"Yes, I agree"** or **"No, I disagree"**
 - If they disagree, a textarea appears to explain why
 
-<Canvas of={CheckRedLineBoundaryStories.ApplicantLandingPage} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ApplicantLandingPage} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -122,15 +123,15 @@ If the applicant agrees with the proposed boundary, the officer sees:
 - Confirmation text: "Change to red line boundary has been approved by the applicant"
 - A "Save and mark as complete" button
 
-<Canvas of={CheckRedLineBoundaryStories.ApplicantApproved} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ApplicantApproved} />
 
 The applicant's response confirmation page:
 
-<Canvas of={CheckRedLineBoundaryStories.ApplicantAgreed} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ApplicantAgreed} />
 
 **Note:** If the applicant doesn't respond within 5 business days, the request is automatically closed and approved:
 
-<Canvas of={CheckRedLineBoundaryStories.AutoClosed} />
+<GdsCanvas of={CheckRedLineBoundaryStories.AutoClosed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -148,11 +149,11 @@ If the applicant disagrees, the officer sees:
 - The current (original) boundary below
 - The same Yes/No question again — the officer can either accept the original boundary ("Yes") or propose a new change ("No")
 
-<Canvas of={CheckRedLineBoundaryStories.ApplicantRejected} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ApplicantRejected} />
 
 The applicant's disagreement confirmation page:
 
-<Canvas of={CheckRedLineBoundaryStories.ApplicantDisagreed} />
+<GdsCanvas of={CheckRedLineBoundaryStories.ApplicantDisagreed} />
 
 <hr style={{ marginTop: "40px" }} />
 

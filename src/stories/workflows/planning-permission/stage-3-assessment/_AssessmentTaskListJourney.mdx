@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as AssessmentTaskListStories from "./_AssessmentTaskList.stories";
 
 <Meta title="Workflows/Planning Permission/3. Assessment/Assessment Task List/Journey" />
@@ -30,7 +31,7 @@ After consultation is complete, the case officer navigates to the assessment sta
 
 The "Complete assessment" tasks (recommendation, conditions, informatives, submit) are locked until earlier sections are done.
 
-<Canvas of={AssessmentTaskListStories.AllNotStarted} />
+<GdsCanvas of={AssessmentTaskListStories.AllNotStarted} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -53,7 +54,7 @@ The case officer starts by verifying that the information from validation and co
 
 The officer can refer to the accordion sections above for quick reference without navigating away from the page.
 
-<Canvas of={AssessmentTaskListStories.InProgress} />
+<GdsCanvas of={AssessmentTaskListStories.InProgress} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -75,7 +76,7 @@ With the checks complete, the officer moves to the substantive assessment work:
 
 This is the most time-intensive part of the assessment. The officer may work through these tasks over several sessions, saving drafts as they go.
 
-<Canvas of={AssessmentTaskListStories.ChecksComplete} />
+<GdsCanvas of={AssessmentTaskListStories.ChecksComplete} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -98,7 +99,7 @@ Once all assessment work is done, the "Complete assessment" tasks unlock:
 
 The officer is now ready to submit the recommendation. The submit task becomes available once all other tasks are complete.
 
-<Canvas of={AssessmentTaskListStories.ReadyToSubmit} />
+<GdsCanvas of={AssessmentTaskListStories.ReadyToSubmit} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -112,7 +113,7 @@ The officer is now ready to submit the recommendation. The submit task becomes a
 
 When all tasks are complete, the recommendation has been submitted and the application moves to the **Review** stage. A senior officer or reviewer will now evaluate the case officer's recommendation before a final decision is made.
 
-<Canvas of={AssessmentTaskListStories.AllComplete} />
+<GdsCanvas of={AssessmentTaskListStories.AllComplete} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -125,4 +126,4 @@ When all tasks are complete, the recommendation has been submitted and the appli
 
 Only three sections are shown: **Check application**, **Assessment summaries**, and **Complete assessment**. The "Assess against policies and guidance" and "Assess against legislation" sections are hidden entirely, making the task list shorter and simpler.
 
-<Canvas of={AssessmentTaskListStories.WithoutPoliciesOrLegislation} />
+<GdsCanvas of={AssessmentTaskListStories.WithoutPoliciesOrLegislation} />

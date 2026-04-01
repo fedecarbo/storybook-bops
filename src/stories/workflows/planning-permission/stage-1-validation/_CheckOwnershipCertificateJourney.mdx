@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as CheckOwnershipCertificateStories from "./CheckOwnershipCertificate.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Check Ownership Certificate/Journey" />
@@ -24,21 +25,21 @@ The officer sees the certificate table showing the type (A/B/C/D) and, where app
 - If **Yes** → the task is saved and marked complete. Journey ends here.
 - If **No** → the form expands (see step 2).
 
-<Canvas of={CheckOwnershipCertificateStories.InitialView} />
+<GdsCanvas of={CheckOwnershipCertificateStories.InitialView} />
 
 When "Yes" is selected — the certificate is correct and the officer can submit:
 
-<Canvas of={CheckOwnershipCertificateStories.SelectedYes} />
+<GdsCanvas of={CheckOwnershipCertificateStories.SelectedYes} />
 
 **Certificate type variations** — the table looks different depending on the type:
 
 **Type A** — sole owner. No land owners are listed because the applicant is the only owner:
 
-<Canvas of={CheckOwnershipCertificateStories.CertificateTypeA} />
+<GdsCanvas of={CheckOwnershipCertificateStories.CertificateTypeA} />
 
 **Type D** — unknown owners. The applicant doesn't know who owns the land. Notice details explain why notice couldn't be served:
 
-<Canvas of={CheckOwnershipCertificateStories.CertificateTypeD} />
+<GdsCanvas of={CheckOwnershipCertificateStories.CertificateTypeD} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -54,7 +55,7 @@ When the officer selects "No", the form expands to show a textarea. The officer 
 
 The hint text reminds the officer that this request won't be sent until the application is marked as invalid. It will be batched with any other validation requests.
 
-<Canvas of={CheckOwnershipCertificateStories.SelectedNo} />
+<GdsCanvas of={CheckOwnershipCertificateStories.SelectedNo} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -68,11 +69,11 @@ The hint text reminds the officer that this request won't be sent until the appl
 
 After saving, the page shows the request in an inset with the reason and date. At this stage (before the application is invalidated), the officer can **delete** or **edit** the request.
 
-<Canvas of={CheckOwnershipCertificateStories.ChangeRequestCreated} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ChangeRequestCreated} />
 
 The edit form allows the officer to update the reason text:
 
-<Canvas of={CheckOwnershipCertificateStories.EditRequest} />
+<GdsCanvas of={CheckOwnershipCertificateStories.EditRequest} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -86,11 +87,11 @@ The edit form allows the officer to update the reason text:
 
 When the application is marked as invalid (via "Send validation decision"), all pending validation requests — including this one — are sent to the applicant. The task page now shows "Ownership certificate change request sent" with a **cancel** link instead of delete/edit.
 
-<Canvas of={CheckOwnershipCertificateStories.ChangeRequestSent} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ChangeRequestSent} />
 
 The applicant receives an email with the officer's statement and a link to respond:
 
-<Canvas of={CheckOwnershipCertificateStories.EmailToApplicant} />
+<GdsCanvas of={CheckOwnershipCertificateStories.EmailToApplicant} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -107,7 +108,7 @@ The applicant clicks the link in the email and sees a page with the case officer
 - **Yes, I agree** → the applicant is directed to submit a corrected ownership certificate
 - **No, I don't agree** → a textarea appears for the applicant to explain why
 
-<Canvas of={CheckOwnershipCertificateStories.ApplicantReviewForm} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ApplicantReviewForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -133,7 +134,7 @@ If the applicant agrees, they are directed to a multi-step form to submit a corr
 
 If the applicant disagrees, they enter their reasons and see a confirmation page with a "Disagreed" tag showing their response has been submitted.
 
-<Canvas of={CheckOwnershipCertificateStories.ApplicantDisagreed} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ApplicantDisagreed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -149,15 +150,15 @@ The officer sees the response. There are three possible outcomes:
 
 **Applicant approved** — submitted a new certificate. The officer sees the updated certificate table (in this example, the type changed from B to C with an additional land owner). If it's still incorrect, they can create another request.
 
-<Canvas of={CheckOwnershipCertificateStories.ApplicantRespondedApproved} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ApplicantRespondedApproved} />
 
 **Applicant rejected** — disagreed with the officer's assessment. The officer sees the rejection reason and must decide whether to accept the original certificate or create a new request.
 
-<Canvas of={CheckOwnershipCertificateStories.ApplicantRespondedRejected} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ApplicantRespondedRejected} />
 
 **No response yet** — the applicant has not responded. The request remains open until the response deadline.
 
-<Canvas of={CheckOwnershipCertificateStories.ApplicantNotResponded} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ApplicantNotResponded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -173,11 +174,11 @@ During the assessment stage, the officer can review the full activity log showin
 
 The activity log shows one completed request cycle (requested → applicant submitted):
 
-<Canvas of={CheckOwnershipCertificateStories.AssessmentView} />
+<GdsCanvas of={CheckOwnershipCertificateStories.AssessmentView} />
 
 When there are multiple requests (including one still awaiting a response), the collapsible section is hidden:
 
-<Canvas of={CheckOwnershipCertificateStories.ActivityLogWithRequests} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ActivityLogWithRequests} />
 
 <hr style={{ marginTop: "40px" }} />
 

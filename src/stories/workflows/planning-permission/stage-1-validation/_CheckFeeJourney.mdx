@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as CheckFeeStories from "./CheckFee.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Check Fee/Journey" />
@@ -24,11 +25,11 @@ The officer sees the payment information table (fee paid, payment reference, ses
 - If **Yes** → the officer saves and the task is marked complete immediately. Jump to the final step.
 - If **No** → the officer is redirected to the fee change request form (see step 3).
 
-<Canvas of={CheckFeeStories.InitialView} />
+<GdsCanvas of={CheckFeeStories.InitialView} />
 
 When "Yes" is selected — the fee is correct and the officer can submit:
 
-<Canvas of={CheckFeeStories.SelectedYes} />
+<GdsCanvas of={CheckFeeStories.SelectedYes} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -42,7 +43,7 @@ When "Yes" is selected — the fee is correct and the officer can submit:
 
 Some applications are exempt from fees (e.g. disability exemptions). When the applicant did not make a payment, the payment reference shows "Exempt" and no fee calculation section is displayed.
 
-<Canvas of={CheckFeeStories.WithExemptFee} />
+<GdsCanvas of={CheckFeeStories.WithExemptFee} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -60,7 +61,7 @@ When the officer selects "No", they are redirected to a form where they must exp
 
 The form includes a guidance dropdown with examples of supporting documents for disability fee exemptions (PIP award letters, NHS letters, blue badges, etc.) to help officers use appropriate language.
 
-<Canvas of={CheckFeeStories.FeeChangeRequestForm} />
+<GdsCanvas of={CheckFeeStories.FeeChangeRequestForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -74,7 +75,7 @@ The form includes a guidance dropdown with examples of supporting documents for 
 
 After the officer submits the fee change request, the system sends an email to the applicant (or their agent) explaining the fee issue, what they need to do, and providing a secure link to respond. The email includes a deadline for responding.
 
-<Canvas of={CheckFeeStories.FeeChangeEmail} />
+<GdsCanvas of={CheckFeeStories.FeeChangeEmail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -88,7 +89,7 @@ After the officer submits the fee change request, the system sends an email to t
 
 While waiting for the applicant to respond, the task page shows the fee change request details in an inset — the reason, what the applicant was told to do, and the date it was sent. The officer can cancel the request if needed.
 
-<Canvas of={CheckFeeStories.FeeChangeRequestSent} />
+<GdsCanvas of={CheckFeeStories.FeeChangeRequestSent} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -102,7 +103,7 @@ While waiting for the applicant to respond, the task page shows the fee change r
 
 The applicant clicks the link in the email and sees a page showing what the officer said and a textarea to explain what they've done (e.g. made an additional payment, provided exemption evidence). They submit their response.
 
-<Canvas of={CheckFeeStories.ApplicantResponseForm} />
+<GdsCanvas of={CheckFeeStories.ApplicantResponseForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -118,7 +119,7 @@ Once the applicant responds, the officer sees the applicant's response alongside
 
 Clicking "Mark as valid" marks the fee as correct and completes the task.
 
-<Canvas of={CheckFeeStories.ApplicantResponded} />
+<GdsCanvas of={CheckFeeStories.ApplicantResponded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -136,4 +137,4 @@ The task is complete when:
 
 The completed view shows the payment information with a green "Valid" tag.
 
-<Canvas of={CheckFeeStories.Completed} />
+<GdsCanvas of={CheckFeeStories.Completed} />

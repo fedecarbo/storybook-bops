@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as PressNoticeV2Stories from "./PressNoticeV2.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Press Notice v2/Journey" />
@@ -24,11 +25,11 @@ This documents the redesigned press notice workflow. It follows the same pattern
 
 The officer sees either the **empty state** (if no notice exists) or the **overview** (if one has been created). Two buttons: **Create press notice** or **Mark as not required**.
 
-<Canvas of={PressNoticeV2Stories.EmptyState} />
+<GdsCanvas of={PressNoticeV2Stories.EmptyState} />
 
 If "Mark as not required" is chosen, the task is done:
 
-<Canvas of={PressNoticeV2Stories.NotRequired} />
+<GdsCanvas of={PressNoticeV2Stories.NotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -42,11 +43,11 @@ If "Mark as not required" is chosen, the task is done:
 
 A single form with the statutory reason checkboxes. The email recipient is shown as a confirmation — the officer doesn't need to enter it.
 
-<Canvas of={PressNoticeV2Stories.CreateForm} />
+<GdsCanvas of={PressNoticeV2Stories.CreateForm} />
 
 With "Other" reason selected, showing the conditional textarea:
 
-<Canvas of={PressNoticeV2Stories.CreateFormOther} />
+<GdsCanvas of={PressNoticeV2Stories.CreateFormOther} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -60,11 +61,11 @@ With "Other" reason selected, showing the conditional textarea:
 
 After creation, the officer lands on the overview. It shows the reasons, who was notified, a timeline, and actions (confirm publication or send a reminder).
 
-<Canvas of={PressNoticeV2Stories.OverviewRequested} />
+<GdsCanvas of={PressNoticeV2Stories.OverviewRequested} />
 
 If confirmation hasn't arrived, the officer can send a reminder:
 
-<Canvas of={PressNoticeV2Stories.ReminderEmail} />
+<GdsCanvas of={PressNoticeV2Stories.ReminderEmail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -78,7 +79,7 @@ If confirmation hasn't arrived, the officer can send a reminder:
 
 A short page: publication date, evidence upload, and an optional comment (e.g. "Southwark News, page 12").
 
-<Canvas of={PressNoticeV2Stories.ConfirmPublication} />
+<GdsCanvas of={PressNoticeV2Stories.ConfirmPublication} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -92,4 +93,4 @@ A short page: publication date, evidence upload, and an optional comment (e.g. "
 
 The overview updates with the full timeline showing the publication evidence inline.
 
-<Canvas of={PressNoticeV2Stories.OverviewComplete} />
+<GdsCanvas of={PressNoticeV2Stories.OverviewComplete} />

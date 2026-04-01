@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as ExpiredTokenStories from "./ExpiredToken.stories";
 
 <Meta title="Workflows/Authentication/Expired Token/Journey" />
@@ -25,7 +26,7 @@ Both flows use the same email template and the same reset password token mechani
 
 The email tells the user the link will expire after 6 hours. This is clear.
 
-<Canvas of={ExpiredTokenStories.CurrentEmail_Confirmed} />
+<GdsCanvas of={ExpiredTokenStories.CurrentEmail_Confirmed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -39,7 +40,7 @@ The email tells the user the link will expire after 6 hours. This is clear.
 
 The user sees the "Create your password" form and has no reason to think anything is wrong. They enter a new password and confirm it.
 
-<Canvas of={ExpiredTokenStories.CurrentExpiredForm} />
+<GdsCanvas of={ExpiredTokenStories.CurrentExpiredForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -53,7 +54,7 @@ The user sees the "Create your password" form and has no reason to think anythin
 
 After spending time creating a valid password, the user is shown an error summary. The message is generic and doesn't guide the user to the "Forgot your password?" page.
 
-<Canvas of={ExpiredTokenStories.CurrentErrorAfterSubmit} />
+<GdsCanvas of={ExpiredTokenStories.CurrentErrorAfterSubmit} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -67,7 +68,7 @@ After spending time creating a valid password, the user is shown an error summar
 
 The user must navigate back to the sign-in page, find the "Forgot your password?" link, and request a new reset email. There's nothing on the error page pointing them here.
 
-<Canvas of={ExpiredTokenStories.CurrentForgotPasswordPage} />
+<GdsCanvas of={ExpiredTokenStories.CurrentForgotPasswordPage} />
 
 ---
 
@@ -85,7 +86,7 @@ The user must navigate back to the sign-in page, find the "Forgot your password?
 
 The email says "confirm your account and set a password" — different wording from the reset email, but uses the same token and the same link format.
 
-<Canvas of={ExpiredTokenStories.CurrentEmail_Unconfirmed} />
+<GdsCanvas of={ExpiredTokenStories.CurrentEmail_Unconfirmed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -99,7 +100,7 @@ The email says "confirm your account and set a password" — different wording f
 
 The unconfirmed user sees the same form, fills it in, gets the same error referring to "reset password" (confusing — they never had a password), and has no way to recover. Worse: an unconfirmed user **cannot** use the "Forgot your password?" flow because they don't have a password set. They need their admin to resend the invitation, but the error doesn't tell them this.
 
-<Canvas of={ExpiredTokenStories.CurrentErrorAfterSubmit} />
+<GdsCanvas of={ExpiredTokenStories.CurrentErrorAfterSubmit} />
 
 ---
 
@@ -117,7 +118,7 @@ The unconfirmed user sees the same form, fills it in, gets the same error referr
 
 The banner tells them exactly what happened and what to do: use the "Forgot your password?" link visible below. No wasted time filling in a form.
 
-<Canvas of={ExpiredTokenStories.IdealExpired_Confirmed} />
+<GdsCanvas of={ExpiredTokenStories.IdealExpired_Confirmed} />
 
 ---
 
@@ -135,7 +136,7 @@ The banner tells them exactly what happened and what to do: use the "Forgot your
 
 Unlike confirmed users who can self-serve via "Forgot your password?", unconfirmed users need their admin to click "Resend invite" in the admin panel. The message makes this clear.
 
-<Canvas of={ExpiredTokenStories.IdealExpired_Unconfirmed} />
+<GdsCanvas of={ExpiredTokenStories.IdealExpired_Unconfirmed} />
 
 ---
 

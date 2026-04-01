@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as CheckOwnershipCertificateStories from "./CheckOwnershipCertificate.stories";
 
 <Meta title="Workflows/Planning Permission/3. Assessment/Check Ownership Certificate/Journey" />
@@ -21,11 +22,11 @@ The case officer opens the task from the assessment task list. The page shows th
 
 If no validation requests were made during Stage 1, the activity log shows an empty state:
 
-<Canvas of={CheckOwnershipCertificateStories.InitialView} />
+<GdsCanvas of={CheckOwnershipCertificateStories.InitialView} />
 
 In most cases, there will be a history of requests from the validation stage — for example, a request was made and the applicant submitted an updated certificate:
 
-<Canvas of={CheckOwnershipCertificateStories.WithValidationHistory} />
+<GdsCanvas of={CheckOwnershipCertificateStories.WithValidationHistory} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -53,7 +54,7 @@ This is the most common outcome — the certificate was already verified during 
 
 If the officer discovers an issue with the certificate during assessment (for example, new information from Land Registry reveals additional owners), they expand the **"Request new ownership certificate"** section and enter a reason explaining why the certificate type is wrong.
 
-<Canvas of={CheckOwnershipCertificateStories.RequestExpanded} />
+<GdsCanvas of={CheckOwnershipCertificateStories.RequestExpanded} />
 
 Unlike validation, where requests are batched and sent when the application is invalidated, assessment-stage requests are sent **immediately** to the applicant.
 
@@ -69,7 +70,7 @@ Unlike validation, where requests are batched and sent when the application is i
 
 The system sends an email to the applicant with the officer's reason and a link to respond. While the request is open, the request section is hidden (only one request can be active at a time). The activity log updates to show the pending request.
 
-<Canvas of={CheckOwnershipCertificateStories.RequestPending} />
+<GdsCanvas of={CheckOwnershipCertificateStories.RequestPending} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -85,7 +86,7 @@ The applicant receives the email, clicks the link, and either submits an updated
 
 Once the applicant responds, the request section reappears in case another request is needed.
 
-<Canvas of={CheckOwnershipCertificateStories.ApplicantRespondedToPostValidation} />
+<GdsCanvas of={CheckOwnershipCertificateStories.ApplicantRespondedToPostValidation} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -99,4 +100,4 @@ Once the applicant responds, the request section reappears in case another reque
 
 The officer reviews the applicant's response, is satisfied with the updated certificate, and clicks **"Save and mark complete"**. A green success banner confirms the task is done. The task shows as "Complete" in the assessment task list.
 
-<Canvas of={CheckOwnershipCertificateStories.Completed} />
+<GdsCanvas of={CheckOwnershipCertificateStories.Completed} />

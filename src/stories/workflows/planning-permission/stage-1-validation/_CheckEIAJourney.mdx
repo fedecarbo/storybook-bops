@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as CheckEIAStories from "./CheckEIA.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Check EIA/Journey" />
@@ -21,7 +22,7 @@ The case officer opens the task from the validation sidebar. They see a collapsi
 
 Below this, a Yes/No radio question asks whether an Environmental Impact Assessment is required.
 
-<Canvas of={CheckEIAStories.InitialView} />
+<GdsCanvas of={CheckEIAStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -39,7 +40,7 @@ The officer reviews the application documents and the GOV.UK guidance, then sele
 
 The officer selects **No** — no additional fields are needed. They click "Save and mark as complete".
 
-<Canvas of={CheckEIAStories.SelectedNo} />
+<GdsCanvas of={CheckEIAStories.SelectedNo} />
 
 ### If EIA is required
 
@@ -51,15 +52,15 @@ The officer selects **Yes**. A hint explains that the determination period will 
 
 The officer can fill in all fields, some, or none — all three are optional. However, if either the address or fee is provided, both must be filled in.
 
-<Canvas of={CheckEIAStories.SelectedYes} />
+<GdsCanvas of={CheckEIAStories.SelectedYes} />
 
 The officer can also confirm an EIA is required without providing any public access details:
 
-<Canvas of={CheckEIAStories.SelectedYesMinimal} />
+<GdsCanvas of={CheckEIAStories.SelectedYesMinimal} />
 
 If the officer tries to submit without selecting an option, a validation error is shown:
 
-<Canvas of={CheckEIAStories.WithErrors} />
+<GdsCanvas of={CheckEIAStories.WithErrors} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -75,8 +76,8 @@ After saving, the page shows a success banner and a summary of the decision. If 
 
 **EIA required — with contact details:**
 
-<Canvas of={CheckEIAStories.Completed} />
+<GdsCanvas of={CheckEIAStories.Completed} />
 
 **EIA not required:**
 
-<Canvas of={CheckEIAStories.CompletedNotRequired} />
+<GdsCanvas of={CheckEIAStories.CompletedNotRequired} />

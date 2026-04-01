@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SelectNeighboursStories from "./SelectNeighbours.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Select Neighbours/Journey" />
@@ -27,7 +28,7 @@ There are two ways to add neighbours:
 
 At this point, no addresses have been selected yet.
 
-<Canvas of={SelectNeighboursStories.InitialView} />
+<GdsCanvas of={SelectNeighboursStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -45,7 +46,7 @@ The purple area on the map shows the drawn selection polygon. A summary shows ho
 
 The site address itself is not included in the results.
 
-<Canvas of={SelectNeighboursStories.MapPolygonDrawn} />
+<GdsCanvas of={SelectNeighboursStories.MapPolygonDrawn} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -61,7 +62,7 @@ If the officer knows of specific neighbours not captured by the polygon (e.g. a 
 
 An autocomplete search field lets the officer type an address or postcode. The OS Places API provides suggestions as they type. Selected addresses are added to the list alongside any map-selected addresses.
 
-<Canvas of={SelectNeighboursStories.ManualAddressSearch} />
+<GdsCanvas of={SelectNeighboursStories.ManualAddressSearch} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -75,7 +76,7 @@ An autocomplete search field lets the officer type an address or postcode. The O
 
 The page now shows all selected addresses — both map-selected and manually added — in separate groups. The officer reviews the full list, removes any incorrect entries using the "Remove" links, and clicks **"Continue to sending letters"** when satisfied.
 
-<Canvas of={SelectNeighboursStories.AddressesSelected} />
+<GdsCanvas of={SelectNeighboursStories.AddressesSelected} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -91,7 +92,7 @@ If the officer returns to this page after neighbours have already been saved, th
 
 Clicking "Edit" reveals an inline text input where the officer can correct the address (e.g. fix a typo or update a flat number). They can also draw a new polygon or add more manual addresses to extend the selection.
 
-<Canvas of={SelectNeighboursStories.ExistingNeighboursEditing} />
+<GdsCanvas of={SelectNeighboursStories.ExistingNeighboursEditing} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -105,7 +106,7 @@ Clicking "Edit" reveals an inline text input where the officer can correct the a
 
 If the officer submits an address that doesn't have the correct format (at least two comma-separated parts: property/street and postcode), a GOV.UK error summary appears at the top of the page with a link to the invalid entry. The address entry itself shows an inline error message explaining the expected format.
 
-<Canvas of={SelectNeighboursStories.WithValidationErrors} />
+<GdsCanvas of={SelectNeighboursStories.WithValidationErrors} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -121,4 +122,4 @@ Once neighbours have been saved, the task status changes to **Complete** (green 
 
 From here, the officer clicks **"Continue to sending letters"** to proceed to the next task in the neighbour workflow.
 
-<Canvas of={SelectNeighboursStories.Completed} />
+<GdsCanvas of={SelectNeighboursStories.Completed} />

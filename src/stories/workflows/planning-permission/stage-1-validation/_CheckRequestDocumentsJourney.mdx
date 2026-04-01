@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as CheckRequestDocumentStories from "./CheckRequestDocuments.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Check and Request Documents/Journey" />
@@ -21,11 +22,11 @@ The case officer opens the "Check and request documents" task from the validatio
 
 The page includes a link to "Add a request for a missing document" at the bottom.
 
-<Canvas of={CheckRequestDocumentStories.InitialView} />
+<GdsCanvas of={CheckRequestDocumentStories.InitialView} />
 
 If any submitted documents are unavailable (for example due to a file security issue), a warning banner appears advising the officer to ask for replacements:
 
-<Canvas of={CheckRequestDocumentStories.WithMissingDocumentWarning} />
+<GdsCanvas of={CheckRequestDocumentStories.WithMissingDocumentWarning} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -41,11 +42,11 @@ The officer clicks "Add a request for a missing document" and is taken to a form
 1. **The document type** they need (e.g. "Existing roof plan")
 2. **The reason** for the request — written in plain English so the applicant understands what is needed and why
 
-<Canvas of={CheckRequestDocumentStories.CreateRequestForm} />
+<GdsCanvas of={CheckRequestDocumentStories.CreateRequestForm} />
 
 Here is the form filled in with a request for a missing roof plan:
 
-<Canvas of={CheckRequestDocumentStories.CreateRequestFormFilled} />
+<GdsCanvas of={CheckRequestDocumentStories.CreateRequestFormFilled} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -67,11 +68,11 @@ The officer can add more requests if other documents are also missing.
 
 With one request:
 
-<Canvas of={CheckRequestDocumentStories.OneRequestPending} />
+<GdsCanvas of={CheckRequestDocumentStories.OneRequestPending} />
 
 With multiple requests created:
 
-<Canvas of={CheckRequestDocumentStories.MultipleRequestsPending} />
+<GdsCanvas of={CheckRequestDocumentStories.MultipleRequestsPending} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -87,7 +88,7 @@ When the validation requests are sent (either immediately when created, or batch
 
 If the applicant does not respond, the application may be closed and any payment refunded.
 
-<Canvas of={CheckRequestDocumentStories.EmailToApplicant} />
+<GdsCanvas of={CheckRequestDocumentStories.EmailToApplicant} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -103,7 +104,7 @@ The applicant clicks the link in the email and sees a page listing all outstandi
 
 They must respond to all requests before the case officer can proceed. Once they respond, the status changes to "Complete" and they cannot make further changes.
 
-<Canvas of={CheckRequestDocumentStories.ApplicantLandingPage} />
+<GdsCanvas of={CheckRequestDocumentStories.ApplicantLandingPage} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -119,11 +120,11 @@ The applicant sees what document was requested and reads the case officer's reas
 
 They upload a file (PNG, JPEG, or PDF, max 30MB) and submit their response. The response is sent to the case officer immediately and cannot be changed.
 
-<Canvas of={CheckRequestDocumentStories.ApplicantUploadForm} />
+<GdsCanvas of={CheckRequestDocumentStories.ApplicantUploadForm} />
 
 After uploading, the applicant sees a confirmation panel:
 
-<Canvas of={CheckRequestDocumentStories.ApplicantUploaded} />
+<GdsCanvas of={CheckRequestDocumentStories.ApplicantUploaded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -141,4 +142,4 @@ Once the applicant has uploaded documents for all requests, the officer returns 
 
 The officer can now mark this task as complete and move on to reviewing the new documents.
 
-<Canvas of={CheckRequestDocumentStories.AllRequestsResolved} />
+<GdsCanvas of={CheckRequestDocumentStories.AllRequestsResolved} />

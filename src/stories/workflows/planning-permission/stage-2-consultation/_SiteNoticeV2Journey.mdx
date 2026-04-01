@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SiteNoticeV2Stories from "./SiteNoticeV2.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Site Notice v2/Journey" />
@@ -26,11 +27,11 @@ The officer sees either the **empty state** (if no notice exists) or the **overv
 
 The empty state offers two buttons: **Create site notice** or **Mark as not required**. No "Does this require a site notice?" yes/no radio — the choice is implicit in which button you press.
 
-<Canvas of={SiteNoticeV2Stories.EmptyState} />
+<GdsCanvas of={SiteNoticeV2Stories.EmptyState} />
 
 If "Mark as not required" is chosen, the task is done:
 
-<Canvas of={SiteNoticeV2Stories.NotRequired} />
+<GdsCanvas of={SiteNoticeV2Stories.NotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -52,15 +53,15 @@ The three methods:
 - **Email applicant** → shows a confirmation line (no extra input needed)
 - **Print it myself** → shows a date input for when it will be displayed
 
-<Canvas of={SiteNoticeV2Stories.CreateForm} />
+<GdsCanvas of={SiteNoticeV2Stories.CreateForm} />
 
 With "Email applicant" selected:
 
-<Canvas of={SiteNoticeV2Stories.CreateFormApplicant} />
+<GdsCanvas of={SiteNoticeV2Stories.CreateFormApplicant} />
 
 With "Print it myself" selected:
 
-<Canvas of={SiteNoticeV2Stories.CreateFormPrint} />
+<GdsCanvas of={SiteNoticeV2Stories.CreateFormPrint} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -78,11 +79,11 @@ After creation, the officer lands on the overview page. This is the page they al
 - A **timeline** showing what's happened and what's pending
 - **Actions**: upload evidence, send a reminder email
 
-<Canvas of={SiteNoticeV2Stories.OverviewSent} />
+<GdsCanvas of={SiteNoticeV2Stories.OverviewSent} />
 
 If evidence hasn't arrived, the officer can send a reminder with a preview first:
 
-<Canvas of={SiteNoticeV2Stories.ReminderEmail} />
+<GdsCanvas of={SiteNoticeV2Stories.ReminderEmail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -96,7 +97,7 @@ If evidence hasn't arrived, the officer can send a reminder with a preview first
 
 A short, focused page with just two fields: the display date and a file upload for photo evidence.
 
-<Canvas of={SiteNoticeV2Stories.UploadEvidence} />
+<GdsCanvas of={SiteNoticeV2Stories.UploadEvidence} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -110,4 +111,4 @@ A short, focused page with just two fields: the display date and a file upload f
 
 The overview updates to show the complete timeline with evidence inline. No separate "completed view" — it's the same page, just with a green `Complete` tag and the full timeline.
 
-<Canvas of={SiteNoticeV2Stories.OverviewComplete} />
+<GdsCanvas of={SiteNoticeV2Stories.OverviewComplete} />

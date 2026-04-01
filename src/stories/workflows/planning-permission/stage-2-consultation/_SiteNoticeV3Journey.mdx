@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SiteNoticeV3Stories from "./SiteNoticeV3.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Site Notice v3/Journey" />
@@ -22,11 +23,11 @@ v3 builds on v2's overview-first approach and adds support for **multiple site n
 
 Same as v2 — clean landing page with two actions. No form questions.
 
-<Canvas of={SiteNoticeV3Stories.EmptyState} />
+<GdsCanvas of={SiteNoticeV3Stories.EmptyState} />
 
 If not required:
 
-<Canvas of={SiteNoticeV3Stories.NotRequired} />
+<GdsCanvas of={SiteNoticeV3Stories.NotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -37,7 +38,7 @@ If not required:
 
 Same creation form as v2 — quantity, location, and delivery method on a single clean page.
 
-<Canvas of={SiteNoticeV3Stories.CreateForm} />
+<GdsCanvas of={SiteNoticeV3Stories.CreateForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -50,11 +51,11 @@ Each notice is a summary card showing all details, timeline, and actions inline.
 
 **Single notice:**
 
-<Canvas of={SiteNoticeV3Stories.OverviewSingleSent_A} />
+<GdsCanvas of={SiteNoticeV3Stories.OverviewSingleSent_A} />
 
 **Multiple notices (one complete, one awaiting evidence):**
 
-<Canvas of={SiteNoticeV3Stories.OverviewMultipleMixed_A} />
+<GdsCanvas of={SiteNoticeV3Stories.OverviewMultipleMixed_A} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -67,19 +68,19 @@ Cards show a compact summary. Click "View details" to see the full timeline, evi
 
 **Compact cards:**
 
-<Canvas of={SiteNoticeV3Stories.OverviewSingleSent_B} />
+<GdsCanvas of={SiteNoticeV3Stories.OverviewSingleSent_B} />
 
-<Canvas of={SiteNoticeV3Stories.OverviewMultipleMixed_B} />
+<GdsCanvas of={SiteNoticeV3Stories.OverviewMultipleMixed_B} />
 
 **Detail pages (reached by clicking "View details"):**
 
 Sent notice — with actions to upload evidence or send a reminder:
 
-<Canvas of={SiteNoticeV3Stories.DetailPageSent_B} />
+<GdsCanvas of={SiteNoticeV3Stories.DetailPageSent_B} />
 
 Completed notice — with full timeline and evidence:
 
-<Canvas of={SiteNoticeV3Stories.DetailPageComplete_B} />
+<GdsCanvas of={SiteNoticeV3Stories.DetailPageComplete_B} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -90,4 +91,4 @@ Completed notice — with full timeline and evidence:
 
 Same focused form as v2 — display date and photo upload.
 
-<Canvas of={SiteNoticeV3Stories.UploadEvidence} />
+<GdsCanvas of={SiteNoticeV3Stories.UploadEvidence} />

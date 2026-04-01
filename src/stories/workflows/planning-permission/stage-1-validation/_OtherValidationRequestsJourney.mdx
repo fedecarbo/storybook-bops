@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as OtherValidationRequestsStories from "./OtherValidationRequests.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Other Validation Requests/Journey" />
@@ -21,7 +22,7 @@ This documents the end-to-end journey of flagging generic validation issues and 
 
 The case officer opens the "Other validation requests" task from the validation task list sidebar. If no requests have been created yet, they see an empty state with a link to "Add another validation request".
 
-<Canvas of={OtherValidationRequestsStories.NoRequests} />
+<GdsCanvas of={OtherValidationRequestsStories.NoRequests} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -39,11 +40,11 @@ The officer clicks "Add another validation request" and is taken to a form with 
 
 The request is saved but **not sent** until the application is marked as invalid (or immediately if the application is already invalidated).
 
-<Canvas of={OtherValidationRequestsStories.CreateRequestForm} />
+<GdsCanvas of={OtherValidationRequestsStories.CreateRequestForm} />
 
 Here is the form filled in — the officer has explained that the materials schedule is missing:
 
-<Canvas of={OtherValidationRequestsStories.CreateRequestFormFilled} />
+<GdsCanvas of={OtherValidationRequestsStories.CreateRequestFormFilled} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -59,11 +60,11 @@ After saving, the officer returns to the task list page. The request now appears
 
 With one request:
 
-<Canvas of={OtherValidationRequestsStories.OneRequestOpen} />
+<GdsCanvas of={OtherValidationRequestsStories.OneRequestOpen} />
 
 With multiple requests:
 
-<Canvas of={OtherValidationRequestsStories.MultipleRequests} />
+<GdsCanvas of={OtherValidationRequestsStories.MultipleRequests} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -79,7 +80,7 @@ When the validation requests are sent (either immediately when created during an
 
 If the applicant does not respond within **15 business days**, the application may be returned with a refund.
 
-<Canvas of={OtherValidationRequestsStories.EmailToApplicant} />
+<GdsCanvas of={OtherValidationRequestsStories.EmailToApplicant} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -93,7 +94,7 @@ If the applicant does not respond within **15 business days**, the application m
 
 The applicant clicks the link in the email and sees a page listing all outstanding validation requests. Each request appears as a task with a status tag. They must respond to all requests before the case officer can proceed.
 
-<Canvas of={OtherValidationRequestsStories.ApplicantLandingPage} />
+<GdsCanvas of={OtherValidationRequestsStories.ApplicantLandingPage} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -109,11 +110,11 @@ The applicant sees the officer's reason for invalidation and their suggestion fo
 
 The response form:
 
-<Canvas of={OtherValidationRequestsStories.ApplicantResponseForm} />
+<GdsCanvas of={OtherValidationRequestsStories.ApplicantResponseForm} />
 
 After submitting, the applicant sees a confirmation panel:
 
-<Canvas of={OtherValidationRequestsStories.ApplicantResponseSubmitted} />
+<GdsCanvas of={OtherValidationRequestsStories.ApplicantResponseSubmitted} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -129,8 +130,8 @@ Once the applicant has responded, the case officer can view the response. The re
 
 Viewing a closed request with the applicant's response:
 
-<Canvas of={OtherValidationRequestsStories.RequestClosed} />
+<GdsCanvas of={OtherValidationRequestsStories.RequestClosed} />
 
 When all requests have been resolved, the task list shows all items with "Updated" tags:
 
-<Canvas of={OtherValidationRequestsStories.AllRequestsResolved} />
+<GdsCanvas of={OtherValidationRequestsStories.AllRequestsResolved} />

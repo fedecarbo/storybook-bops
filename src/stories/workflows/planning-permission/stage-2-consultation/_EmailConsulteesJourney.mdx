@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as EmailConsulteesStories from "./EmailConsultees.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Email Consultees/Journey" />
@@ -27,7 +28,7 @@ The case officer opens the "Send emails to consultees" task from the consultatio
 
 On first use, all consultees are shown as "Not consulted" with all checkboxes selected.
 
-<Canvas of={EmailConsulteesStories.InitialView} />
+<GdsCanvas of={EmailConsulteesStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -43,7 +44,7 @@ The "Select all" checkbox in the table header toggles all consultees at once. Th
 
 The table always shows all assigned consultees regardless of selection state, so the officer has a clear overview of who will and won't receive an email.
 
-<Canvas of={EmailConsulteesStories.NoneSelected} />
+<GdsCanvas of={EmailConsulteesStories.NoneSelected} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -61,7 +62,7 @@ The officer can customise the wording for this specific consultation — for exa
 
 The message uses GOV.UK Notify formatting rules (Markdown-style headings with `##`). A "Reset message to default content" button restores the original template if needed.
 
-<Canvas of={EmailConsulteesStories.TemplateExpanded} />
+<GdsCanvas of={EmailConsulteesStories.TemplateExpanded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -77,7 +78,7 @@ In Step 3, the officer enters the number of days consultees have to respond (typ
 
 When everything is ready — consultees selected, email type chosen, template reviewed, response period set — the officer clicks **"Send emails to consultees"**. The system confirms the action before dispatching.
 
-<Canvas of={EmailConsulteesStories.InitialView} />
+<GdsCanvas of={EmailConsulteesStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -93,7 +94,7 @@ After the officer confirms, the system creates an email for each selected consul
 
 A green success banner confirms the emails have been dispatched. All selected consultees' statuses update to "Sending" while the emails are in transit.
 
-<Canvas of={EmailConsulteesStories.EmailsSentConfirmation} />
+<GdsCanvas of={EmailConsulteesStories.EmailsSentConfirmation} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -113,7 +114,7 @@ The officer can return to this page at any time to check delivery progress. GOV.
 
 The "Date consulted" column shows when the email was sent. This gives the officer an at-a-glance view of how the consultation is progressing.
 
-<Canvas of={EmailConsulteesStories.MixedDeliveryStatuses} />
+<GdsCanvas of={EmailConsulteesStories.MixedDeliveryStatuses} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -129,7 +130,7 @@ If any emails failed to deliver, the officer can resend them. They change the em
 
 The officer might also need to verify or update the consultee's email address before resending (done in the Select Consultees task).
 
-<Canvas of={EmailConsulteesStories.ResendToFailed} />
+<GdsCanvas of={EmailConsulteesStories.ResendToFailed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -147,4 +148,4 @@ The reconsultation email uses a modified template that highlights the changes an
 
 This completes the email consultees workflow. The next step is to monitor and manage **consultee responses** as they come in.
 
-<Canvas of={EmailConsulteesStories.ReconsultationType} />
+<GdsCanvas of={EmailConsulteesStories.ReconsultationType} />

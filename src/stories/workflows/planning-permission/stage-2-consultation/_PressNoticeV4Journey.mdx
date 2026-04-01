@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as PressNoticeV4Stories from "./PressNoticeV4.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Press Notice v4/Journey" />
@@ -23,11 +24,11 @@ v4 builds on v3's multi-notice summary cards and addresses gaps identified in a 
 
 Clean landing page with two actions: create a notice or mark as not required.
 
-<Canvas of={PressNoticeV4Stories.EmptyState} />
+<GdsCanvas of={PressNoticeV4Stories.EmptyState} />
 
 If not required (now shows the captured reason):
 
-<Canvas of={PressNoticeV4Stories.NotRequired} />
+<GdsCanvas of={PressNoticeV4Stories.NotRequired} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -38,7 +39,7 @@ If not required (now shows the captured reason):
 
 Reason selection via checkboxes. Button says "Continue" — takes you to check your answers before sending.
 
-<Canvas of={PressNoticeV4Stories.CreateForm} />
+<GdsCanvas of={PressNoticeV4Stories.CreateForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -49,7 +50,7 @@ Reason selection via checkboxes. Button says "Continue" — takes you to check y
 
 GDS "check your answers" pattern — review reasons and notification email with "Change" links. Inset text confirms what will happen.
 
-<Canvas of={PressNoticeV4Stories.CheckAnswers} />
+<GdsCanvas of={PressNoticeV4Stories.CheckAnswers} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -60,11 +61,11 @@ GDS "check your answers" pattern — review reasons and notification email with 
 
 After sending the request, the overview shows the notice as a summary card. The card action says "Confirm publication" — guiding the officer to their next task. "Send reminder" link available for pending notices.
 
-<Canvas of={PressNoticeV4Stories.OverviewSingleRequested} />
+<GdsCanvas of={PressNoticeV4Stories.OverviewSingleRequested} />
 
 **Multiple notices (one complete, one pending):**
 
-<Canvas of={PressNoticeV4Stories.OverviewMultipleMixed} />
+<GdsCanvas of={PressNoticeV4Stories.OverviewMultipleMixed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -75,7 +76,7 @@ After sending the request, the overview shows the notice as a summary card. The 
 
 Focused form to confirm the press notice has been published — publication date, evidence upload, and optional comment. Button says "Confirm publication".
 
-<Canvas of={PressNoticeV4Stories.ConfirmPublication} />
+<GdsCanvas of={PressNoticeV4Stories.ConfirmPublication} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -86,7 +87,7 @@ Focused form to confirm the press notice has been published — publication date
 
 Once all notices are confirmed as published, overall status changes to "Complete". Evidence details shown inline.
 
-<Canvas of={PressNoticeV4Stories.OverviewComplete} />
+<GdsCanvas of={PressNoticeV4Stories.OverviewComplete} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -97,4 +98,4 @@ Once all notices are confirmed as published, overall status changes to "Complete
 
 New in v4 — captures a reason for the decision (audit trail).
 
-<Canvas of={PressNoticeV4Stories.MarkNotRequired} />
+<GdsCanvas of={PressNoticeV4Stories.MarkNotRequired} />

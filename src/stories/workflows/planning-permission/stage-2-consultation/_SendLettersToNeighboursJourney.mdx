@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as SendLettersStories from "./SendLettersToNeighbours.stories";
 
 <Meta title="Workflows/Planning Permission/2. Consultation/Send Letters to Neighbours/Journey" />
@@ -27,7 +28,7 @@ The case officer opens the "Send letters to neighbours" task from the consultati
 
 A "Back to add neighbours" link at the top lets the officer return to the Select Neighbours page if they need to add or remove addresses.
 
-<Canvas of={SendLettersStories.InitialView} />
+<GdsCanvas of={SendLettersStories.InitialView} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -43,7 +44,7 @@ The officer can expand the "View/edit letter template" details section to previe
 
 The letter uses formatting conventions: lines starting with `#` become headers in the printed letter, and lines starting with `*` become bullet points. The officer can customise the wording for this specific application before sending.
 
-<Canvas of={SendLettersStories.LetterTemplateExpanded} />
+<GdsCanvas of={SendLettersStories.LetterTemplateExpanded} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -61,7 +62,7 @@ The response period defaults to 21 days but can be changed. This determines the 
 
 When the officer is satisfied with the selection and settings, they click **"Confirm and send letters"** to dispatch the letters.
 
-<Canvas of={SendLettersStories.SomeDeselected} />
+<GdsCanvas of={SendLettersStories.SomeDeselected} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -82,7 +83,7 @@ When the officer confirms, the system:
 
 The email copy includes the application reference, received date, site address, and the full letter content.
 
-<Canvas of={SendLettersStories.EmailCopyToApplicant} />
+<GdsCanvas of={SendLettersStories.EmailCopyToApplicant} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -104,7 +105,7 @@ If delivery fails, the status shows as a red tag (Technical failure, Permanent f
 
 A green success banner confirms that letters have been sent and a copy was emailed to the applicant.
 
-<Canvas of={SendLettersStories.LettersSent} />
+<GdsCanvas of={SendLettersStories.LettersSent} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -125,11 +126,11 @@ If the application changes during the consultation period (e.g. amended plans, u
 
 Previously contacted neighbours now show their prior delivery status and last contacted date. The officer can choose to resend to all or only some.
 
-<Canvas of={SendLettersStories.RenotificationSelected} />
+<GdsCanvas of={SendLettersStories.RenotificationSelected} />
 
 If a reviewer has flagged issues with the letters, an inset text alert appears at the top of the page with their comment:
 
-<Canvas of={SendLettersStories.ReviewerRequestedChanges} />
+<GdsCanvas of={SendLettersStories.ReviewerRequestedChanges} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -150,4 +151,4 @@ The officer can view a complete history of all letter batches sent for this appl
 
 This provides a full audit trail. A CSV export of all letters is also available. If a renotification was sent, it appears as a separate batch entry.
 
-<Canvas of={SendLettersStories.LetterBatchHistory} />
+<GdsCanvas of={SendLettersStories.LetterBatchHistory} />

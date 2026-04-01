@@ -1,4 +1,5 @@
-import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
 import * as CheckDescriptionStories from "./CheckDescription.stories";
 
 <Meta title="Workflows/Planning Permission/1. Validation/Check Description/Journey" />
@@ -24,11 +25,11 @@ The officer sees the existing application description in an inset box and is ask
 - If **Yes** → the officer saves and the task is marked complete immediately. Journey ends here.
 - If **No** → the form expands (see step 2).
 
-<Canvas of={CheckDescriptionStories.InitialView} />
+<GdsCanvas of={CheckDescriptionStories.InitialView} />
 
 When "Yes" is selected — the description is correct and the officer can submit:
 
-<Canvas of={CheckDescriptionStories.SelectedYes} />
+<GdsCanvas of={CheckDescriptionStories.SelectedYes} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -44,7 +45,7 @@ When the officer selects "No", the form expands to show:
 1. A **textarea** pre-filled with the current description, which the officer edits
 2. A **sub-question**: "Does this description change require applicant's agreement?"
 
-<Canvas of={CheckDescriptionStories.SelectedNo} />
+<GdsCanvas of={CheckDescriptionStories.SelectedNo} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -60,11 +61,11 @@ The officer has two options:
 
 **"Yes, applicant agreement needed"** — The amended description will be sent to the applicant for approval. They have 5 business days to respond. If they don't respond, the change is automatically accepted to avoid delaying the application.
 
-<Canvas of={CheckDescriptionStories.SelectedNoWithApproval} />
+<GdsCanvas of={CheckDescriptionStories.SelectedNoWithApproval} />
 
 **"No, update description immediately"** — The description is updated right away. The applicant receives a notification email but doesn't need to approve it. This is used for minor corrections (standardising terminology, fixing typos).
 
-<Canvas of={CheckDescriptionStories.SelectedNoImmediateUpdate} />
+<GdsCanvas of={CheckDescriptionStories.SelectedNoImmediateUpdate} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -78,11 +79,11 @@ The officer has two options:
 
 If the officer chose "No, update immediately", the description is changed straight away and a notification email is sent to the applicant showing the old and new descriptions. The task completes immediately.
 
-<Canvas of={CheckDescriptionStories.DescriptionUpdateEmail} />
+<GdsCanvas of={CheckDescriptionStories.DescriptionUpdateEmail} />
 
 The officer then sees the completed state:
 
-<Canvas of={CheckDescriptionStories.CompletedWithUpdate} />
+<GdsCanvas of={CheckDescriptionStories.CompletedWithUpdate} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -100,7 +101,7 @@ If the officer chose "Yes, applicant agreement needed", the system sends an emai
 - A deadline (5 business days)
 - A warning that non-response means automatic acceptance
 
-<Canvas of={CheckDescriptionStories.DescriptionChangeEmail} />
+<GdsCanvas of={CheckDescriptionStories.DescriptionChangeEmail} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -114,7 +115,7 @@ If the officer chose "Yes, applicant agreement needed", the system sends an emai
 
 While waiting for the applicant to respond, the task page shows the change request details in an inset with the date it was sent and a note that the response is pending. The officer can cancel the request if needed.
 
-<Canvas of={CheckDescriptionStories.ChangeRequestSent} />
+<GdsCanvas of={CheckDescriptionStories.ChangeRequestSent} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -132,7 +133,7 @@ The applicant clicks the link in the email and sees a page with:
 - A deadline warning with auto-accept notice
 - Radio buttons to agree or disagree (with a textarea if disagreeing)
 
-<Canvas of={CheckDescriptionStories.ApplicantReviewForm} />
+<GdsCanvas of={CheckDescriptionStories.ApplicantReviewForm} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -146,7 +147,7 @@ The applicant clicks the link in the email and sees a page with:
 
 If the applicant agrees (or doesn't respond within 5 days, triggering auto-acceptance), the officer sees the request marked as "Approved" and can save and mark the task as complete.
 
-<Canvas of={CheckDescriptionStories.ChangeRequestApproved} />
+<GdsCanvas of={CheckDescriptionStories.ChangeRequestApproved} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -160,11 +161,11 @@ If the applicant agrees (or doesn't respond within 5 days, triggering auto-accep
 
 If the applicant disagrees, the officer sees the request marked as "Rejected" with a link to request a new description change. The officer can either accept the original description or propose a different change (going back to step 2).
 
-<Canvas of={CheckDescriptionStories.ChangeRequestRejected} />
+<GdsCanvas of={CheckDescriptionStories.ChangeRequestRejected} />
 
 The applicant's disagreement page shows their objection and suggested wording:
 
-<Canvas of={CheckDescriptionStories.ApplicantDisagreed} />
+<GdsCanvas of={CheckDescriptionStories.ApplicantDisagreed} />
 
 <hr style={{ marginTop: "40px" }} />
 
@@ -182,4 +183,4 @@ The task is complete when:
 - The request auto-closed after 5 days with no response, or
 - The officer chose "update immediately" (no applicant approval needed)
 
-<Canvas of={CheckDescriptionStories.Completed} />
+<GdsCanvas of={CheckDescriptionStories.Completed} />
