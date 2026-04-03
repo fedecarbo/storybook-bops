@@ -1,0 +1,57 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as AuditStories from "./PageTitlesAudit.stories";
+
+<Meta title="Patterns/Page Titles Audit/Documentation" />
+
+# Page titles and descriptions audit
+
+A complete review of every task page title and instruction description in BOPS — what officers see as the h1 heading on each task page, what instruction text appears below it, and how consistent these are across 6 workflow types and 52+ tasks.
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+**Audit date:** 2 April 2026. Every title and description shown here was checked against the live BOPS codebase.
+
+</div>
+
+<hr />
+
+## All titles and descriptions by stage
+
+The full inventory. Every task organised by stage, showing its title, instruction description (or whether it's missing), and which workflow types include it.
+
+Use this to see the complete picture and spot gaps where descriptions are missing.
+
+<GdsCanvas of={AuditStories.AllTitlesByWorkflow} />
+
+<hr />
+
+## Naming patterns
+
+All task titles grouped by their leading verb — "Check", "Review", "Add", "Confirm", and so on. Use this to check whether similar actions use consistent wording across the application.
+
+<GdsCanvas of={AuditStories.NamingPatterns} />
+
+<hr />
+
+## Shared vs unique titles
+
+Which task titles appear across multiple workflow types and which are unique to one. Tasks shared across many workflows are the most important to get right — inconsistencies there affect the most users.
+
+<GdsCanvas of={AuditStories.SharedVsUnique} />
+
+<hr />
+
+## Flags and things to review
+
+Issues spotted during the audit that are worth discussing as a team — naming inconsistencies between workflows, missing descriptions, format differences, and titles that could be clearer.
+
+<GdsCanvas of={AuditStories.FlagsToReview} />
+
+<hr />
+
+<div style={{ marginTop: "24px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+This audit is a snapshot from 2 April 2026. If BOPS changes, this page should be checked again against the current codebase.
+
+</div>
