@@ -1,0 +1,118 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as AskingStories from "./AskingMultipleThings.stories";
+
+<Meta title="Patterns/Asking multiple things at once/Documentation" />
+
+# Asking multiple things at once
+
+A pattern for back-office services where related questions are grouped onto a single, high-density page rather than being split across separate pages.
+
+This pattern is a deliberate departure from the GOV.UK Design System recommendation to ask [one thing per page](https://design-system.service.gov.uk/patterns/question-pages/). One thing per page is the right default for public services, where users are unfamiliar and infrequent. Back-office services often have a different audience — expert caseworkers performing repetitive, conditional, high-frequency tasks — and benefit from seeing related questions together.
+
+<GdsCanvas of={AskingStories.GroupedOnOnePage} />
+
+<hr />
+
+## When to use this pattern
+
+Use this pattern when:
+
+- the service is **internal / back-office**, not citizen-facing
+- users are **expert caseworkers** who perform the same task many times a day
+- **time saving matters** — fewer clicks and page loads is a measurable productivity win
+- the questions are **closely related** and a user needs to see them together to make a professional judgement
+- the domain is **conditional** — some answers depend on or modify others, and showing them apart hides the relationships
+- users hold a **strong internal model** of the process and don't need step-by-step guidance through every question
+
+## When not to use this pattern
+
+Do not use this pattern when:
+
+- the service is **public-facing** — use [one thing per page](https://design-system.service.gov.uk/patterns/question-pages/) instead
+- users are **infrequent or unfamiliar** with the task and need maximum focus on each question
+- the questions are **not related** — grouping unrelated questions just creates a wall of fields
+- the task is **accessibility-sensitive** in a way that benefits from one decision per screen (for example, users with cognitive load constraints completing the form unaided)
+- you cannot afford to invest in **clear visual grouping and validation** — high-density forms only work if structure and feedback are strong
+
+If in doubt, start with one thing per page and only move to grouped pages once you have evidence from real users that the linear flow is slowing them down.
+
+<hr />
+
+## How it works
+
+### Group fields by what users decide together
+
+Group fields around the *decision* the user is making, not the data model. If two questions are normally answered with the same piece of source information (a map, a document, a previous case), they belong on the same page. If a user has to look at two different sources to answer two questions, those questions probably belong on different pages.
+
+### Use clear section headings
+
+Each group of related fields gets its own heading and, where helpful, a one-line hint. Headings turn a high-density page into something that can still be scanned in seconds.
+
+### Reveal conditional fields inline
+
+When an answer triggers a follow-up question, show the follow-up immediately beneath the option that triggered it — never on a separate page. This keeps the relationship between the trigger and the dependent question visible.
+
+<GdsCanvas of={AskingStories.WithConditionalReveals} />
+
+### Validate in place
+
+Errors and confirmations should appear next to the field they relate to, not at the top of the next page. Expert users move fast and need feedback where they are looking.
+
+### Allow saving partway through
+
+Caseworkers are often interrupted. A "save as draft" option means a dense page never becomes a barrier to stepping away.
+
+<hr />
+
+## How it differs from one thing per page
+
+| Aspect | One thing per page (GDS default) | Asking multiple things at once |
+|--------|----------------------------------|-------------------------------|
+| **Layout** | One question per page; user clicks Continue between each | Related questions grouped on a single page with section headings |
+| **Navigation** | Linear — Back / Continue between every question | Single page; user moves through sections at their own pace |
+| **Cognitive load** | Minimised per screen — ideal for unfamiliar users | Higher per screen, but reduced overall for users who already hold the mental model |
+| **Conditional questions** | Often shown on their own follow-up page | Revealed inline beneath the trigger field |
+| **Speed** | Slower — many page loads per task | Faster — fewer clicks, fewer page loads, fewer context switches |
+| **Suitable for** | Public services, infrequent users, unfamiliar tasks | Back-office services, expert users, repetitive conditional tasks |
+
+A "before" example showing the same task built as one thing per page:
+
+<GdsCanvas of={AskingStories.OneThingPerPage} />
+
+<hr />
+
+## Research and learnings
+
+This pattern is grounded in observations of expert users in back-office settings. The findings below are written generically; the BOPS callout shows how we applied them in one specific service.
+
+### What we've learned
+
+- **Conditional, non-linear domains don't fit a single-question-per-page model.** When the answer to one question changes which question comes next, splitting questions across pages forces users to mentally reassemble a structure that the interface has taken apart.
+
+- **Time saving is critical for expert users.** Caseworkers process many cases per day. Reducing the number of clicks and page loads per case is a real productivity win, not just a nice-to-have. Users actively prefer denser pages once they have built a mental model of the form.
+
+- **Experts need to see relationships, not next steps.** A novice user benefits from being told "now answer this, then answer this." An expert user already knows the order. What they need is to *see related data points side by side* so they can make a professional judgement about how those data points fit together.
+
+- **Density only works with structure.** A high-density page without clear section headings, hints, and inline validation collapses into noise. The pattern depends on disciplined visual grouping.
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #1d70b8" }}>
+
+**Example: how we applied this in BOPS**
+
+The Back Office Planning System (BOPS) is used by planning officers to process planning applications. The UK planning system is highly conditional — the rules around site notices, press notices and statutory consultees all branch on attributes of the site (Conservation Area, listed building, major development, flood zone, and so on).
+
+The clearest places we apply this pattern are the **Send site notice** and **Create press notice** tasks in Stage 2 Consultation:
+
+- The **Send site notice** form (shown above) puts the quantity, display locations and arrangement method on a single page. The "How should the notice be arranged?" radio reveals different follow-ups inline depending on the choice — internal team email, applicant email, or a "print and arrange myself" date — instead of sending the officer to three separate pages.
+- The **Create press notice** form groups the nine statutory reasons as checkboxes on one page, with an "Other" option that reveals a free-text justification inline. An officer can capture every reason that applies in one pass, rather than answering "is this in a Conservation Area? / does it affect a Listed Building? / is it a Major Development?" across nine separate pages.
+
+See the live forms in [Site Notice v4](?path=/docs/workflows-planning-permission-2-consultation-site-notice-v4--create-form) and [Press Notice v4](?path=/docs/workflows-planning-permission-2-consultation-press-notice-v4--create-form). Officers told us these grouped forms feel faster and let them judge the case as a whole rather than as a sequence of disconnected questions.
+
+</div>
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+**This is an evolving pattern.** Grouping questions has worked well for back-office expert users, but the right *amount* of grouping is still an open question. Too dense and the page becomes a wall of fields; too sparse and you lose the benefit. If you're considering this pattern for a different back-office service, start with one thing per page, watch real users, and only group questions where you can show they belong together.
+
+</div>
