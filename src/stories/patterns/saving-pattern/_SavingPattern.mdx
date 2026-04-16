@@ -1,0 +1,105 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as SavingStories from "./SavingPattern.stories";
+
+<Meta title="Patterns/Saving pattern/Documentation" />
+
+# Saving pattern
+
+A pattern for back-office services where a task within a larger task list needs two distinct save actions — one to persist work in progress, and one to declare the task complete — paired with a specific success message and a clear return to the task list.
+
+Caseworkers rarely complete a task in a single sitting. They get interrupted, they wait for evidence, they hand work over. The saving pattern is how the interface stays trustworthy through all of that: the user always knows the difference between "I'm coming back to this" and "I'm done", and the system always tells them exactly what just happened.
+
+<GdsCanvas of={SavingStories.SaveAndMarkAsComplete} />
+
+<hr />
+
+## When to use this pattern
+
+Use this pattern when:
+
+- the screen is a **task within a larger task list** — completion is a meaningful state change visible elsewhere in the service
+- users are **expert caseworkers** who work across many tasks and many applications in parallel
+- tasks are **often interrupted** — waiting on documents, colleagues, applicants, or evidence
+- the task has a **binary complete / not-complete state** that other people in the service rely on (a reviewer, an auditor, a next-stage workflow)
+- users need **confidence that their work has been saved** before they move on, not just an assumption
+
+## When not to use this pattern
+
+Do not use this pattern when:
+
+- the form is **a single inline edit** with no meaningful "complete" state — a plain Save button is enough
+- the form **autosaves** — don't ask the user to press a button for something the system is already doing
+- the screen is **not part of a task list** — "mark as complete" has nothing to mark against
+- the action is **destructive or irreversible** (sending a notice, issuing a decision) — use a dedicated action verb like "Send" or "Issue", not "Save"
+
+<hr />
+
+## How it works
+
+### Two save actions, not one
+
+Every task form offers two distinct actions:
+
+- **Save and mark as complete** (primary) — persists the user's work *and* flips the task's status on the task list to Completed. This is how the user declares "I'm done with this task."
+- **Save changes** (secondary) — persists the user's work without changing the task's status. This is how the user says "I'm still working on this, but I want my progress safe."
+
+Splitting these into two buttons removes a judgement the user would otherwise have to make every single time they save. Bundling save and completion into one button leaves in-progress work stranded; offering only "Save" hides the completion step somewhere else and forces the user to remember it.
+
+<GdsCanvas of={SavingStories.SaveChangesOnly} />
+
+### Give a specific success confirmation
+
+After a successful save, show a green notification banner that **names exactly what was saved and what state changed**. "Site notice confirmation has been saved and the task has been marked as complete" is stronger than "Saved successfully" — it reassures the caseworker that the right thing happened, and it reminds them of the decision they just made, which matters when they're moving between many cases.
+
+<GdsCanvas of={SavingStories.SuccessBanner} />
+
+### Return the user to the task list
+
+After saving, the user lands back on the task list, with the task they just completed now showing a "Completed" tag. The next task they could pick up is still visible in context. This turns the save action into a natural handoff into the next piece of work rather than a dead end that makes the caseworker hunt for where to go next.
+
+<GdsCanvas of={SavingStories.ReturnToTaskList} />
+
+### Keep the wording consistent across every task
+
+The button labels and success messages should read the same way across every task in the service. Inconsistency here is expensive: if one task says "Save and mark as complete" and another says "Finish task" and a third says "Done", the user has to re-learn the pattern every time. Pick one wording and hold it.
+
+### Write success messages in the active voice
+
+Name the thing that was saved, in sentence case, in the active voice, the way GDS [content guidelines](https://www.gov.uk/guidance/content-design/writing-for-gov-uk) recommend. Avoid passive phrasing ("Your changes have been saved") — it's longer and weaker than naming the thing directly.
+
+<hr />
+
+## Research and learnings
+
+This pattern comes from observing how caseworkers actually move through a long task list over the course of a day — rarely linearly, rarely in one sitting, and almost always with interruptions between tasks.
+
+### What we've learned
+
+- **Caseworkers need to distinguish "saving progress" from "declaring done".** Bundling those into one button forces a judgement on every save and loses in-progress work when the user isn't ready to commit.
+
+- **Confidence matters more than speed at the save step.** Users will tolerate a full-page reload and a prominent banner if it tells them clearly that their work has landed. A silent save feels like it might not have worked.
+
+- **Specific success messages outperform generic ones.** Naming the thing that was saved ("Site notice confirmation has been saved...") gives the user a moment to verify in their own head that the right action happened, which reduces the number of times they go back in to check.
+
+- **The task list is the anchor.** Returning to the task list after save is what makes the whole pattern hang together — the completed tag is the visible proof that the save worked, and the remaining tasks are the prompt for what to do next.
+
+- **Consistency across the whole service compounds.** Every task that uses the same two-button pattern and the same success-banner shape makes every other task easier to learn.
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #1d70b8" }}>
+
+**Example: how we apply this in BOPS**
+
+The Back Office Planning System (BOPS) presents a planning application as a task list across five workflow stages (Validation, Consultation, Assessment, Review, Determination). A single application can involve 20+ tasks and multiple actors (case officer, consultee, reviewer), often spread over weeks.
+
+Most task forms in BOPS use the two-button pattern described here. For example, the **Confirm site notice is in place** task (shown above) lets officers upload evidence and mark the task complete, while **Check description** lets officers save a change request mid-flow without declaring the task done. After saving, officers see a specific success banner naming what was saved, and land back on the Consultation task list with the task now tagged Completed — ready to pick up the next task in the stage.
+
+See live examples in [Confirm Site Notice](?path=/docs/workflows-planning-permission-2-consultation-site-notice--confirm-notice) and [Send Letters to Neighbours](?path=/docs/workflows-planning-permission-2-consultation-send-letters-to-neighbours--success).
+
+</div>
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+**This is an evolving pattern.** The two-button split works well for tasks with a clear complete/not-complete state, but there are edge cases we're still thinking about — tasks where "complete" depends on an external actor, tasks that need to branch into a follow-up rather than returning to the task list, and tasks that should probably autosave instead of using this pattern at all. If you're considering this pattern for a different back-office service, start with the task list as your anchor and work outwards from there.
+
+</div>
