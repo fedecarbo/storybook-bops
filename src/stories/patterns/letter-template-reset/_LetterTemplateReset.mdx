@@ -1,0 +1,118 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as LetterTemplateResetStories from "./LetterTemplateReset.stories";
+
+<Meta title="Patterns/Letter template reset/Documentation" />
+
+# Letter template reset
+
+A pattern for back-office services where a customisable template — a letter, an email, a notice — needs an honest way to fall back to the default. "Reset" must actually reset the persisted state, not just repaint the form.
+
+When a service ships with a default letter that case officers can customise per application, the system has to know the difference between "this application uses the default" and "this application has a saved custom version". Without that distinction, a "Reset to default" button can only ever be cosmetic — and a button that lies about what it does is worse than no button at all.
+
+<GdsCanvas of={LetterTemplateResetStories.CustomisedContent} />
+
+<hr />
+
+## Why this pattern exists
+
+In the current BOPS implementation, a customised letter or email is persisted to the application's record on send (and, for neighbour letters, on draft save). The form is bound to that persisted column, so when the user reopens the page they see the customised version, not the default.
+
+The "Reset to default" button is purely client-side: it overwrites form fields from data attributes and never tells the server anything. The persisted custom text is untouched. The user clicks Reset, sees the default text in the form, navigates away, and the next page load reloads the saved custom text again. The reset action visibly did nothing.
+
+The default only "wins" if the user happens to send the letter while the form is showing the default — at which point the send action overwrites the persisted column. Reset, in other words, is just a side-effect of sending. Officers reasonably expect Reset to be its own action, with its own meaning. Today, it is neither.
+
+This is a trust failure rather than a functional bug. The form does not lie about saving customisations — it saves them on send, which is reasonable. It lies about resetting them. Any control labelled with a verb of state change must actually change state, or it should be relabelled.
+
+<hr />
+
+## When to use this pattern
+
+Use this pattern when:
+
+- the service ships a **canonical default** for a piece of content that users can customise
+- customisations are **persisted per record**, so a customised version saved today must still be recognisable tomorrow
+- multiple actors may **touch the same record over time** — what one officer customised, another may need to revert
+- the **persisted text and the displayed text can diverge**, which is the precise condition under which "Reset" needs a real meaning
+
+## When not to use this pattern
+
+Do not use this pattern when:
+
+- the form is a **single-shot** edit-then-submit with no draft persistence — there is nothing for "Reset" to round-trip against
+- there is **no canonical default** to fall back to (the user is authoring fresh content each time)
+- the field is **autosaved** with a fast round-trip, in which case "Reset" can simply re-fetch the default and the persisted state takes care of itself
+- "default" is **versioned over time** and a sent letter must reflect the default *at the moment of sending* — that is a separate problem and needs a snapshot column on the sent record, not a reset button
+
+<hr />
+
+## How it works
+
+### Make "custom" and "default" different states
+
+Store the customisation in a column that can be **`nil`**. When the column is `nil`, the form (and the sent letter) fall back to the service default; when the column has a value, that value is used. This is the load-bearing change — without it, "Reset" has no DB-side meaning, because the schema literally cannot represent "use the default".
+
+In BOPS today, the persisted columns (`Consultation#consultee_message_subject`, `Consultation#consultee_message_body`, `Consultation#neighbour_letter_text`) are `nil` for new applications and only become non-nil once a letter is sent or a draft is saved. The remaining work is to honour `nil` as a meaningful state — and to give the user a way to put the column back to `nil`.
+
+<GdsCanvas of={LetterTemplateResetStories.DefaultContent} />
+
+### Reset must round-trip to the server
+
+Clicking **Reset to default** submits a request. The server nulls the custom column and responds with a success banner naming exactly what changed: *"Email content has been reset to the default."* It cannot be a client-only DOM swap, because the DOM is not what the next visitor will see — the database is.
+
+This also means Reset belongs next to a real save action, not floating on its own. A user who edits the body, then changes their mind and clicks Reset, expects both their unsaved edits and the persisted custom text to disappear. One round-trip handles both.
+
+<GdsCanvas of={LetterTemplateResetStories.ResetSuccess} />
+
+### Show provenance
+
+When the form loads, indicate whether the user is looking at the default text or a saved custom version — and, when it is custom, who saved it and when. A short inline label removes ambiguity about which version will actually be sent:
+
+- *"This is the default content. Edits will be saved against this application only."*
+- *"This content was customised on 5 May 2026 by Sarah Johnson."*
+
+Without this label, the form is silent about its own state. With it, the user can answer "is what I'm looking at the default, or someone's edit?" without having to mentally diff against an absent reference.
+
+### Hide Reset when there is nothing to reset
+
+If the persisted column is `nil`, the form is already showing the default — there is nothing for Reset to do, so do not show the button. A disabled or no-op button is just another way for the control to lie. The provenance label alone tells the user where they stand.
+
+<hr />
+
+## Worked examples
+
+### Consultee email
+
+The "Send emails to consultees" task lets a case officer customise the message subject and body before sending. Today, customisations persist on send, but Reset is client-side. With this pattern applied:
+
+- A fresh application has `consultee_message_subject` and `consultee_message_body` as `nil`. The form shows the default; the provenance label confirms it; no Reset button is offered.
+- An officer customises the body to mention the conservation area, sends, and the columns now hold the custom text. The next visitor sees the custom text and a *"Customised on 5 May 2026 by Sarah Johnson"* label, with a real Reset button.
+- Clicking Reset round-trips to the server, nulls both columns, and shows the success banner. The form reloads showing the default. The next sent email uses the default, not because it happened to be visible at send time, but because the application now genuinely has no customisation saved.
+
+### Neighbour letter
+
+The "Send letters to neighbours" task has the same shape, plus a wrinkle: the form has a **"Save and come back later"** button that explicitly persists drafts via `ConsultationsController#update`. Today there is no Reset button on this form at all — meaning once a draft is saved, the only way to "revert to default" is to manually paste the default text back in. With this pattern applied, Reset must clear `neighbour_letter_text` whether the column was populated by a saved draft or by a previous send. One column, one action, one meaning.
+
+<hr />
+
+## Research and learnings
+
+This pattern came out of a design review prompted by an officer who reported that customisations persisted across "Reset to default" clicks — only sending the letter actually appeared to "confirm" the reset. Investigation confirmed the behaviour: Reset was a Stimulus action that overwrote DOM values from data attributes and never touched the database. The persisted column survived every reset until a new send overwrote it.
+
+The broader principle is one worth holding to in any back-office service: **any control labelled with a verb of state change must actually change state**. A button that says "Reset" must reset something the user can verify on reload. A button that says "Save" must save something the user can verify on reload. Where the model cannot represent the state the button claims to produce — for example, where there is no nullable "custom" column to put back to `nil` — the model is what needs fixing, not the button.
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #1d70b8" }}>
+
+**Example: how we apply this in BOPS**
+
+Two flows in BOPS need this pattern: **Send emails to consultees** and **Send letters to neighbours**. Both edit a customisable template, both persist customisations on the consultation record, and both currently treat Reset as a client-side concern (or omit it entirely, in the case of neighbour letters). Press notice, site notice, and decision letters are likely candidates for the same treatment and should be revisited as those forms gain editable content.
+
+See the live flows this pattern would change in [Email Consultees](?path=/docs/workflows-planning-permission-2-consultation-email-consultees--docs) and [Send Letters to Neighbours](?path=/docs/workflows-planning-permission-2-consultation-send-letters-to-neighbours--docs).
+
+</div>
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+**This is an evolving pattern.** The nullable-custom-column approach assumes the default itself is stable over time — if the service updates the default copy after an application has been sent, sent letters need to snapshot the rendered text at send time so the audit trail reflects what was actually delivered. BOPS already does this for neighbour letters via `NeighbourLetter#text`. Consultee emails do not yet — the audit relies on the consultation record, which is overwritten on each send. That gap is worth closing alongside this pattern, but it is a separate piece of work and should not block the reset fix.
+
+</div>

@@ -58,6 +58,21 @@
     max-width: none !important;
   }
 
+  /* Fix checkbox/radio labels dropping below their input in docs previews.
+     The wildcard max-width:none above breaks GOV.UK's flex-wrap layout for
+     checkboxes and radios. Taking the invisible input out of the flex flow
+     (the visual checkbox is already position:absolute via ::before) prevents
+     the label from wrapping to a new line. */
+  .sbdocs-preview .govuk-checkboxes__input,
+  .sbdocs-preview .govuk-radios__input {
+    position: absolute !important;
+  }
+
+  .sbdocs-preview .govuk-checkboxes__label,
+  .sbdocs-preview .govuk-radios__label {
+    padding-left: 59px !important; /* 44px (input touch target) + 15px (original padding) */
+  }
+
   /* Story step headings — no border, no underline, badge aligned to top */
   .sbdocs-content h2 {
     border-bottom: none !important;

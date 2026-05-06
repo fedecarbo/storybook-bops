@@ -2,7 +2,6 @@
  * Press Notice v4 — Workflow improvements from planning officer review.
  *
  * Builds on v3 and addresses:
- * - Check your answers page before sending (GDS best practice)
  * - Context-aware card actions (Confirm publication vs Edit)
  * - Created/requested date shown on cards
  * - Send reminder link for pending notices
@@ -242,46 +241,6 @@ export const CreateForm = {
             </legend>
             ${renderReasonCheckboxes(["conservation_area", "listed_building"])}
           </fieldset>
-        </div>
-
-        <div class="govuk-button-group govuk-!-margin-top-6">
-          <button type="submit" class="govuk-button" data-module="govuk-button">
-            Continue
-          </button>
-          <a class="govuk-link" href="#">Cancel</a>
-        </div>
-      </div>
-    </div>`,
-};
-
-/** Check your answers — GDS pattern before sending request. */
-export const CheckAnswers = {
-  render: () => `
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <a class="govuk-back-link" href="#">Back</a>
-
-        <h1 class="govuk-heading-l">Check your answers before sending</h1>
-
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Reasons</dt>
-            <dd class="govuk-summary-list__value">${reasonsList(["conservation_area", "listed_building"])}</dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> reasons</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Notification email</dt>
-            <dd class="govuk-summary-list__value">${pnV4.notices[0].notificationEmail}</dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> notification email</span></a>
-            </dd>
-          </div>
-        </dl>
-
-        <div class="govuk-inset-text">
-          A request for publication will be sent to <strong>${pnV4.notices[0].notificationEmail}</strong>.
         </div>
 
         <div class="govuk-button-group govuk-!-margin-top-6">

@@ -709,7 +709,7 @@ export const mockData = {
   ],
 
   // Structured task list matching the source YAML at
-  // ~/Documents/test5/config/task_workflows/planning_permission.yml
+  // ~/Documents/bops-system/config/task_workflows/planning_permission.yml
   validationTasks: {
     title: "Validation tasks",
     subsections: [
@@ -1723,4 +1723,131 @@ Yours
       consultees: [],
     },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Review stage — assessor's submitted recommendation, audit trail of past
+  // submissions/reviews, and the assessor content shown inside each Review
+  // accordion section.
+  // ---------------------------------------------------------------------------
+  review: {
+    recommendation: {
+      decision: "Granted",
+      decisionStatus: "granted",
+      publicComment:
+        "The proposed loft conversion with rear dormer is acceptable in design and amenity terms. The materials and proportions match the host dwelling and the surrounding terrace, and the rear dormer would not result in significant overlooking or loss of light to neighbouring properties. Subject to conditions, the proposal complies with policies DM3 and DM12 of the Local Plan.",
+      submittedAt: "24 January 2025",
+      submittedBy: "Sarah Johnson",
+    },
+    audit: [
+      {
+        action: "Submitted recommendation",
+        name: "Sarah Johnson",
+        date: "24 January 2025",
+        time: "14:32",
+        comment:
+          "Recommend granting. Two neighbour objections received but addressed in the amenity assessment.",
+      },
+    ],
+    auditAfterChallenge: [
+      {
+        action: "Submitted recommendation",
+        name: "Sarah Johnson",
+        date: "24 January 2025",
+        time: "14:32",
+        comment:
+          "Recommend granting. Two neighbour objections received but addressed in the amenity assessment.",
+      },
+      {
+        action: "Recommendation queried",
+        name: "Mark Thompson",
+        date: "27 January 2025",
+        time: "10:15",
+        comment:
+          "Site description needs more context on the conservation area boundary. Please update before resubmitting.",
+      },
+    ],
+    assessmentSummaries: [
+      {
+        category: "site_description",
+        heading: "Site description",
+        entry:
+          "The site is a two-storey mid-terrace dwellinghouse on Elm Grove, within the Camberwell Conservation Area. The property has a small rear garden bounded by brick walls, with neighbouring two-storey properties to either side.",
+      },
+      {
+        category: "summary_of_works",
+        heading: "Summary of works",
+        entry:
+          "Loft conversion with rear dormer to create a new bedroom and en-suite bathroom. New rooflights to the front roof slope. Internal alterations to existing first-floor layout.",
+      },
+      {
+        category: "consultation_summary",
+        heading: "Consultation summary",
+        entry:
+          "Five consultees were notified. Conservation Officer raised no objection subject to materials being secured by condition. Highways and Trees Officers had no comment. The remaining consultees did not respond.",
+      },
+      {
+        category: "neighbour_summary",
+        heading: "Neighbour summary",
+        entry:
+          "Eight neighbouring properties were notified. Two objections received concerning loss of light to the rear garden of No. 14 and overlooking from the proposed dormer. Both points are addressed in the amenity assessment.",
+      },
+      {
+        category: "amenity",
+        heading: "Amenity",
+        entry:
+          "The proposed dormer is set back 1.5 metres from the rear wall and uses obscure-glazed side panels. Daylight modelling confirms the impact on No. 14 falls within BRE guidance. There is no material loss of amenity.",
+      },
+      {
+        category: "additional_evidence",
+        heading: "Additional evidence",
+        entry:
+          "An updated Daylight and Sunlight Report was submitted on 18 January 2025 in response to neighbour comments. The report confirms compliance with BRE Site Layout Planning for Daylight and Sunlight (2022).",
+      },
+    ],
+    considerations: [
+      {
+        position: 1,
+        policyArea: "Design and appearance",
+        policyReferences: "DM3 — Design quality (Local Plan 2022)",
+        policyGuidance: "Camberwell Conservation Area Appraisal (2019)",
+        assessment:
+          "The proposal uses traditional materials matching the host dwelling and the established pattern of rear dormers along the terrace. The set-back from the eaves and the use of slate cladding preserve the character of the conservation area.",
+        conclusion: "Complies with DM3.",
+      },
+      {
+        position: 2,
+        policyArea: "Amenity impact",
+        policyReferences: "DM12 — Residential amenity (Local Plan 2022)",
+        assessment:
+          "Overshadowing analysis shows the proposed dormer would reduce afternoon sunlight to the rear garden of No. 14 by less than 5%, well within BRE guidance. The obscure-glazed side panels prevent any direct overlooking.",
+        conclusion: "No significant amenity loss; complies with DM12.",
+      },
+    ],
+    conditions: [
+      {
+        position: 1,
+        title: "Time limit",
+        text: "The development hereby permitted shall be begun before the expiration of three years from the date of this permission.",
+        reason:
+          "To comply with Section 91 of the Town and Country Planning Act 1990 (as amended).",
+      },
+      {
+        position: 2,
+        title: "Approved plans",
+        text: "The development shall be carried out in accordance with the approved drawings: 24-LG-001 (Site plan), 24-LG-100 (Existing plans), 24-LG-110 (Proposed plans), 24-LG-200 (Elevations).",
+        reason:
+          "For the avoidance of doubt and in the interests of proper planning.",
+      },
+    ],
+    informatives: [
+      {
+        position: 1,
+        title: "Building regulations",
+        text:
+          "This permission does not constitute Building Regulations approval. The applicant should contact the Building Control team before starting work.",
+      },
+    ],
+    reviewerComment:
+      "Site description needs more context on the conservation area boundary. Please reference the appraisal and confirm the site lies within the primary character zone.",
+  },
 };

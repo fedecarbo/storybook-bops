@@ -15,4 +15,8 @@ export {
   renderSidebar,
   wrapInPage,
   renderValidationLayout,
+  renderBopsTaskAccordion,
+  renderInlineReviewForm,
+  renderBopsSummary,
+  renderAfterSignOffNotice,
 } from "./pageLayout.js";

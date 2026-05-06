@@ -37,6 +37,48 @@ if (typeof document !== "undefined") {
       }
     }).observe(document.body, { childList: true, subtree: true });
   }
+
+  // bops-task-accordion expand/collapse — the source Rails app uses a Stimulus
+  // controller for this; in Storybook a single delegated click handler is enough.
+  document.addEventListener("click", (event) => {
+    const sectionBtn = event.target.closest(
+      ".bops-task-accordion__section-header > button",
+    );
+    if (sectionBtn) {
+      const section = sectionBtn.closest(".bops-task-accordion__section");
+      if (section) {
+        const isExpanded = section.classList.toggle(
+          "bops-task-accordion__section--expanded",
+        );
+        sectionBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+      }
+      return;
+    }
+
+    const allBtn = event.target.closest(".bops-task-accordion__expand-all");
+    if (allBtn) {
+      const accordion = allBtn.closest(".bops-task-accordion");
+      if (!accordion) return;
+      const willExpand = allBtn.getAttribute("aria-expanded") !== "true";
+      accordion
+        .querySelectorAll(".bops-task-accordion__section")
+        .forEach((s) => {
+          s.classList.toggle(
+            "bops-task-accordion__section--expanded",
+            willExpand,
+          );
+          const btn = s.querySelector(
+            ".bops-task-accordion__section-header > button",
+          );
+          if (btn) {
+            btn.setAttribute("aria-expanded", willExpand ? "true" : "false");
+          }
+        });
+      allBtn.setAttribute("aria-expanded", willExpand ? "true" : "false");
+      const text = allBtn.querySelector(".bops-task-accordion__expand-all-text");
+      if (text) text.textContent = willExpand ? "Collapse all" : "Expand all";
+    }
+  });
 }
 
 export default {

@@ -1,0 +1,63 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as AuditStories from "./StatusTagsAudit.stories";
+
+<Meta title="Patterns/Status Tags Audit/Documentation" />
+
+# Status tags audit
+
+A complete review of every status tag used in BOPS — what colour it is, what it says, and where it appears. Use this to spot inconsistencies, review wording, and decide what to change.
+
+<div style={{ marginTop: "16px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+**Audit date:** 2 April 2026. Every tag shown here was checked against the live BOPS codebase.
+
+</div>
+
+<hr />
+
+## All tags by colour
+
+See every tag grouped by its colour. Use this to check whether each tag is the right colour for what it communicates, and whether any should be moved to a different colour group.
+
+<GdsCanvas of={AuditStories.AllTagsByColour} />
+
+<hr />
+
+## Same status, different colours
+
+Some statuses appear in more than one place in BOPS but are shown in different colours depending on where they are. This section flags those so we can decide if they should be consistent.
+
+<GdsCanvas of={AuditStories.Inconsistencies} />
+
+<hr />
+
+## Wording review
+
+All the status wording used across BOPS, grouped by theme. Use this to check whether the wording is clear, consistent, and makes sense to users.
+
+<GdsCanvas of={AuditStories.WordingReview} />
+
+<hr />
+
+## Tags by where they appear
+
+The same tags grouped by where they show up in the application — task lists, consultee tables, letter tracking, and so on. Use this to understand what a user sees in each part of BOPS.
+
+<GdsCanvas of={AuditStories.TagsByContext} />
+
+<hr />
+
+## Flags and things to review
+
+Issues spotted during the audit that are worth discussing as a team.
+
+<GdsCanvas of={AuditStories.FlagsToReview} />
+
+<hr />
+
+<div style={{ marginTop: "24px", padding: "16px 20px", background: "#f3f2f1", borderLeft: "4px solid #505a5f" }}>
+
+This audit is a snapshot from 2 April 2026. If BOPS changes, this page should be checked again against the current codebase.
+
+</div>

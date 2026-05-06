@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as ReviewTaskListStories from "./_ReviewTaskList.stories";
+
+<Meta title="Workflows/Planning Permission/4. Review/Review Task List/Journey" />
+
+# Review Task List — User Journey
+
+This documents how a senior reviewer works through the review stage of a planning application. The case officer has finished assessing the application and submitted a recommendation. The reviewer's job is to verify each section the assessor produced — accept it or return it with comments — and then either **sign off** (sending the application to determination) or **return the whole recommendation** to the assessor for changes.
+
+The Review page is built around four stacked **task accordions** (Review consultation, Review assessment, Review assessment summaries, Review conditions). The reviewer expands each section, reads the assessor's content, and uses an inline Agree / Return-with-comments form in the section footer. They never leave the page until the dedicated sign-off step.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Reviewer opens the review task list</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Application overview → Review
+
+After the case officer submits a recommendation, the application moves into the Review stage and the reviewer opens the page. They see:
+
+- An **Assessor recommendation** notification banner pinned at the top with the recommended decision (e.g. "Granted") in bold
+- A **dates bar** with validation date, consultation end date, recommendation submission date, and target decision date
+- A **site map** for spatial context
+- Up to **four task accordions**, each with sections collapsed by default, a status tag in each section header, and a "Sign off recommendation" row in a separate task list at the bottom that is locked until everything else is reviewed
+
+<GdsCanvas of={ReviewTaskListStories.AssessorRecommendationReceived} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Reviewing each section inline</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review task list — accordion sections
+
+The reviewer works top-down through the accordions. For each section they expand the accordion, read what the assessor produced, and choose **Agree** or **Return with comments** in the embedded form at the bottom of the section. Choosing "Return with comments" reveals a comment textarea — the comment goes back to the assessor on the next round.
+
+For the focused inline-review form pattern, see the **[Review Assessment Summaries](?path=/docs/workflows-planning-permission-4-review-review-assessment-summaries-journey--docs)** and **[Review Conditions](?path=/docs/workflows-planning-permission-4-review-review-conditions-journey--docs)** journey docs.
+
+<GdsCanvas of={ReviewTaskListStories.InProgress} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>All sections reviewed — sign-off unlocks</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review task list — bottom task list
+
+Once every section in every accordion is marked as **Agreed**, the **Sign off recommendation** row at the bottom unlocks and links to the dedicated Sign-off page. The reviewer can also still go back into any section and change their verdict.
+
+The publish button is not yet visible — it only appears after the reviewer has completed sign-off and explicitly accepted the recommendation.
+
+<GdsCanvas of={ReviewTaskListStories.AllReviewedReadyToSignOff} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Recommendation signed off</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review task list
+
+The reviewer accepts the recommendation on the Sign-off page (Task 42). The application moves to **Determination** and the publish button appears on this page so the reviewer can issue the decision notice.
+
+For the sign-off step itself see the **[Sign-off Recommendation](?path=/docs/workflows-planning-permission-4-review-sign-off-recommendation-journey--docs)** journey doc.
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#505a5f", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>~</div>
+  <h2 style={{ margin: 0 }}>Variant: Reviewer disagrees and returns the recommendation</h2>
+</div>
+
+**When:** The reviewer disagrees with the assessor's recommendation, or finds material problems while reviewing the summaries or conditions.
+
+The reviewer chooses **No (return the case for assessment)** on the Sign-off page and records a reason. The application is returned to the assessor with the reviewer's comments attached, and an inset notice on the Review page records that the application is now back with the assessor. Once the assessor reworks the affected sections and resubmits, the review begins again from step 1.
+
+<GdsCanvas of={ReviewTaskListStories.ChangesRequested} />

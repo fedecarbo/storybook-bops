@@ -766,3 +766,185 @@ body:has(.bops-fullwidth-container) {
   gap: govuk-spacing(2);
   text-decoration: none;
 }
+
+// ---------------------------------------------------------------------------
+// Task accordion (from source: bops_core/components/_task_accordion.scss)
+// Used by the Review stage to stack inline-review accordion sections.
+// ---------------------------------------------------------------------------
+
+.bops-task-accordion {
+  @include govuk-responsive-margin(6, "bottom");
+
+  &-header {
+    display: flex;
+    align-items: center;
+  }
+
+  &-heading {
+    @include govuk-font($size: 24, $weight: bold);
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  &-controls {
+    flex-grow: 0;
+    margin-left: govuk-spacing(3);
+
+    button {
+      @include govuk-font($size: 19);
+      border-width: 0;
+      margin: 0;
+      padding: 0;
+      color: $govuk-link-colour;
+      background: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.bops-task-accordion__section {
+  border: 1px solid $govuk-border-colour;
+  margin-top: govuk-spacing(3);
+
+  &-content {
+    display: none;
+    margin-top: govuk-spacing(2);
+    margin-bottom: govuk-spacing(3);
+  }
+
+  &-header {
+    align-items: center;
+    margin: 0;
+
+    & > button {
+      background: none;
+      box-sizing: border-box;
+      border: none;
+      color: $govuk-link-colour;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: govuk-spacing(3);
+      text-align: left;
+      width: 100%;
+      position: relative;
+      cursor: pointer;
+      -webkit-appearance: none;
+
+      &:hover {
+        background-color: govuk-colour("light-grey");
+        color: $govuk-text-colour;
+      }
+
+      &:before {
+        content: "";
+        box-sizing: border-box;
+        display: block;
+        border-bottom: 3px solid $govuk-link-colour;
+        position: absolute;
+        width: 14px;
+        top: 31px;
+        right: 25px;
+        transform-origin: bottom right;
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        content: "";
+        box-sizing: border-box;
+        display: block;
+        border-bottom: 3px solid $govuk-link-colour;
+        position: absolute;
+        width: 14px;
+        top: 31px;
+        right: 11px;
+        transform-origin: bottom left;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &-heading {
+    @include govuk-font($size: 19, $weight: bold);
+    flex-grow: 0;
+    margin: 0;
+  }
+
+  &-status {
+    flex-grow: 0;
+    margin-right: govuk-spacing(6) + 4px;
+  }
+
+  &-block {
+    border: 1px solid $govuk-border-colour;
+    background-color: govuk-colour("light-grey");
+    padding: govuk-spacing(3);
+    margin: govuk-spacing(3);
+    margin-top: govuk-spacing(1);
+
+    & > :first-child {
+      margin-top: 0;
+    }
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &-divider {
+    border: none;
+    border-bottom: 1px solid $govuk-border-colour;
+    height: 0;
+    margin: govuk-spacing(3);
+  }
+
+  &-footer {
+    margin: govuk-spacing(3);
+
+    & > :first-child {
+      margin-top: 0;
+    }
+
+    & :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.bops-task-accordion__section--expanded {
+  .bops-task-accordion__section-content {
+    display: block;
+  }
+
+  .bops-task-accordion__section-header > button {
+    &:before {
+      top: 21px;
+      right: 25px;
+      transform-origin: top right;
+      transform: rotate(-45deg);
+    }
+
+    &:after {
+      top: 21px;
+      right: 11px;
+      transform-origin: top left;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+// Light wrapper used inside accordion blocks for assessor-content summaries
+.bops-summary {
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,90 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as SignOffStories from "./SignOffRecommendation.stories";
+
+<Meta title="Workflows/Planning Permission/4. Review/Sign-off Recommendation/Journey" />
+
+# Sign-off Recommendation — User Journey
+
+This documents the dedicated sign-off page that the reviewer reaches once every section on the [Review task list](?path=/docs/workflows-planning-permission-4-review-review-task-list-journey--docs) has been agreed. Unlike the rest of the Review stage (which keeps everything inline on the task list), sign-off lives on its own URL because it is the final, more deliberate step.
+
+The reviewer reads the assessor's recommendation and the audit trail of past submissions, then chooses **Yes** (decision is ready to be published) or **No** (return the case for assessment). When the application is going to committee, a third option exists for "Yes, with amendments".
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Reviewer opens the Sign-off page</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review task list → "Sign off recommendation" link
+
+The reviewer arrives at the dedicated sign-off page. From top to bottom they see:
+
+- The **Assessor recommendation** with the decision (e.g. "To grant") as a status tag
+- A warning that this information will appear on the decision notice and officer report
+- The assessor's **public comment** as it will appear to the applicant, with a link to edit it
+- The **documents included in the decision notice**
+- The **Assessor and reviewer audit** trail showing every past submission and reviewer query
+- The **form** with two radios — they haven't chosen one yet
+
+<GdsCanvas of={SignOffStories.InitialView} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Accepting the recommendation</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Sign-off page → form
+
+The reviewer agrees and selects **Yes (decision is ready to be published)**. No additional fields appear. They submit, the application returns to the Review task list with the **Review and publish decision** button now visible, and the application moves to the Determination stage when published.
+
+<GdsCanvas of={SignOffStories.AcceptingRecommendation} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Returning the recommendation with comments</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Sign-off page → form ("No" path)
+
+If the reviewer wants the assessor to make changes, they select **No (return the case for assessment)**. The conditional panel reveals showing the case officer the recommendation will be returned to, and a comment textarea where the reviewer explains what needs to change.
+
+After submission, the audit trail records the **Recommendation queried** event (visible to both the assessor and any future reviewer), and the application is reassigned back to the assessor. The reviewer is taken back to the Review task list which now shows the after-sign-off "Application is now in assessment and assigned to…" notice.
+
+<GdsCanvas of={SignOffStories.ReturningWithComments} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#505a5f", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>~</div>
+  <h2 style={{ margin: 0 }}>Variant: Consultation is still ongoing</h2>
+</div>
+
+**When:** The reviewer reaches the sign-off page before the consultation has ended.
+
+A warning banner appears reminding the reviewer of the consultation end date. The form is still usable — the reviewer can choose to sign off anyway — but the warning prompts them to consider whether outstanding consultation responses should be reviewed first.
+
+<GdsCanvas of={SignOffStories.WithConsultationStillOpen} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#505a5f", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>~</div>
+  <h2 style={{ margin: 0 }}>Variant: Application is going to committee</h2>
+</div>
+
+**When:** A committee decision was set during assessment. The page heading swaps to "Update decision notice after committee" and the form changes to three radios:
+
+- **Yes** — the committee agreed; ready to publish
+- **Yes, with amendments (return to case officer)** — committee agreed but with changes; reveals the comment panel
+- **No** — committee did not agree; the reviewer can record the committee's decision in the next step
+
+<GdsCanvas of={SignOffStories.CommitteeVariant} />

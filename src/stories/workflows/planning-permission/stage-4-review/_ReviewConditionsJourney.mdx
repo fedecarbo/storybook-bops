@@ -1,0 +1,74 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as ReviewConditionsStories from "./ReviewConditions.stories";
+
+<Meta title="Workflows/Planning Permission/4. Review/Review Conditions/Journey" />
+
+# Review Conditions — User Journey
+
+This documents the **Review conditions** accordion on the Review task list page. It contains a variable number of sub-sections depending on the application type — considerations (policies and guidance assessment), pre-commencement conditions, conditions, informatives, and rarer sub-sections for immunity / permitted-development-rights cases.
+
+The interaction pattern is the same one used elsewhere in the Review stage (see also [Review Assessment Summaries](?path=/docs/workflows-planning-permission-4-review-review-assessment-summaries-journey--docs)): each sub-section is reviewed inline with an Agree / Return-with-comments form. The difference is the **content** the assessor produced — instead of free-form summary text, the reviewer sees structured lists of considerations, conditions, and informatives, each with a per-item Edit link.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Reviewer arrives at the conditions section</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review task list → Review conditions accordion
+
+The reviewer scrolls to the fourth accordion. Four sub-sections are present: Review assessment against policies and guidance, Review pre-commencement conditions, Review conditions, Review informatives. All are collapsed with "Not started" status tags.
+
+<GdsCanvas of={ReviewConditionsStories.AllSectionsCollapsed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Reviewing the policy and guidance assessment</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review conditions accordion → "Review assessment against policies and guidance" (expanded)
+
+Expanded, the reviewer sees a numbered list of **considerations**. Each one shows:
+
+- The **policy area** the assessor identified (e.g. "Design and appearance")
+- The **policy** references (with optional **guidance** references)
+- The assessor's **assessment**
+- A **conclusion**
+- An **Edit to accept** link for amending the consideration before accepting
+
+A "Rearrange…" link below the list lets the reviewer reorder considerations. The footer form awaits a verdict on the section as a whole.
+
+<GdsCanvas of={ReviewConditionsStories.ConsiderationsExpanded} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>Agreeing with the conditions</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review conditions accordion → "Review conditions" (expanded, agreed)
+
+The reviewer expands the **Review conditions** sub-section, reads each condition's text and reason, and chooses **Agree**. The status tag changes to **Completed** and the section is marked as reviewed.
+
+<GdsCanvas of={ReviewConditionsStories.ConditionsExpandedAgreed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#505a5f", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>~</div>
+  <h2 style={{ margin: 0 }}>Variant: Returning a condition for amendment</h2>
+</div>
+
+**When:** The reviewer disagrees with one or more conditions and wants the assessor to amend before sign-off.
+
+The reviewer selects **Return with comments**, types what needs to change in the revealed comment textarea, and saves. The status tag becomes **Awaiting changes** and the comment goes back to the assessor on the next round.
+
+<GdsCanvas of={ReviewConditionsStories.ConditionsExpandedReturnedWithComments} />

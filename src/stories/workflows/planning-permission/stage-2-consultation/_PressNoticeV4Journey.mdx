@@ -8,7 +8,6 @@ import * as PressNoticeV4Stories from "./PressNoticeV4.stories";
 
 v4 builds on v3's multi-notice summary cards and addresses gaps identified in a planning officer walkthrough. Key changes:
 
-- **Check your answers** page before sending (GDS best practice)
 - **Context-aware card actions** — pending cards show "Confirm publication" as primary action
 - **Send reminder** link for notices awaiting publication confirmation
 - **"Not required" captures a reason** for audit purposes
@@ -37,7 +36,7 @@ If not required (now shows the captured reason):
   <h2 style={{ margin: 0 }}>Create a press notice</h2>
 </div>
 
-Reason selection via checkboxes. Button says "Continue" — takes you to check your answers before sending.
+Reason selection via checkboxes. Button says "Send request" to submit directly.
 
 <GdsCanvas of={PressNoticeV4Stories.CreateForm} />
 
@@ -45,17 +44,6 @@ Reason selection via checkboxes. Button says "Continue" — takes you to check y
 
 <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
   <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
-  <h2 style={{ margin: 0 }}>Check your answers</h2>
-</div>
-
-GDS "check your answers" pattern — review reasons and notification email with "Change" links. Inset text confirms what will happen.
-
-<GdsCanvas of={PressNoticeV4Stories.CheckAnswers} />
-
-<hr style={{ marginTop: "40px" }} />
-
-<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
-  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
   <h2 style={{ margin: 0 }}>Overview — pending notice</h2>
 </div>
 
@@ -70,7 +58,7 @@ After sending the request, the overview shows the notice as a summary card. The 
 <hr style={{ marginTop: "40px" }} />
 
 <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
-  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>4</div>
   <h2 style={{ margin: 0 }}>Confirm publication</h2>
 </div>
 
@@ -81,7 +69,7 @@ Focused form to confirm the press notice has been published — publication date
 <hr style={{ marginTop: "40px" }} />
 
 <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
-  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>5</div>
   <h2 style={{ margin: 0 }}>Overview — all complete</h2>
 </div>
 
@@ -92,7 +80,7 @@ Once all notices are confirmed as published, overall status changes to "Complete
 <hr style={{ marginTop: "40px" }} />
 
 <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
-  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>7</div>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>6</div>
   <h2 style={{ margin: 0 }}>Mark as not required</h2>
 </div>
 

@@ -55,14 +55,32 @@ export const statusColourMap = {
   requested: "light-blue",
   awaiting_evidence: "yellow",
   awaiting_publication: "yellow",
+  no_objection: "green",
+  supported: "green",
+  invalidated: "red",
+  refused_legal_agreement: "red",
+  in_assessment: "light-blue",
+  awaiting_determination: "purple",
+  granted: "green",
+  determined: "grey",
+  active: "green",
+  inactive: "grey",
+  retired: "red",
+  urgent: "orange",
+  pending: "yellow",
+  not_sent: "grey",
+  responded: "blue",
+  review_in_progress: "light-blue",
+  waiting: "yellow",
+  needs_changes: "yellow",
 };
 
 export const statusLabelMap = {
-  approved: "Approved",
-  auto_approved: "Auto approved",
+  approved: "Accepted",
+  auto_approved: "Auto accepted",
   valid: "Valid",
   complies: "Complies",
-  complete: "Complete",
+  complete: "Completed",
   supportive: "Supportive",
   not_started: "Not started",
   new: "New",
@@ -79,7 +97,7 @@ export const statusLabelMap = {
   neutral: "Neutral",
   amendments_needed: "Amendments needed",
   awaiting_changes: "Awaiting changes",
-  refused: "Refused",
+  refused: "To refuse",
   removed: "Removed",
   invalid: "Invalid",
   rejected: "Rejected",
@@ -96,11 +114,29 @@ export const statusLabelMap = {
   not_required: "Not required",
   cannot_start_yet: "Cannot start yet",
   checked: "Checked",
-  review_complete: "Review complete",
+  review_complete: "Completed",
   sent: "Sent",
   requested: "Requested",
   awaiting_evidence: "Awaiting evidence",
   awaiting_publication: "Awaiting publication",
+  no_objection: "No objection",
+  supported: "Supported",
+  invalidated: "Invalidated",
+  refused_legal_agreement: "To refuse with Legal agreement",
+  in_assessment: "In assessment",
+  awaiting_determination: "Awaiting determination",
+  granted: "To grant",
+  determined: "Determined",
+  active: "Active",
+  inactive: "Inactive",
+  retired: "Retired",
+  urgent: "Urgent",
+  pending: "Pending",
+  not_sent: "Not sent",
+  responded: "Responded",
+  review_in_progress: "In progress",
+  waiting: "Waiting",
+  needs_changes: "Needs Changes",
 };
 
 // ---------------------------------------------------------------------------
@@ -622,4 +658,144 @@ export function renderValidationLayout(content, options = {}) {
     showHeaderBar: true,
     breadcrumbs,
   });
+}
+
+// ---------------------------------------------------------------------------
+// renderBopsTaskAccordion
+// Mirrors BopsCore::TaskAccordionComponent (engines/bops_core).
+// Used by the Review stage to stack inline-review accordion sections.
+// ---------------------------------------------------------------------------
+
+/**
+ * @param {object} options
+ * @param {string} options.id - Outer accordion DOM id
+ * @param {string} options.heading - Top-level accordion heading text (h2)
+ * @param {Array<object>} options.sections - Each: { id, heading, expanded, statusTag, blocks: [html…], footer }
+ */
+export function renderBopsTaskAccordion({ id, heading, sections }) {
+  const allExpanded = sections.length > 0 && sections.every((s) => s.expanded);
+  const expandAllLabel = allExpanded ? "Collapse all" : "Expand all";
+
+  const sectionsHtml = sections
+    .map((s) => {
+      const expandedClass = s.expanded
+        ? " bops-task-accordion__section--expanded"
+        : "";
+      const blocksHtml = (s.blocks || [])
+        .map(
+          (b, i) =>
+            `<div class="bops-task-accordion__section-block" id="${s.id}-block-${i + 1}">${b}</div>`,
+        )
+        .join("");
+      return `
+        <div class="bops-task-accordion__section${expandedClass}" id="${s.id}">
+          <div class="bops-task-accordion__section-header">
+            <button type="button" aria-expanded="${s.expanded ? "true" : "false"}">
+              <h3 class="bops-task-accordion__section-heading">${s.heading}</h3>
+              <div class="bops-task-accordion__section-status">${s.statusTag || ""}</div>
+            </button>
+          </div>
+          <div class="bops-task-accordion__section-content">
+            ${blocksHtml}
+            ${s.footer ? `<hr class="bops-task-accordion__section-divider"><div class="bops-task-accordion__section-footer" id="${s.id}-footer">${s.footer}</div>` : ""}
+          </div>
+        </div>`;
+    })
+    .join("");
+
+  return `
+    <div class="bops-task-accordion" id="${id}">
+      <div class="bops-task-accordion-header">
+        <h2 class="bops-task-accordion-heading">${heading}</h2>
+        <div class="bops-task-accordion-controls">
+          <button type="button" aria-expanded="${allExpanded ? "true" : "false"}" class="bops-task-accordion__expand-all">
+            <span class="bops-task-accordion__expand-all-text">${expandAllLabel}</span>
+          </button>
+        </div>
+      </div>
+      ${sectionsHtml}
+    </div>`;
+}
+
+// ---------------------------------------------------------------------------
+// renderInlineReviewForm
+// Mirrors the Agree / Return-with-comments footer used inside every Review
+// accordion section (e.g. summaries/_considerations.html.erb:79-96).
+// ---------------------------------------------------------------------------
+
+/**
+ * @param {object} options
+ * @param {string} options.id - Unique form id (used to scope radios/textarea ids)
+ * @param {string} [options.agreeLabel="Agree"]
+ * @param {string} [options.returnLabel="Return with comments"]
+ * @param {"accepted"|"rejected"|null} [options.verdict] - Which radio is checked
+ * @param {string} [options.comment] - Pre-filled textarea content (only shown when verdict==="rejected")
+ * @param {number} [options.commentRows=3]
+ * @param {string} [options.submitLabel="Save and mark as complete"]
+ */
+export function renderInlineReviewForm({
+  id,
+  agreeLabel = "Agree",
+  returnLabel = "Return with comments",
+  verdict = null,
+  comment = "",
+  commentRows = 3,
+  submitLabel = "Save and mark as complete",
+}) {
+  const acceptedChecked = verdict === "accepted" ? " checked" : "";
+  const rejectedChecked = verdict === "rejected" ? " checked" : "";
+  const conditionalHidden =
+    verdict === "rejected" ? "" : " govuk-radios__conditional--hidden";
+
+  return `
+    <form>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios govuk-radios--small govuk-radios--conditional" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="${id}-accepted" name="${id}[verdict]" type="radio" value="accepted"${acceptedChecked}>
+              <label class="govuk-label govuk-radios__label" for="${id}-accepted">${agreeLabel}</label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="${id}-rejected" name="${id}[verdict]" type="radio" value="rejected" aria-controls="${id}-comment-conditional" aria-expanded="${verdict === "rejected" ? "true" : "false"}"${rejectedChecked}>
+              <label class="govuk-label govuk-radios__label" for="${id}-rejected">${returnLabel}</label>
+            </div>
+            <div class="govuk-radios__conditional${conditionalHidden}" id="${id}-comment-conditional">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="${id}-comment">Add a comment</label>
+                <textarea class="govuk-textarea" id="${id}-comment" name="${id}[comment]" rows="${commentRows}">${comment}</textarea>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">${submitLabel}</button>
+    </form>`;
+}
+
+// ---------------------------------------------------------------------------
+// renderBopsSummary
+// Light wrapper used for the assessor-content blocks inside Review accordion
+// sections — see e.g. summaries/_considerations.html.erb:31-58.
+// ---------------------------------------------------------------------------
+
+export function renderBopsSummary(html) {
+  return `<div class="bops-summary">${html}</div>`;
+}
+
+// ---------------------------------------------------------------------------
+// renderAfterSignOffNotice
+// Mirrors Reviewing::Tasks::AfterSignOffComponent — the line shown on the
+// Review task list after the reviewer challenges the recommendation.
+// ---------------------------------------------------------------------------
+
+/**
+ * @param {object} options
+ * @param {string} options.assessorName - Name shown after "assigned to"
+ */
+export function renderAfterSignOffNotice({ assessorName }) {
+  return `
+    <p class="govuk-body">
+      Application is now in assessment and assigned to <span class="govuk-!-font-weight-bold">${assessorName}</span>
+    </p>`;
 }

@@ -11,12 +11,12 @@
     "govuk-frontend": "^5.2.0"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.3",
     "@storybook/html": "^10.3.3",
     "@storybook/html-vite": "^10.3.3",
-    "@storybook/addon-a11y": "^10.3.3",
-    "storybook": "^10.3.3",
     "sass": "^1.80.0",
-    "vite": "^6.0.0",
-    "@storybook/addon-docs": "^10.3.3"
+    "storybook": "^10.3.3",
+    "vite": "^8.0.3"
   }
 }

@@ -1,0 +1,73 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { GdsCanvas } from "@sb-components/GdsCanvas";
+import * as ReviewAssessmentSummariesStories from "./ReviewAssessmentSummaries.stories";
+
+<Meta title="Workflows/Planning Permission/4. Review/Review Assessment Summaries/Journey" />
+
+# Review Assessment Summaries — User Journey
+
+This documents the **inline-review form pattern** that runs through the Review stage, focused on the "Review assessment summaries" accordion. This is the same pattern the reviewer uses on the [Review task list](?path=/docs/workflows-planning-permission-4-review-review-task-list-journey--docs); it's broken out here so designers can see the interaction in detail without the rest of the page distracting.
+
+There are six summary categories the assessor produces — site description, summary of works, consultation summary, neighbour summary, amenity, additional evidence — and the reviewer either **agrees** with each one or **returns it with comments** for the assessor to rework.
+
+<hr />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>1</div>
+  <h2 style={{ margin: 0 }}>Reviewer arrives at the summaries section</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review task list → Review assessment summaries accordion
+
+The reviewer scrolls to the third accordion on the Review page. All six summary sections are rendered with their headings and "Not started" status tags. Nothing is open yet.
+
+<GdsCanvas of={ReviewAssessmentSummariesStories.AllSectionsCollapsed} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>2</div>
+  <h2 style={{ margin: 0 }}>Expanding a section reveals the assessor's content and a footer form</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review assessment summaries accordion → Site description (expanded)
+
+When a section is expanded, the reviewer sees:
+
+- The assessor's text wrapped in a grey-bordered **summary block** with an **Edit** link if they want to amend the assessor's work directly
+- A horizontal divider
+- A **footer form** in the section footer with two radios (**Agree** / **Return with comments**) and a Save submit button
+
+The Consultation summary section additionally shows the consultee responses inline; the Amenity and Neighbour summary sections show a "View neighbour responses" link.
+
+<GdsCanvas of={ReviewAssessmentSummariesStories.OneSectionExpandedAwaitingVerdict} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#1d70b8", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>3</div>
+  <h2 style={{ margin: 0 }}>Returning a summary with comments</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Footer form → "Return with comments" radio
+
+Selecting **Return with comments** reveals a comment textarea below the radio. The reviewer types what needs to change and clicks **Save and mark as complete**. The section's status tag becomes **Awaiting changes** and the comment is preserved as part of the assessor's next round of work.
+
+<GdsCanvas of={ReviewAssessmentSummariesStories.OneSectionExpandedReturnedWithComments} />
+
+<hr style={{ marginTop: "40px" }} />
+
+<div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px", marginTop: "32px" }}>
+  <div style={{ background: "#00703c", color: "#fff", borderRadius: "50%", width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", flexShrink: 0 }}>&#10003;</div>
+  <h2 style={{ margin: 0 }}>All summaries reviewed</h2>
+</div>
+
+**Who:** Senior officer / Reviewer
+**Where:** Review assessment summaries accordion
+
+The reviewer has worked through every summary. Mixed verdicts are normal: some agreed, some returned with comments. Once they're done with this section they move on to the next accordion (Review conditions). The Sign-off step at the bottom of the page only unlocks once **every** section in **every** accordion is marked Agreed.
+
+<GdsCanvas of={ReviewAssessmentSummariesStories.MixedVerdicts} />

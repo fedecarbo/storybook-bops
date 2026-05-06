@@ -2,7 +2,6 @@
  * Site Notice v4 — Workflow improvements from planning officer review.
  *
  * Builds on v3 and addresses:
- * - Check your answers page before sending (GDS best practice)
  * - Context-aware card actions (Confirm displayed vs Edit)
  * - Created date shown on cards
  * - Send reminder link for pending notices
@@ -275,60 +274,6 @@ export const CreateForm = {
               </div>
             </div>
           </fieldset>
-        </div>
-
-        <div class="govuk-button-group govuk-!-margin-top-6">
-          <button type="submit" class="govuk-button" data-module="govuk-button">
-            Continue
-          </button>
-          <a class="govuk-link" href="#">Cancel</a>
-        </div>
-      </div>
-    </div>`,
-};
-
-/** Check your answers — GDS pattern before sending. */
-export const CheckAnswers = {
-  render: () => `
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <a class="govuk-back-link" href="#">Back</a>
-
-        <h1 class="govuk-heading-l">Check your answers before sending</h1>
-
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Quantity</dt>
-            <dd class="govuk-summary-list__value">2</dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> quantity</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Display locations</dt>
-            <dd class="govuk-summary-list__value">${sn.locationInstructions}</dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> display locations</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Arranged via</dt>
-            <dd class="govuk-summary-list__value">Email to internal team</dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> arrangement method</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">Team email</dt>
-            <dd class="govuk-summary-list__value">${sn.internalTeamEmail}</dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> team email</span></a>
-            </dd>
-          </div>
-        </dl>
-
-        <div class="govuk-inset-text">
-          An email with the site notice PDF will be sent to <strong>${sn.internalTeamEmail}</strong>.
         </div>
 
         <div class="govuk-button-group govuk-!-margin-top-6">
